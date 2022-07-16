@@ -1,0 +1,81 @@
+
+<div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 order-md-2">
+          <img [src]="image" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="mb-4">
+              <h3>Sign Up to <strong>RentBuy</strong></h3>
+            </div>
+            <div class="alert alert-primary" role="alert" *ngIf="showSucessMessage">
+                send sucssecfuly
+              </div>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+              <div *ngIf="!signupForm.controls.username?.valid &&
+              (signupForm.controls.username?.dirty || signupForm.controls.username?.touched)" style="color: red">
+              Enter a name consisting of 2 letters or more
+             </div>
+                <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="text" class="form-control" name="username"  placeholder="Enter username" 
+                    formControlName="username"/>
+                 </div>
+                 <div *ngIf="!signupForm.controls.email?.valid &&
+                 (signupForm.controls.email?.dirty || signupForm.controls.email?.touched)" style="color: red">
+                 The email must be from @gmail
+                </div>
+               <div class="field">
+                  <span class="fa fa-envelope"></span>
+                  <input type="email" class="form-control" name="email"  placeholder="Enter email"
+                  formControlName="email"/>
+               </div>
+               <div *ngIf="!signupForm.controls.password?.valid &&
+               (signupForm.controls.password?.dirty || signupForm.controls.password?.touched)" style="color: red">
+               Enter more than 7 letters and numbers
+              </div>
+               <div class="field space">
+                  <span class="fa fa-lock"></span>
+                  <input type="password" class="form-control" name="password"  placeholder="Enter Password"
+                  formControlName="password"/>
+               </div>
+               <div *ngIf="!signupForm.controls.phone?.valid &&
+               (signupForm.controls.phone?.dirty || signupForm.controls.phone?.touched)" style="color: red">
+               Enter a 10-digit phone number
+              </div>
+               <div class="field">
+                <span class="fa fa-phone"></span>
+                <input type="tel" class="form-control"  name="phone" placeholder="054-455-8952" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
+                formControlName="phone"/>
+             </div>
+              <div class="d-flex mb-5 align-items-center">
+                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
+              </div>
+
+              <input type="submit" value="Log In" class="btn text-white btn-block btn-primary">
+
+              <span class="d-block text-left my-4 text-muted"> or sign in with</span>
+              
+              <div class="social-login">
+                <a href="#" class="facebook">
+                  <span class="fa fa-facebook"></span> 
+                </a>
+                <a href="#" class="twitter">
+                  <span class="fa fa-twitter"></span> 
+                </a>
+                <a href="#" class="google">
+                  <span class="fa fa-instagram"></span> 
+                </a>
+              </div>
+            </form>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,194 @@
+<app-navbar></app-navbar>
+<header class="section-title">
+    <h2>Rent Cars</h2>
+    <p>The best cars for rent</p>
+  </header>
+
+
+
+
+  <div class="column">
+     
+<h2>Catgory</h2>
+<div class="list-group">
+    <a  (click)="mostWatched()"   class="list-group-item d-flex justify-content-between align-items-center">
+        mostWatched
+        <span class="badge bg-dark rounded-pill"><i class="fa fa-laptop"></i></span></a>
+    <a  (click)="mazda()"   class="list-group-item d-flex justify-content-between align-items-center">
+      mazda
+      <span class="badge bg-dark rounded-pill"><i class="fa fa-laptop"></i></span></a>
+    <a  (click)="toyota()" class="list-group-item d-flex justify-content-between align-items-center">
+        toyota         <span class="badge bg-dark rounded-pill"><i class="fa fa-desktop"></i></span></a>
+    <a  (click)="ford()" class="list-group-item d-flex justify-content-between align-items-center">
+        ford
+         <span class="badge bg-dark rounded-pill"><i class="fa fa-desktop"></i></span></a>
+</div>
+    </div>
+    <div class="column" style="margin-top: -240px; margin-left: 50px;">
+<div *ngIf="showCar"> 
+<section class="cars" id="cars">
+  <div class="content">
+      <div class="cars-card" *ngFor="let car of cars">
+          <div class="cars-image">
+              <img [src]="car.img" />
+          </div>
+          <div class="cars-info">
+            <p class="cars-isRent">is renting</p>
+            <p class="cars-isNotRent">Available to rent</p>
+              <p class="cars-price">price : $12</p>
+              <strong class="cars-title">
+                  <span>Dev Books</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+  </div>
+</section>
+    </div>
+
+    <div *ngIf="showMostWatched"> 
+      <section class="cars" id="cars">
+        <div class="content">
+            <div class="cars-card" *ngFor="let car of mostWatchedArray">
+                <div class="cars-image">
+                    <img [src]="car.img" />
+                </div>
+                <div class="cars-info">
+                  <p class="cars-isRent">is renting</p>
+                  <p class="cars-isNotRent">Available to rent</p>
+                    <p class="cars-price">price : $12</p>
+                    <strong class="cars-title">
+                        <span>Dev Books</span>
+                        <a href="#" class="more-details">More details</a>
+                    </strong>
+                </div>
+            </div>
+        </div>
+      </section>
+          </div>
+<!-- <div *ngIf="showCar">
+  <div class="container-fluid d-flex justify-content-center" style="margin-top: -260px;">
+      <div class="row mt-4">
+          <div class="col-sm-4" *ngFor="let car of cars">
+              <div class="card"> <img [src]="car.img" class="card-img-top" >
+                <hr class="mt-1 mx-2">
+                  <div class="card-body pt-0 px-0">
+                      <div class="d-flex flex-row justify-content-between mb-0 px-3"> <h6 class="text-muted mt-1">PRICE</h6>
+                          <h6>{{car.price| currency}}</h6>
+                      </div>
+                      <div class="d-flex flex-column"><h6>CheckIn</h6></div>
+                        <div class="d-flex flex-column"><h6>CheckOut</h6></div>
+                      <div *ngFor="let rent of rents">
+                      <div  *ngIf="rent.serialNumber==car.serialNumber">
+                        <div class="d-flex flex-column"><p style="font-size: 12px;" class="text-muted">{{rent.checkIn}}</p></div>
+                        <div >
+                          <div class="d-flex flex-column"> <p style="font-size: 12px;" class="text-muted">{{rent.checkOut}}</p></div>
+                    </div> 
+                  </div>
+                </div>
+                      <div class="d-flex flex-row justify-content-between p-1 mid" style="margin-top: -50px;">
+                          <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small>
+                              <div class="d-flex flex-row"><img src="https://imgur.com/iPtsG7I.png" width="35px" height="25px">
+                                  <div class="d-flex flex-column ml-1"><small class="ghj">{{car.engineCapacity}}</small><small class="ghj">16V I-4 Turbo</small></div>
+                              </div>
+                          </div>
+                          <div class="d-flex flex-column"><small class="text-muted mb-2">HORSEPOWER</small>
+                              <div class="d-flex flex-row"><img src="https://imgur.com/J11mEBq.png">
+                                  <h6 class="ml-1">{{car.horsePower}}HP</h6>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mx-2 mt-2 mb-1"><button type="button"   (click)="carViews(car)" [routerLink]="['/rentcars', car.serialNumber]" class="btn  btn-block"><small>Read More</small></button></div> 
+                      <div class="mx-2 mt-2 mb-1"><button type="button" class="btn  btn-block" [disabled]="car.isRent" data-toggle="modal" (click)="editCar(car)" data-target="#UPDATE"><small>Rent Now</small></button></div> 
+                  </div>
+              </div>
+         
+        </div>
+      </div>
+    </div>
+    </div>
+    
+  <div *ngIf="showMostWatched">
+    <div class="container-fluid d-flex justify-content-center"  style="margin-top: -260px;">
+      <div class="row mt-4" >
+          <div class="col-sm-4" *ngFor="let car of mostWatchedArray">
+              <div class="card"> <img [src]="car.img" class="card-img-top" >
+                <hr class="mt-1 mx-2">
+                  <div class="card-body pt-0 px-0">
+                      <div class="d-flex flex-row justify-content-between mb-0 px-3"> <h6 class="text-muted mt-1">PRICE</h6>
+                          <h6>{{car.price| currency}}</h6>
+                      </div>
+                      <hr class="mt-2 mx-3">
+                      <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                        <div class="d-flex flex-column"><h6>CheckIn</h6><p style="font-size: 12px;" class="text-muted">{{car.checkIn}}</p></div>
+                        <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                          <div class="d-flex flex-column"><h6>CheckOut</h6><p style="font-size: 12px;" class="text-muted">{{car.checkOut}}</p></div>
+                    </div> 
+                  </div>
+                      <div class="d-flex flex-row justify-content-between p-1 mid" style="margin-top: -50px;">
+                          <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small>
+                              <div class="d-flex flex-row"><img src="https://imgur.com/iPtsG7I.png" width="35px" height="25px">
+                                  <div class="d-flex flex-column ml-1"><small class="ghj">{{car.engineCapacity}}</small><small class="ghj">16V I-4 Turbo</small></div>
+                              </div>
+                          </div>
+                          <div class="d-flex flex-column"><small class="text-muted mb-2">HORSEPOWER</small>
+                              <div class="d-flex flex-row"><img src="https://imgur.com/J11mEBq.png">
+                                  <h6 class="ml-1">{{car.horsePower}}HP</h6>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mx-2 mt-2 mb-1"><button type="button"   (click)="carViews(car)" [routerLink]="['/rentcars', car.serialNumber]" class="btn  btn-block"><small>Read More</small></button></div> 
+                      <div class="mx-2 mt-2 mb-1"><button type="button" class="btn  btn-block" [disabled]="car.isRent" data-toggle="modal" (click)="editCar(car)" data-target="#UPDATE"><small>Rent Now</small></button></div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>   -->
+    </div>
+    <div class="modal fade" id="UPDATE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="showMassegeError">
+            Rent Error or error in rent Time
+          </div>
+          <div class="alert alert-primary" role="alert" *ngIf="showMassegeSuccses">
+            send sucssecfuly
+          </div>
+         <div class="modal-body">
+          <div class="field">
+            <input type="text" class="form-control"   placeholder="Enter serialnumber"  [(ngModel)]="car.serialNumber" />
+         </div>
+        </div>
+  
+        <div class="modal-body">
+          <div class="field">
+            <input type="text" class="form-control"   placeholder="Enter serialnumber"  [(ngModel)]="code" />
+         </div>
+        </div>
+  
+        <div class="modal-body">
+          <div class="field">
+            <input type="date" class="form-control"   placeholder="Enter checkIn"  [(ngModel)]="checkIn" />
+         </div>
+        </div>
+  
+        <div class="modal-body">
+          <div class="field">
+            <input type="date" class="form-control"   placeholder="Enter checkOut"  [(ngModel)]="checkOut"/>
+         </div>
+        </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" (click)="postCar()" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>

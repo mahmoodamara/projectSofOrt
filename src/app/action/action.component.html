@@ -1,0 +1,35 @@
+<p>action works!</p>
+<div *ngFor="let max of maxPriceArray">
+    <h4>{{max.bidValue}}</h4>
+<div>
+
+{{days}} : {{hours}} : {{minutes}} : {{seconds}}
+<div *ngFor="let ac of auctions">
+    <h4>{{ac.maxPrice}}</h4>
+    <h4>{{ac.minPrice}}</h4>
+<div>
+    <div class="form-group">
+
+        <input [(ngModel)]="price" />
+        <br />
+    </div>
+    <div>
+    <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible" (click)="clickToBuyDirectly()">clickToBuyDirectly</button>
+<div *ngIf="isBuyDirectly">
+    <label>enter the code</label>
+    <input  [(ngModel)]="code" />
+    <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible"  (click)="clickOk(ac)">OK</button>
+</div>
+</div>
+
+    <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible" (click)="addPrice(ac)">Add</button>
+    <div *ngIf="isBuyDirectly2">
+        <label>enter the code</label>
+        <input  [(ngModel)]="code" />
+        <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible"  (click)="clickOk(ac)">OK</button>
+    </div>
+</div>
+
+<button class="btn btn-secondary"   (click)="carViews(ac)">views</button>
+
+</div>

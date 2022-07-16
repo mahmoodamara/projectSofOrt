@@ -1,0 +1,128 @@
+<!-- <app-navbar></app-navbar>
+
+<section class="projects" id="projects">
+  <h2 class="title">Projects</h2>
+  <div class="content">
+      <div class="project-card">
+          <div class="project-image">
+              <img src="/assets/images/work1.jpg" />
+          </div>
+          <div class="project-info">
+              <p class="project-category">is renting</p>
+              <p class="project-price">price : $12</p>
+              <strong class="project-title">
+                  <span>Dev Books</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+      <div class="project-card">
+          <div class="project-image">
+              <img src="/assets/images/work2.jpg" />
+          </div>
+          <div class="project-info">
+              <p class="project-category">is renting</p>
+              <p class="project-price">price : $12</p>
+              <strong class="project-title">
+                  <span>Dev Books</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+      <div class="project-card">
+          <div class="project-image">
+              <img src="/assets/images/work3.jpg" />
+          </div>
+          <div class="project-info">
+              <p class="project-category">is renting</p>
+              <p class="project-price">price : $12</p>
+              <strong class="project-title">
+                  <span>Dev Books</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+      <div class="project-card">
+          <div class="project-image">
+              <img src="/assets/images/work4.jpg" />
+          </div>
+          <div class="project-info">
+              <p class="project-category">is renting</p>
+              <p class="project-price">price : $12</p>
+              <strong class="project-title">
+                  <span>Dev Books</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+      <div class="project-card">
+          <div class="project-image">
+              <img src="/assets/images/work5.jpg" />
+          </div>
+          <div class="project-info">
+              <p class="project-category">is renting</p>
+              <p class="project-price">price : $12</p>
+              <strong class="project-title">
+                  <span>Dev Books</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+      <div class="project-card">
+          <div class="project-image">
+              <img src="/assets/images/work6.jpg" />
+          </div>
+          <div class="project-info">
+              <p class="project-category">is renting</p>
+              <p class="project-price">price : $12</p>
+              <strong class="project-title">
+                  <span>Internet</span>
+                  <a href="#" class="more-details">More details</a>
+              </strong>
+          </div>
+      </div>
+  </div>
+</section> -->
+<app-navbar></app-navbar>
+<div class="container text-center" style="margin-top:15px">
+  <h1 style="font-family: cursive;">Rent Car</h1>
+  <nav>
+    <a (click)="mostWatched()">MostCars</a>
+    <a (click)="mazda()">Mazda</a>
+    <a (click)="toyota()">Toyota</a>
+    <a (click)="ford()">Ford</a>
+    <a href="#">GUITAR</a>
+    <div id="indicator"></div>
+  </nav>
+  </div>
+
+
+
+  <div class="shell">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let car of mostWatchedArray">
+          <div class="wsk-cp-product" >
+            <div class="wsk-cp-img">
+              <img [src]="car.img" />
+            </div>
+            <div class="wsk-cp-text">
+              <div class="category" *ngIf="!car.isRent">
+                <span [style.color]="'green'"  >not rent</span>
+              </div>
+              <div class="category" *ngIf="car.isRent">
+                <span [style.color]="'red'"  >is rent</span>
+              </div>
+              <div class="title-product">
+                <h3>My face not my heart</h3>
+              </div>
+              <div class="description-prod">
+                <p>Description Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
+              </div>
+              <div class="card-footer">
+                <div class="wcf-left"><span class="price">Rp500.000</span></div>
+                <div class="wcf-right"><a href="#" class="buy-btn" [routerLink]="['/rentcars', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
