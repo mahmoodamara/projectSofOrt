@@ -1,4 +1,5 @@
 const express = require('express');
+const { asyncScheduler } = require('rxjs');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
 
@@ -11,6 +12,18 @@ router.get('/rent', (req, res) => {
     });
 });
 
+router.get('/rent/serialNumber', (req, res) => {
+  const serialnumber = req.query.serialNumber;
+  Rent.find({
+    serialNumber: serialnumber
+  }, function (err, response) {
+    if (err)
+      res.send(err);
+    else
+      res.send(response)
+  })
+});
+
 router.get('/rentSort', (req, res) => {
     Rent.find().sort({checkOut: 1}).exec(function (err, docs) {
       if (!err) {
@@ -21,39 +34,40 @@ router.get('/rentSort', (req, res) => {
     });
   });
 
-router.post('/rent', (req, res) => {
+router.post('/rent',  async (req, res) => {
+  const rentOne = await Rent.findOne({serialNumber: req.body.serialNumber});
+
     var rent = new Rent({
         serialNumber: req.body.serialNumber,
-        img: req.body.img,
-        type: req.body.type,
-        manufacturer: req.body.manufacturer,
-        yearOfManufacture: req.body.yearOfManufacture,
-        model: req.body.model,
-        horsePower: req.body.horsePower,
-        engineCapacity: req.body.engineCapacity,
-        fuelType: req.body.fuelType,
-        KM: req.body.KM,
-        price: req.body.price,
-        views: req.body.views,
-        isShowRent: req.body.isShowRent,
-        checkOut: req.body.checkOut,
-        checkIn: req.body.checkIn,
-        email: req.body.email,
-        isRent: req.body.isRent,
-        isShow: req.body.isShow,
-        timeRent: req.body.timeRent,
-        carInspectionDate: req.body.carInspectionDate
     });
+    rentUser = {
+      email: req.body.email,
+      checkOut: req.body.checkOut,
+      checkIn: req.body.checkIn,
+      location:req.body.location
+    }
+    rent.rent.push(rentUser);
+
+    if(!rentOne){
     rent.save((err, doc) => {
     if (!err) { res.send(doc); }
         else { console.log('Error in Rent Save :' + JSON.stringify(err, undefined, 2)); }
     });
+  }else{
+    Rent.updateOne({serialNumber:req.body.serialNumber},{$push: {rent : rentUser}},(err, doc) => {
+      if (!err) {
+        res.send(doc);
+      } else {
+        console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2));
+      }
+    });
+  }
 });
 
 router.put('/rent/:id', (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send(`No record with given id : ${req.params.id}`);
-  
+
     var rent = {
         car : req.body.car ,
         checkOut:req.body.checkOut ,

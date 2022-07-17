@@ -32,7 +32,7 @@ export class CarsService {
   getmaxViewsCar():Observable<any>{
     return this.http.get(this.baseURLMaxViews);
   }
-  getOneCar(carSerialnumber:number){
+  getOneCar(carSerialnumber:number):Observable<any>{
     this.baseURLOneCar = `${this.baseURL}/serialNumber?serialNumber=${carSerialnumber}`
     return this.http.get(this.baseURLOneCar);
   }
@@ -58,7 +58,7 @@ export class CarsService {
     return this.http.put(`${this.baseURLRentCar}/${rent._id}`, rent);
   }
 
- 
+
   rentCar(car:Cars){
     return this.http.put(`${this.baseURL}/${car._id}` , car);
 
@@ -79,6 +79,6 @@ export class CarsService {
     headers: this.headers
     });
   }
- 
-  
+
+
 }

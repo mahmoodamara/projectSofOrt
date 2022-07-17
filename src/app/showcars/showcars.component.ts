@@ -4,6 +4,7 @@ import { Email } from '../models/email.model';
 import { Rent } from '../models/rent.model';
 import { ActionService } from '../services/action.service';
 import { CarsService } from '../services/cars.service';
+import { RentService } from '../services/rent.service';
 
 @Component({
   selector: 'app-showcars',
@@ -28,12 +29,12 @@ export class ShowcarsComponent implements OnInit {
 
 
   car = new Cars("","","");
-  constructor(private carsService:CarsService , private acutionservice:ActionService) { }
+  constructor(private carsService:CarsService , private acutionservice:ActionService,private rentService:RentService) { }
 
   ngOnInit(): void {
     this.getCars();
-    this.getCodes();
-    this.timer();
+    // this.getCodes();
+    // this.timer();
     this.mostWatched();
   }
 
@@ -70,6 +71,13 @@ export class ShowcarsComponent implements OnInit {
     this.mostWatchedArray=data;
      });
   }
+
+  rentCar(car:Cars){
+      this.rentService.car.push(car);
+  }
+
+
+
 /*
   getCars():void{
     this.carsService.getCars().subscribe((data)=>{
@@ -79,111 +87,111 @@ export class ShowcarsComponent implements OnInit {
   }
   */
 
-  getCodes():void{
-    this.acutionservice.getCodeInfo().subscribe(data=>{
-      this.codes=data;
-    });
-  }
+//   getCodes():void{
+//     this.acutionservice.getCodeInfo().subscribe(data=>{
+//       this.codes=data;
+//     });
+//   }
 
-  carViews(car:Cars):void{
-    car.views++;
-    this.carsService.putCar(car).subscribe((data)=>{
-      this.getCars();
-    })
-  }
+//   carViews(car:Cars):void{
+//     car.views++;
+//     this.carsService.putCar(car).subscribe((data)=>{
+//       this.getCars();
+//     })
+//   }
 
-  sendEmail():void{
-    this.acutionservice.Sendemail().subscribe((res)=>{
-      console.log("sendEmail");
-      this.getCodes();
-   })
-  }
+//   sendEmail():void{
+//     this.acutionservice.Sendemail().subscribe((res)=>{
+//       console.log("sendEmail");
+//       this.getCodes();
+//    })
+//   }
 
-   editCar(car:Cars):void{
-    this.car=car;
-    this.sendEmail();
-  }
+//    editCar(car:Cars):void{
+//     this.car=car;
+//     this.sendEmail();
+//   }
 
-  checkRent(car:Cars):boolean{
-    let checkInRent = new Date (car.checkIn).getTime();
-    let checkOutRent = new Date (car.checkOut).getTime();
-    let checkInNow = new Date (this.checkIn).getTime();
-    let checkOutNow = new Date (this.checkOut).getTime();
+//   checkRent(car:Cars):boolean{
+//     let checkInRent = new Date (car.checkIn).getTime();
+//     let checkOutRent = new Date (car.checkOut).getTime();
+//     let checkInNow = new Date (this.checkIn).getTime();
+//     let checkOutNow = new Date (this.checkOut).getTime();
 
-    let now = new Date().getTime();
-    if(checkInNow >= now && this.checkCode()==true){
-    if(checkInNow < checkInRent &&  checkInNow < checkOutRent && checkOutNow < checkInRent   || checkInNow > checkOutRent ||
-      car.checkIn=="" && car.checkOut=="" ){
-        this.showMassegeSuccses = true;
-        setTimeout(()=>{
-          this.showMassegeSuccses = false;
-      }, 3000);
-      return true;
-    }
-    else{
-      this.showMassegeError = true;
-      setTimeout(()=>{
-        this.showMassegeError = false;
-    }, 3000);
-    }
+//     let now = new Date().getTime();
+//     if(checkInNow >= now && this.checkCode()==true){
+//     if(checkInNow < checkInRent &&  checkInNow < checkOutRent && checkOutNow < checkInRent   || checkInNow > checkOutRent ||
+//       car.checkIn=="" && car.checkOut=="" ){
+//         this.showMassegeSuccses = true;
+//         setTimeout(()=>{
+//           this.showMassegeSuccses = false;
+//       }, 3000);
+//       return true;
+//     }
+//     else{
+//       this.showMassegeError = true;
+//       setTimeout(()=>{
+//         this.showMassegeError = false;
+//     }, 3000);
+//     }
 
-    }
-    else{
-      this.showMassegeError = true;
-    setTimeout(()=>{
-      this.showMassegeError = false;
-  }, 3000);
-    }
-    return false;
-  }
+//     }
+//     else{
+//       this.showMassegeError = true;
+//     setTimeout(()=>{
+//       this.showMassegeError = false;
+//   }, 3000);
+//     }
+//     return false;
+//   }
 
-   checkCode():boolean{
-    for(let code of this.codes){
-      if(this.code == code.rand){
-        return true;
-      }
-    }
-    return false;
-  }
+//    checkCode():boolean{
+//     for(let code of this.codes){
+//       if(this.code == code.rand){
+//         return true;
+//       }
+//     }
+//     return false;
+//   }
 
-   rentCar():void{
-   if(this.checkRent(this.car) && this.checkCode()==true){
-    this.car.checkIn = this.checkIn;
-    this.car.checkOut = this.checkOut;
-    this.carsService.rentCar(this.car).subscribe((res)=>{
-      this.getCars();
-      console.log("update")
-    })
-   }
-  }
+//    rentCar():void{
+//    if(this.checkRent(this.car) && this.checkCode()==true){
+//     this.car.checkIn = this.checkIn;
+//     this.car.checkOut = this.checkOut;
+//     this.carsService.rentCar(this.car).subscribe((res)=>{
+//       this.getCars();
+//       console.log("update")
+//     })
+//    }
+//   }
 
-  year : number;
-  month : number;
-  day : number;
-  timer(){
-    let d = new Date();
-    this.year=d.getFullYear();
-    this.month=d.getMonth()+1;
-    this.day=d.getDate();
-  }
+//   year : number;
+//   month : number;
+//   day : number;
+//   timer(){
+//     let d = new Date();
+//     this.year=d.getFullYear();
+//     this.month=d.getMonth()+1;
+//     this.day=d.getDate();
+//   }
 
- updatecarInspectionDate():void{
-  for(let car of this.cars){
-   let d = new Date(car.carInspectionDate).getDate();
-   if(this.day==d){
-   this.carsService.sendEmail(car).subscribe((res)=>{
-     console.log("send email");
-   })
-  }
-  else{
-    console.log(false);
-  }
-}
-}
+//  updatecarInspectionDate():void{
+//   for(let car of this.cars){
+//    let d = new Date(car.carInspectionDate).getDate();
+//    if(this.day==d){
+//    this.carsService.sendEmail(car).subscribe((res)=>{
+//      console.log("send email");
+//    })
+//   }
+//   else{
+//     console.log(false);
+//   }
+// }
+// }
 
 
 
- inteval =setInterval(this.timer,(1000));
+//  inteval =setInterval(this.timer,(1000));
 
 
 

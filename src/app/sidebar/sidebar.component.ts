@@ -25,14 +25,14 @@ export class SidebarComponent implements OnInit {
   codes:Email[] =[];
   checkIn:any;
   checkOut:any;
-  code : number;
+  code : number | undefined;
   serialNumber:any;
   showMassegeSuccses:boolean = false;
   showMassegeError:boolean = false;
   car = new Cars("","","");
 
     constructor(private carservice : CarsService , private actRouter:ActivatedRoute  , private acutionservice:ActionService ) { }
-  
+
     ngOnInit(): void {
       this.mostWatched();
       this.getCodes();
@@ -90,14 +90,14 @@ export class SidebarComponent implements OnInit {
         this.rents = data;
       })
     }
-  
+
     carViews(car:Cars):void{
       car.views++;
       this.carservice.putCar(car).subscribe((data)=>{
         this.getCars();
       })
     }
-  
+
     sendEmail():void{
       this.acutionservice.Sendemail().subscribe((res)=>{
         console.log("sendEmail");
@@ -121,64 +121,64 @@ export class SidebarComponent implements OnInit {
       })
     }
     }
-  
+
     checkRent(car:Cars):boolean{
       let now = new Date().getTime();
       for(let rent of this.rents){
         if(car.serialNumber==rent.serialNumber){
-      
+
       let checkInRent = new Date (rent.checkIn).getTime();
       let checkOutRent = new Date (rent.checkOut).getTime();
       let checkInNow = new Date (this.checkIn).getTime();
       let checkOutNow = new Date (this.checkOut).getTime();
 
-      
-    
+
+
       if(checkInNow >= now && this.checkCode()==true){
       if(checkInNow < checkInRent &&  checkInNow < checkOutRent && checkOutNow < checkInRent   || checkInNow > checkOutRent && checkOutNow> checkOutRent||
         car.checkIn=="" && car.checkOut=="" ){
           this.showMassegeSuccses = true;
-          setTimeout(()=>{                         
+          setTimeout(()=>{
             this.showMassegeSuccses = false;
         }, 3000);
         return true;
       }
       else{
         this.showMassegeError = true;
-        setTimeout(()=>{                         
+        setTimeout(()=>{
           this.showMassegeError = false;
       }, 3000);
       }
-      
+
       }
       else{
         this.showMassegeError = true;
-      setTimeout(()=>{                         
+      setTimeout(()=>{
         this.showMassegeError = false;
     }, 3000);
       }
     }
     else{
-    
+
         if(this.checkCode()==true && this.checkIn>=now && this.checkOut>this.checkIn ){
           this.showMassegeSuccses = true;
-          setTimeout(()=>{                         
+          setTimeout(()=>{
             this.showMassegeSuccses = false;
         }, 3000);
         }
         else{
           this.showMassegeError = true;
-        setTimeout(()=>{                         
+        setTimeout(()=>{
         this.showMassegeError = false;
         }, 3000);
         }
-     
+
        return true;
     }
   }
       return false;
-    } 
-  
+    }
+
      checkCode():boolean{
       for(let code of this.codes){
         if(this.code == code.rand){
@@ -194,7 +194,7 @@ export class SidebarComponent implements OnInit {
         this.getCodes();
       });
      }
-    
+
     rentCar():void{
      if(this.checkRent(this.car) && this.checkCode()==true){
       this.car.checkIn = `${this.checkIn}T10:00`;
@@ -203,10 +203,10 @@ export class SidebarComponent implements OnInit {
         this.getCars();
         console.log("update")
       })
-     } 
+     }
     }
-  
 
 
-    
+
+
 }

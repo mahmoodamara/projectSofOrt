@@ -5,6 +5,7 @@ import { ActionComponent } from './action/action.component';
 import { AllcarsComponent } from './admin/allcars/allcars.component';
 import { CardetailsComponent } from './cardetails/cardetails.component';
 import { ContactComponent } from './contact/contact.component';
+import { DateComponent } from './date/date.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -36,7 +37,7 @@ const routes: Routes = [{
   path:'auction',
   component:ActionComponent
 },
-{ 
+{
   path: 'rentcars/:serialNumber', component:CardetailsComponent
 },
 {
@@ -62,6 +63,13 @@ const routes: Routes = [{
 {
   path:'admin/cars',
   component:AllcarsComponent,
+},
+{
+  path: 'date/:serialNumber', component:DateComponent
+},
+{
+  path:'date',
+  component:DateComponent,
 },
 ];
 

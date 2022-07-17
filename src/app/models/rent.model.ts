@@ -6,6 +6,7 @@ export class Rent {
     email: string;
     checkIn:string;
     checkOut:string;
+    location:string;
 
-   
+
 }

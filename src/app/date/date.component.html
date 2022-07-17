@@ -1,0 +1,56 @@
+<div id="booking" class="section">
+       <div class="section-center">
+              <div class="container">
+                     <div class="row">
+                            <div class="booking-form" >
+                                   <div class="booking-bg">
+                                          <div class="form-header">
+                                                 <h2>Make your reservation</h2>
+                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
+                                          </div>
+                                   </div>
+                                   <form>
+                                     <h1></h1>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <span class="form-label">car model</span>
+                                          <input placeholder="{{carType}}" class="form-control" type="text" >
+
+                                   </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="btn-dates">
+                                        <button style="margin-top: 30px; padding: 10px 50px; border: none; background: #fff;">Button <i class='fa fa-calendar-check-o' style="font-size: 20px;"></i></button>
+                                      </div>
+                                      </div>
+                                      </div>
+                                          <div class="row">
+                                                 <div class="col-md-6">
+                                                        <div class="form-group">
+                                                               <span class="form-label">Check In</span>
+                                                               <input [(ngModel)]="rent.checkIn" name="checkIn" class="form-control" type="date">
+                                                        </div>
+                                                 </div>
+                                                 <div class="col-md-6">
+                                                        <div class="form-group">
+                                                               <span class="form-label">Check Out</span>
+                                                               <input [(ngModel)]="rent.checkOut" name="checkOut" class="form-control" type="date">
+                                                        </div>
+                                                 </div>
+                                          </div>
+                                          <div class="form-group">
+                                                 <span class="form-label">location</span>
+                                                 <input [(ngModel)]="rent.location" name="location" placeholder="location" class="form-control" type="text" >
+
+                                          </div>
+                                          <div class="form-btn">
+                                                 <button (click)="rentCar()" class="submit-btn">Check availability</button>
+                                          </div>
+
+                                   </form>
+                            </div>
+                     </div>
+              </div>
+       </div>
+</div>
