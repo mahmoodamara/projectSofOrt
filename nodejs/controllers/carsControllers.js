@@ -81,13 +81,7 @@ router.post('/cars', (req, res) => {
     KM: req.body.KM,
     price: req.body.price,
     views: req.body.views,
-    isShowRent: req.body.isShowRent,
-    checkOut: req.body.checkOut,
-    checkIn: req.body.checkIn,
-    email: req.body.email,
     isRent: req.body.isRent,
-    isShow: req.body.isShow,
-    timeRent: req.body.timeRent,
     carInspectionDate: req.body.carInspectionDate
 
 
@@ -118,13 +112,7 @@ router.put('/cars/:id', (req, res) => {
     KM: req.body.KM,
     price: req.body.price,
     views: req.body.views,
-    isShowRent: req.body.isShowRent,
-    checkOut: req.body.checkOut,
-    checkIn: req.body.checkIn,
-    email: req.body.email,
     isRent: req.body.isRent,
-    isShow: req.body.isShow,
-    timeRent: req.body.timeRent,
     carInspectionDate: req.body.carInspectionDate
   };
   Cars.findByIdAndUpdate(req.params.id, {

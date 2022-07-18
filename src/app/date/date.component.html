@@ -10,8 +10,12 @@
                                           </div>
                                    </div>
                                    <form>
-                                     <h1></h1>
-                                    <div class="row">
+                                    <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+                                      Error in date
+                                    </div>
+                                    <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
+                                      send sucssecfuly
+                                    </div>                                    <div class="row">
                                       <div class="col-md-6">
                                         <div class="form-group">
                                           <span class="form-label">car model</span>
@@ -53,4 +57,39 @@
                      </div>
               </div>
        </div>
+</div>
+
+<div class="holder d-flex align-items-center justify-content-center">
+
+  <div class="container">
+      <!-- FOR DEMO PURPOSE -->
+      <header class="text-center mb-5">
+          <h1 class="display-4">Bootstrap check list</h1>
+          <p class="fst-italic text-muted">Using Bootstrap 5 checkbox component, create an elegant checkbox list. Snippet by <a class="text-primary" href="https://bootstrapious.com/" target="_blank">Bootstrapious</a></p>
+      </header>
+
+
+      <div class="row">
+          <div class="col-lg-5 mx-auto">
+
+              <!-- CHECKBOX LIST -->
+              <div class="card rounded border-0 shadow-sm position-relative">
+                  <div class="card-body p-5">
+                      <div class="d-flex align-items-center mb-4 pb-4 border-bottom"><i class="far fa-calendar-alt fa-3x"></i>
+                          <div class="ms-3">
+                              <h4 class="text-uppercase fw-weight-bold mb-0">Wednesday</h4>
+                              <p class="text-gray fst-italic mb-0">05 December 2020</p>
+                          </div>
+                      </div>
+                      <div *ngFor="let carss of rents"  >
+                      <div class="form-check mb-3" *ngFor="let date of carss.rent">
+                          <input class="form-check-input" id="flexChec2" type="checkbox">
+                          <label class="form-check-label" for="flexChec2"><span class="fst-italic pl-1">checkIn : {{date.checkIn}} checkOut : {{date.checkOut}}  </span></label>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

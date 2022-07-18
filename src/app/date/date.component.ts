@@ -18,7 +18,10 @@ export class DateComponent implements OnInit {
   carSerialnumber:any;
   currentProduct:any;
   carType:any;
+  listDates : any[]=[];
   rent = new Rent();
+  showErrorMessage:boolean=false
+  showSuccssMessage:boolean=false;
 
     constructor(private carservice : CarsService , private actRouter:ActivatedRoute,private rentService:RentService  ) { }
 
@@ -31,6 +34,8 @@ export class DateComponent implements OnInit {
     refreshCars(){
       this.carservice.getOneCar(this.carSerialnumber).subscribe((data)=>{
       this.car=data;
+      this.listDates=data;
+      console.log(this.listDates);
       this.carType = this.car[0].manufacturer;
        });
     }
@@ -38,7 +43,7 @@ export class DateComponent implements OnInit {
     getRents(){
       this.rentService.getOneRent(this.carSerialnumber).subscribe(data=>{
         this.rents=data;
-        console.log(this.rents);
+       // console.log(this.rents);
       })
     }
 
@@ -48,8 +53,8 @@ export class DateComponent implements OnInit {
       let dCheckIn =new Date(this.rent.checkIn).getDate();
       let dCheckOt =new Date(this.rent.checkOut).getDate();
 
-      console.log(d);
-      console.log(dCheckIn);
+    //  console.log(d);
+     // console.log(dCheckIn);
 
       for(let i=0;i<this.rents.length;i++){
         if(this.rent.checkIn >= this.rents[i].rent[i].checkIn && this.rent.checkOut <= this.rents[i].rent[i].checkOut
@@ -78,11 +83,14 @@ export class DateComponent implements OnInit {
       if(this.checkRent()){
       this.rentService.postRent(this.rent).subscribe(res=>{
         this.getRents();
-        console.log("save");
+        this.showSuccssMessage = true;
+        setTimeout(() => this.showErrorMessage = false, 2000);
+        //console.log("save");
       })
     }
     else{
-      console.log("not save");
+      this.showErrorMessage = true;
+      setTimeout(() => this.showErrorMessage = false, 2000);
     }
 
     }

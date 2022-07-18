@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<section id="team" class="team">
+
+  <div class="container" data-aos="fade-up">
+
+    <header class="section-title">
+      <h2>Team</h2>
+      <p>Our hard working team</p>
+    </header>
+
+  <div class="shell">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let car of auctions">
+          <div class="wsk-cp-product" >
+            <div class="wsk-cp-img">
+              <img [src]="car.carPhoto" />
+            </div>
+            <div class="wsk-cp-text">
+              <div class="category" *ngIf="!car.isRent">
+                <span [style.color]="'green'"  >not rent</span>
+              </div>
+              <div class="category" *ngIf="car.isRent">
+                <span [style.color]="'red'"  >is rent</span>
+              </div>
+              <div class="title-product">
+                <h3>My face not my heart</h3>
+              </div>
+              <div class="description-prod">
+                <p> Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
+              </div>
+              <div class="card-footer">
+                <div class="wcf-left"><span class="price">{{car.maxPrice | currency}}</span></div>
+                <div class="wcf-right"><a href="#" class="buy-btn"   [routerLink]="['/date', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+
+    </div>
+  </div>
+  </div>
+</section>
