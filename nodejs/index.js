@@ -17,6 +17,7 @@ var teamControllers = require('./controllers/teamControllers.js');
 var contactController = require('./controllers/contactController.js');
 var messageController = require('./controllers/messageController.js');
 var carTreatmentControllers = require('./controllers/carTreatmentControllers.js');
+var profileControllers = require('./controllers/profileControllers.js');
 
 
 
@@ -34,6 +35,7 @@ app.use('/api', teamControllers);
 app.use('/api', contactController);
 app.use('/api', messageController);
 app.use('/api', carTreatmentControllers);
+app.use('/api', profileControllers);
 
 
 

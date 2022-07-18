@@ -13,6 +13,7 @@ import { ShowcarsComponent } from './showcars/showcars.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SignupComponent } from './signup/signup.component';
 import { TeamComponent } from './team/team.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path:'',pathMatch:'full',redirectTo:'login'
@@ -70,6 +71,10 @@ const routes: Routes = [{
 {
   path:'date',
   component:DateComponent,
+},
+{
+  path:'profile',
+  component:ProfileComponent,
 },
 ];
 

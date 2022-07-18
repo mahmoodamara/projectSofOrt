@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container bootstrap snippets bootdey" style="margin-left: 0px;">
+<div class="row">
+  <div class="profile-nav col-md-3">
+      <div class="panel">
+          <div class="user-heading round">
+              <a href="#">  
+                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+              </a>
+              <h1>Camila Smith</h1>
+              <p>deydey@theEmail.com</p>
+          </div>
+
+          <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+              <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
+              <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+          </ul>
+      </div>
+  </div>
+  <div class="profile-info col-md-9">
+      
+  <div class="shell">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6" *ngFor="let car of Profile">
+          <div class="wsk-cp-product">
+            <div class="wsk-cp-img">
+              <img [src]="car.car.img" />
+            </div>
+            <div class="wsk-cp-text">
+              <div class="category" *ngIf="!car.car.isRent">
+                <span [style.color]="'green'"  >not rent</span>
+              </div>
+              <div class="category" *ngIf="car.car.isRent">
+                <span [style.color]="'red'"  >is rent</span>
+              </div>
+              <div class="title-product">
+                <h3>My face not my heart</h3>
+              </div>
+              <div class="description-prod">
+                <p> Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
+              </div>
+              <div class="card-footer">
+                <div class="wcf-left"><span class="price">Rp500.000</span></div>
+                <div class="wcf-right"><a href="#" class="buy-btn" (click)="addToProfile(car);"><i class="fa fa-shopping-basket"></i></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+</div>
+</div>   
+</div>

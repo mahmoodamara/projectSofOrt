@@ -4,6 +4,7 @@ import { Email } from '../models/email.model';
 import { Rent } from '../models/rent.model';
 import { ActionService } from '../services/action.service';
 import { CarsService } from '../services/cars.service';
+import { ProfileService } from '../services/profile.service';
 import { RentService } from '../services/rent.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class ShowcarsComponent implements OnInit {
 
 
   car = new Cars("","","");
-  constructor(private carsService:CarsService , private acutionservice:ActionService,private rentService:RentService) { }
+  constructor(private carsService:CarsService , private acutionservice:ActionService,private rentService:RentService,private profileService:ProfileService) { }
 
   ngOnInit(): void {
     this.getCars();
@@ -75,7 +76,11 @@ export class ShowcarsComponent implements OnInit {
   rentCar(car:Cars){
       this.rentService.car.push(car);
   }
-
+  addToProfile(car:Cars){
+    this.profileService.addToProfile(car).subscribe((data)=>{
+      alert("add succ");
+    })
+  }
 
 
 /*

@@ -19,6 +19,7 @@ import { AllcarsComponent } from './admin/allcars/allcars.component';
 import { AboutComponent } from './about/about.component';
 import { CarDetailsComponent } from './car-details/car-details.component';
 import { DateComponent } from './date/date.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -38,7 +39,8 @@ import { DateComponent } from './date/date.component';
     AllcarsComponent,
     AboutComponent,
     CarDetailsComponent,
-    DateComponent
+    DateComponent,
+    ProfileComponent
 
 
   
