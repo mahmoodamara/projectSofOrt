@@ -19,7 +19,11 @@ import { AllcarsComponent } from './admin/allcars/allcars.component';
 import { AboutComponent } from './about/about.component';
 import { CarDetailsComponent } from './car-details/car-details.component';
 import { DateComponent } from './date/date.component';
+
 import { ProfileComponent } from './profile/profile.component';
+
+import { CarActionComponent } from './car-action/car-action.component';
+
 
 
 
@@ -40,11 +44,8 @@ import { ProfileComponent } from './profile/profile.component';
     AboutComponent,
     CarDetailsComponent,
     DateComponent,
-    ProfileComponent
-
-
-  
-    
+    ProfileComponent,
+    CarActionComponent  
   ],
   imports: [
     BrowserModule,

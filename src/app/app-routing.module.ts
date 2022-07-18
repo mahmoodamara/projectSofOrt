@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { ActionComponent } from './action/action.component';
 import { AllcarsComponent } from './admin/allcars/allcars.component';
+import { CarActionComponent } from './car-action/car-action.component';
 import { CardetailsComponent } from './cardetails/cardetails.component';
 import { ContactComponent } from './contact/contact.component';
 import { DateComponent } from './date/date.component';
@@ -73,8 +74,14 @@ const routes: Routes = [{
   component:DateComponent,
 },
 {
+
   path:'profile',
   component:ProfileComponent,
+},
+{
+  path:'carsAction',
+  component:CarActionComponent,
+ 
 },
 ];
 

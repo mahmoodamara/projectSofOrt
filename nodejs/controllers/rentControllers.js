@@ -1,15 +1,25 @@
 const express = require('express');
-const { asyncScheduler } = require('rxjs');
+const {
+  asyncScheduler
+} = require('rxjs');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
 
-var { Rent } = require('../models/rent');
+var {
+  Rent
+} = require('../models/rent');
 
+var {
+  Cars
+} = require('../models/cars');
 router.get('/rent', (req, res) => {
-    Rent.find((err, docs) => {
-        if (!err) { res.send(docs); }
-        else { console.log('Error in Retriving Rent :' + JSON.stringify(err, undefined, 2)); }
-    });
+  Rent.find((err, docs) => {
+    if (!err) {
+      res.send(docs);
+    } else {
+      console.log('Error in Retriving Rent :' + JSON.stringify(err, undefined, 2));
+    }
+  });
 });
 
 router.get('/rent/serialNumber', (req, res) => {
@@ -25,36 +35,49 @@ router.get('/rent/serialNumber', (req, res) => {
 });
 
 router.get('/rentSort', (req, res) => {
-    Rent.find().sort({checkOut: 1}).exec(function (err, docs) {
-      if (!err) {
-        res.send(docs);
-      } else {
-        console.log('Error in Retriving Users :' + JSON.stringify(err, undefined, 2));
-      }
-    });
+  Rent.find().sort({
+    "rent.checkOut": -1
+  }).exec(function (err, docs) {
+    if (!err) {
+      res.send(docs);
+    } else {
+      console.log('Error in Retriving Users :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
+
+router.post('/rent', async (req, res) => {
+  const rentOne = await Rent.findOne({
+    serialNumber: req.body.serialNumber
   });
 
-router.post('/rent',  async (req, res) => {
-  const rentOne = await Rent.findOne({serialNumber: req.body.serialNumber});
+  var rent = new Rent({
+    serialNumber: req.body.serialNumber,
+  });
+  rentUser = {
+    email: req.body.email,
+    checkOut: req.body.checkOut,
+    checkIn: req.body.checkIn,
+    location: req.body.location
+  }
+  rent.rent.push(rentUser);
 
-    var rent = new Rent({
-        serialNumber: req.body.serialNumber,
-    });
-    rentUser = {
-      email: req.body.email,
-      checkOut: req.body.checkOut,
-      checkIn: req.body.checkIn,
-      location:req.body.location
-    }
-    rent.rent.push(rentUser);
-
-    if(!rentOne){
+  if (!rentOne ) {
     rent.save((err, doc) => {
-    if (!err) { res.send(doc); }
-        else { console.log('Error in Rent Save :' + JSON.stringify(err, undefined, 2)); }
+      if (!err) {
+        res.send(doc);
+      } else {
+        console.log('Error in Rent Save :' + JSON.stringify(err, undefined, 2));
+      }
     });
-  }else{
-    Rent.updateOne({serialNumber:req.body.serialNumber},{$push: {rent : rentUser}},(err, doc) => {
+  } else {
+    Rent.updateOne({
+      serialNumber: req.body.serialNumber
+    }, {
+      $push: {
+        rent: rentUser
+      }
+    }, (err, doc) => {
       if (!err) {
         res.send(doc);
       } else {
@@ -65,49 +88,140 @@ router.post('/rent',  async (req, res) => {
 });
 
 router.put('/rent/:id', (req, res) => {
-    if (!ObjectId.isValid(req.params.id))
-        return res.status(400).send(`No record with given id : ${req.params.id}`);
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send(`No record with given id : ${req.params.id}`);
 
-    var rent = {
-        car : req.body.car ,
-        checkOut:req.body.checkOut ,
-        checkIn:req.body.checkIn ,
-        email:req.body.email ,
-        isRent : req.body.isRent,
-        isShow:req.body.isShow,
-    };
-    Rent.findByIdAndUpdate(req.params.id, { $set: rent }, { new: true }, (err, doc) => {
-        if (!err) { res.send(doc); }
-        else { console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2)); }
-    });
+  var rent = {
+    checkOut: req.body.checkOut,
+    checkIn: req.body.checkIn,
+    email: req.body.email,
+  };
+  Rent.findByIdAndUpdate(req.params.id, {$set: rent}, {new: true}, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
+
+
+function timer() {
+
+  const d = new Date().getDate();
+  const m = new Date().getMonth() + 1;
+  const y = new Date().getFullYear();
+
+  let time = `${y}-${m}-${d}`
+
+  Rent.find({
+    "rent.checkIn": time
+  }, function (err, docs) {
+    if (!err) {
+      for (let dos of docs) {
+        router.delete(`/home/:${dos._id}`)
+        if (!ObjectId.isValid(docs._id))
+          return res.status(400).send(`No record with given id : ${docs._id}`);
+
+        Rent.findByIdAndRemove(docs._id, (err, doc) => {
+          if (!err) {
+            res.send(doc);
+          } else {
+            console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2));
+          }
+        });
+      }
+    }
   });
 
+}
 
-  function timer() {
+function updateRent() {
 
-    const d = new Date().getDate();
-    const m = new Date().getMonth() + 1;
-    const y = new Date().getFullYear();
-    const h = 'T18:00';
 
-    let time=`${y}-${m}-${d}${h}`
+  const d = new Date().getDate();
+  const m = new Date().getMonth() + 1;
+  const y = new Date().getFullYear();
 
-    Rent.find({checkOut: time}, function (err, docs) {
-        if (!err) {
-        for(let dos of docs ){
-            router.delete(`/home/:${dos._id}`)
-            if (!ObjectId.isValid(docs._id))
-                return res.status(400).send(`No record with given id : ${docs._id}`);
+  const h = new Date().getHours();
+  const min = new Date().getMinutes();
+  const s = new Date().getSeconds();
 
-    Rent.findByIdAndRemove(docs._id, (err, doc) => {
-        if (!err) { res.send(doc); }
-        else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
-    });
-   }
- }
+
+  let time = `${y}-0${m}-${d}`
+//console.log(time)
+  Rent.find({"rent.checkIn": time}, function (err, docs) {
+    if (!err) {
+      for(let i=0;i<docs.length;i++){
+        for(let j=0;j<docs[i].rent.length;j++){
+          if(docs[i].rent[j].checkIn == time){
+             if(h>=10 && h<18){
+              Cars.updateOne({serialNumber:docs[i].serialNumber}, {$set: {isRent:true}}, (err, doc) => {
+                if (!err) {
+                  return;
+                } else {
+                  console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+                }
+              });
+
+             }
+          }
+          if(docs[i].rent[j].checkOut == time){
+            if(h>=18 && h<24){
+              Cars.updateOne({serialNumber:docs[i].serialNumber}, {$set: {isRent:false}}, (err, doc) => {
+                if (!err) {
+                  return;
+                } else {
+                  console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+                }
+              });
+
+
+       Rent.findOneAndUpdate({ serialNumber: docs[i].serialNumber },{ $pull: { rent: { email: docs[i].rent[j].email } } },{ new: true },(err, doc) => {
+         if (!err) {
+            if(docs[i].rent.length==0){
+          Rent.findOneAndRemove({serialNumber: docs[i].serialNumber}, (err, doc) => {
+            if (!err) { res.send(doc); }
+            else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
+        });
+        }
+
+    } else {
+      console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+    }
+  })
+             }
+
+          }
+        }
+      }
+    } else {
+      console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2));
+    }
+  })
+}
+setInterval(updateRent, 1000);
+
+
+
+
+router.put('/rent/:serialNumber/:email', (req, res) => {
+
+  Rent.findOneAndUpdate({ serialNumber: req.params.serialNumber },{ $pull: { rent: { email: req.params.email } } },{ new: true },(err, doc) => {
+    if (!err) {
+        if(doc.rent.length==0){
+          Rent.findOneAndRemove({serialNumber:req.params.serialNumber}, (err, doc) => {
+            if (!err) { res.send(doc); }
+            else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
+        });
+        }
+
+    } else {
+      console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+    }
+  })
 });
 
 
 
-  }
 module.exports = router;

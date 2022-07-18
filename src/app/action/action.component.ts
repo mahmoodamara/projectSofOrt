@@ -96,7 +96,7 @@ clickToBuyDirectly(){
  this.sendEmail();
   this.isBuyDirectly = true;
 }
- 
+
 clickOk(ac:Auction){
     if(this.checkCode()==true){
         this.acutionservice.SendemailWinner().subscribe((res)=>{
@@ -124,14 +124,14 @@ onCodeDelete(_id: string) {
 
 timer(){
   const myfunc = setInterval(()=>{
-   var countDownDate = new Date('2022-06-17T17:53:00').getTime();
+   var countDownDate = new Date('2022-07-19T17:53:00').getTime();
    var now = new Date().getTime();
    var timeleft = countDownDate - now;
    this.days= Math.floor(timeleft / (1000 * 60 * 60 * 24));
    this.hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
    this.minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-   this.seconds = Math.floor((timeleft % (1000 * 60)) / 1000);   
-   
+   this.seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
    if(timeleft < 0){
      clearInterval(myfunc);
      this.days=0;
