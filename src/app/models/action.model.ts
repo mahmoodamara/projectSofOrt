@@ -10,6 +10,7 @@ export class Auction {
     lenght: number;
     isButtonVisible :boolean;
     views : number;
-    
+    serialNumber:number;
+
 
 }

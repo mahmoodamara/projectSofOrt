@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Auction } from '../models/action.model';
 import { Email } from '../models/email.model';
 import { UsersAuction } from '../models/usersAction';
@@ -12,110 +13,135 @@ import { ActionService } from '../services/action.service';
 })
 export class ActionComponent implements OnInit {
 
-  constructor(private acutionservice:ActionService , private formBuilder:FormBuilder) { }
+  constructor(private acutionservice:ActionService , private formBuilder:FormBuilder,private actRouter:ActivatedRoute) { }
   auctions : Auction[]=[];
-  codes:Email[] =[];
+  maxPrice:number;
+  minPrice:number;
+  carType:string;
+  bidValue:number=0;
   maxPriceArray:UsersAuction[]=[];
-  price:number;
+  priceAdd:number;
+
+
+
+
+  codes:Email[] =[];
   isWinner : string
   isBuyDirectly : boolean = false
   isBuyDirectly2 : boolean = false
   code : number;
+  carSerialnumber:any;
+  serial:number;
+  timeAuction:string=''
   ngOnInit(): void {
-    this.getCarsAuction();
-    this.getCodes();
-    this.getMaxPrice();
-    this.timer();
+    // this.getCodes();
+     this.timer();
+    this.carSerialnumber=this.actRouter.snapshot.params['serialNumber'];
+    this.getCarAuction();
+     this.getMaxPrice();
+
+      setInterval(()=>{
+        this.timer();
+        this.getCarAuction();
+        this.getMaxPrice();
+      },1000)
   }
 
-getCarsAuction(){
-    this.acutionservice.getactioninfo().subscribe(data=>{
+getCarAuction(){
+    this.acutionservice.getOneActionInfo(this.carSerialnumber).subscribe(data=>{
       this.auctions=data;
+      this.timeAuction = this.auctions[0].timeAction;
+      this.maxPrice = this.auctions[0].maxPrice;
+      this.minPrice = this.auctions[0].minPrice;
+      this.carType = this.auctions[0].carType;
     });
 }
 
-getCodes(){
-  this.acutionservice.getCodeInfo().subscribe(data=>{
-    this.codes=data;
+// getCodes(){
+//   this.acutionservice.getCodeInfo().subscribe(data=>{
+//     this.codes=data;
+//   });
+// }
+//  maxPrice:number=0;
+getMaxPrice(){
+  this.acutionservice.getMxPrice(Number(this.carSerialnumber)).subscribe(data=>{
+    this.maxPriceArray=data;
+    this.bidValue=this.maxPriceArray[0].bidValue;
   });
 }
- maxPrice:number=0;
-checkPrice(auctionId:string,price:number){
-  for (let action of this.auctions) {
-      if(auctionId===action._id)
-      {
-        if(price>action.minPrice && price<action.maxPrice && price>this.maxPrice){
 
+
+checkPrice(){
+        if(this.priceAdd>this.minPrice && this.priceAdd<this.maxPrice && this.priceAdd>this.bidValue){
           return true;
         }
-      }
-  }
   return false
 }
-getMaxPrice(){
-  this.acutionservice.getMxPrice().subscribe(data=>{
-    this.maxPriceArray=data;
-  });
-}
 
-sendEmail(){
-  this.acutionservice.Sendemail().subscribe((res)=>{
-    console.log("sendEmail");
-    this.getCodes();
- })
-}
-sendEmailWinner(ac:Auction){
-  if(this.price==ac.maxPrice){
-    this.isBuyDirectly2 = true;
-    this.sendEmail();
-}
-}
 
-addPrice(action:Auction){
-  if (this.checkPrice(action._id,this.price)) {
-    this.acutionservice.participateInTheAuction(this.price,action).subscribe((res) => {
-      this.getCarsAuction();
-      this.getMaxPrice();
-    });
-  }
-  this.sendEmailWinner(action);
-}
+// sendEmail(){
+//   this.acutionservice.Sendemail().subscribe((res)=>{
+//     console.log("sendEmail");
+//     this.getCodes();
+//  })
+// }
+// sendEmailWinner(ac:Auction){
+//   if(this.price==ac.maxPrice){
+//     this.isBuyDirectly2 = true;
+//     this.sendEmail();
+// }
+// }
 
-checkCode():boolean{
-  for(let code of this.codes){
-    if(this.code == code.rand){
-      this.onCodeDelete(code._id);
-      return true;
+addPrice(){
+  if(this.checkPrice()){
+    this.acutionservice.participateInTheAuction(this.priceAdd,(this.carSerialnumber),this.auctions[0]).subscribe((res) => {
     }
+    );
+    alert("add")
+  }else{
+    alert("notadd")
   }
-  return false;
+  this.getCarAuction();
+  this.getMaxPrice();
+
 }
 
+// checkCode():boolean{
+//   for(let code of this.codes){
+//     if(this.code == code.rand){
+//       this.onCodeDelete(code._id);
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
-clickToBuyDirectly(){
- this.sendEmail();
-  this.isBuyDirectly = true;
-}
 
-clickOk(ac:Auction){
-    if(this.checkCode()==true){
-        this.acutionservice.SendemailWinner().subscribe((res)=>{
-          console.log("sendEmail");
-  });
+// clickToBuyDirectly(){
+//  this.sendEmail();
+//   this.isBuyDirectly = true;
+// }
 
-  ac.isButtonVisible=false;
-  this.acutionservice.putAuction(ac).subscribe((res)=>{
-    this.getCarsAuction();
-    console.log("updateing")
-  });
-}
- }
+// clickOk(ac:Auction){
+//     if(this.checkCode()==true){
+//         this.acutionservice.SendemailWinner().subscribe((res)=>{
+//           console.log("sendEmail");
+//   });
 
-onCodeDelete(_id: string) {
-  this.acutionservice.deleteEmail(_id).subscribe((res) => {
-    this.getCodes();
-  });
- }
+//   ac.isButtonVisible=false;
+//   this.acutionservice.putAuction(ac).subscribe((res)=>{
+//     this.getCarAuction();
+//     console.log("updateing")
+//   });
+// }
+//  }
+
+// onCodeDelete(_id: string) {
+//   this.acutionservice.deleteEmail(_id).subscribe((res) => {
+//     this.getCodes();
+//   });
+//  }
+
 
  days:number=0;
  hours:number=0;
@@ -124,7 +150,7 @@ onCodeDelete(_id: string) {
 
 timer(){
   const myfunc = setInterval(()=>{
-   var countDownDate = new Date('2022-07-19T17:53:00').getTime();
+   var countDownDate = new Date(this.timeAuction).getTime();
    var now = new Date().getTime();
    var timeleft = countDownDate - now;
    this.days= Math.floor(timeleft / (1000 * 60 * 60 * 24));
@@ -141,7 +167,7 @@ timer(){
      for(let ac of this.auctions){
        ac.isButtonVisible=false;
        this.acutionservice.putAuction(ac).subscribe((res)=>{
-        this.getCarsAuction();
+        this.getCarAuction();
         console.log("updateing")
       });
      }
@@ -150,12 +176,14 @@ timer(){
  }
 
 
- carViews(ac:Auction){
-   ac.views++;
-   this.acutionservice.putAuction(ac).subscribe((res)=>{
-     console.log("update");
-     this.getCarsAuction();
-   });
- }
+
+
+//  carViews(ac:Auction){
+//    ac.views++;
+//    this.acutionservice.putAuction(ac).subscribe((res)=>{
+//      console.log("update");
+//      this.getCarAuction();
+//    });
+//  }
 }
 

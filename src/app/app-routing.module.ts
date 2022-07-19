@@ -36,6 +36,9 @@ const routes: Routes = [{
   component:SignupComponent
 },
 {
+  path: 'auction/:serialNumber', component:ActionComponent
+},
+{
   path:'auction',
   component:ActionComponent
 },
@@ -78,10 +81,11 @@ const routes: Routes = [{
   path:'profile',
   component:ProfileComponent,
 },
+
 {
   path:'carsAction',
   component:CarActionComponent,
- 
+
 },
 ];
 

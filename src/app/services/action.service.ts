@@ -21,9 +21,9 @@ export class ActionService {
 
   date :Date = new Date();
 
-  
 
-  
+
+
   headers = { 'content-type': 'application/json' };
   constructor(private http : HttpClient) { }
 
@@ -31,20 +31,20 @@ export class ActionService {
     return this.http.get(this.baseURL);
   }
 
-  getOneActionInfo():Observable<any>{
-    return this.http.get(this.baseURLAuction);
+  getOneActionInfo(serialNumber):Observable<any>{
+    return this.http.get(this.baseURL +`/${serialNumber}`);
   }
 
   getCodeInfo():Observable<any>{
     return this.http.get(this.baseURLEmail);
   }
 
-  getMxPrice():Observable<any>{
-    return this.http.get(this.baseURLMaxPrice);
+  getMxPrice(serialNumber:number):Observable<any>{
+    return this.http.get(this.baseURLMaxPrice+`/${serialNumber}`);
   }
 
-  participateInTheAuction(bidValue:number,Action:Auction):Observable<any>{
-    let body = JSON.stringify(new UsersAuction(this.email,bidValue,Action));
+  participateInTheAuction(bidValue:number,carNumber:number,Action:Auction):Observable<any>{
+    let body = JSON.stringify(new UsersAuction(this.email,bidValue,carNumber,Action));
     return this.http.post(this.baseURLUsers , body,{
     headers: this.headers
     });

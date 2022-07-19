@@ -4,9 +4,11 @@ export class UsersAuction {
     Action:Auction
     email:string;
     bidValue:number;
-    constructor(email:string,bidValue:number,Action:Auction){
+    carNumber:number;
+    constructor(email:string,bidValue:number,carNumber:number,Action:Auction){
         this.email=email;
         this.bidValue=bidValue;
+        this.carNumber=carNumber;
         this.Action=Action;
     }
 }

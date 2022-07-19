@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
- 
+
 
   var Action = mongoose.model('Action', {
     timeAction:{type:String},
@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
     carKM: {type:Number},
     isButtonVisible : {type:Boolean},
     views : {type:Number},
+    serialNumber:{type:Number}
 
 
 });

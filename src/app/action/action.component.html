@@ -33,14 +33,19 @@
 <button class="btn btn-secondary"   (click)="carViews(ac)">views</button>
 
 </div> -->
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar>
+
 <section>
   <div class="container">
-    <div class="icons">
-      <i class="fas fa-moon"></i>
-      <i class="fas fa-sun"></i>
-    </div>
+
     <div class="time">
+      <div class="time-colon">
+        <div class="time-text">
+          <span class="num hour_num">{{days}}</span>
+          <span class="text">day</span>
+        </div>
+        <span class="colon">:</span>
+      </div>
       <div class="time-colon">
         <div class="time-text">
           <span class="num hour_num">{{hours}}</span>
@@ -60,26 +65,151 @@
           <span class="num sec_num">{{seconds}}</span>
           <span class="text">Seconds</span>
         </div>
-        <span class="am_pm">AM</span>
       </div>
     </div>
   </div>
 
 </section>
-<section>
-<div class="newsletter-subscribe" >
-  <div class="container">
-      <div class="intro">
-          <h2 class="text-center">Subscribe for our Newsletter</h2>
-          <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
-      </div>
-      <form class="form-inline" method="post">
-          <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Your Email"></div>
-          <div style="margin-top: 3px;" class="form-group"><button class="btn btn-primary" type="submit">Subscribe </button></div>
-          <div style="margin-top: 3px;" class="form-group"><button class="btn btn-primary" type="submit">Subscribe </button></div>
+<div id="booking" class="section">
+  <div class="section-center">
+         <div class="container">
+                <div class="row">
+                       <div class="booking-form" >
+                              <div class="booking-bg">
+                                     <div class="form-header">
+                                            <h2>Make your reservation</h2>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
+                                     </div>
+                              </div>
+                              <form>
+                               <div class="alert alert-danger" role="alert" *ngIf="">
+                                 Error in date
+                               </div>
+                               <div class="alert alert-primary" role="alert" *ngIf="">
+                                 send sucssecfuly
+                               </div>                                    <div class="row">
+                                 <div class="col-md-6">
+                                   <div class="form-group">
+                                     <span class="form-label">car model</span>
+                                     <input placeholder="" class="form-control" type="text" >
 
-      </form>
+                              </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                 </div>
+                                 </div>
+                                     <div class="row">
+                                            <div class="col-md-6">
+                                                   <div class="form-group">
+                                                          <span class="form-label">Check In</span>
+                                                          <input name="checkIn" class="form-control" type="date">
+                                                   </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                   <div class="form-group">
+                                                          <span class="form-label">Check Out</span>
+                                                          <input name="checkOut" class="form-control" type="date">
+                                                   </div>
+                                            </div>
+                                     </div>
+                                     <div class="form-group">
+                                            <span class="form-label">location</span>
+                                            <input  name="location" placeholder="location" class="form-control" type="text" >
+
+                                     </div>
+                                     <div class="form-btn">
+                                            <button  class="submit-btn">Check availability</button>
+                                     </div>
+
+                              </form>
+                       </div>
+                </div>
+         </div>
+  </div>
+</div> -->
+
+
+<app-navbar></app-navbar>
+<section>
+<div class="container">
+
+  <div class="time">
+    <div class="time-colon">
+      <div class="time-text">
+        <span class="num hour_num">{{days}}</span>
+        <span class="text">day</span>
+      </div>
+      <span class="colon">:</span>
+    </div>
+    <div class="time-colon">
+      <div class="time-text">
+        <span class="num hour_num">{{hours}}</span>
+        <span class="text">Hours</span>
+      </div>
+      <span class="colon">:</span>
+    </div>
+    <div class="time-colon">
+      <div class="time-text">
+        <span class="num min_num">{{minutes}}</span>
+        <span class="text">Minutes</span>
+      </div>
+      <span class="colon">:</span>
+    </div>
+    <div class="time-colon">
+      <div class="time-text">
+        <span class="num sec_num">{{seconds}}</span>
+        <span class="text">Seconds</span>
+      </div>
+    </div>
   </div>
 </div>
-
 </section>
+<div id="booking" class="auction">
+
+       <div class="section-center">
+              <div class="container">
+
+                     <div class="row">
+                            <div class="booking-form" >
+                                   <div class="booking-bg">
+                                          <div class="form-header">
+                                                 <h2>max price: {{maxPrice | currency}}</h2>
+                                                 <h2>min price: {{minPrice | currency}}</h2>
+                                                 <h2>car Type: {{carType}}</h2>
+                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
+                                          </div>
+                                   </div>
+                                   <form>
+                                    <div class="alert alert-danger" role="alert" *ngIf="">
+                                      Error in date
+                                    </div>
+                                    <div class="alert alert-primary" role="alert" *ngIf="">
+                                      send sucssecfuly
+                                    </div>
+                                    <h3>{{bidValue}}</h3>
+                                      <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <span class="form-label">car model</span>
+                                          <input placeholder="enter the price" [(ngModel)]="priceAdd" name="price" class="form-control" type="text" >
+                                        </div>
+                                      </div>
+                                      </div>
+                                          <div class="form-btn">
+                                                 <button (click)="addPrice()"  class="submit-btn">Check Price</button>
+                                          </div>
+                                          <div class="form-btn">
+                                            <button  class="submit-btn">Check availability</button>
+                                          </div>
+                                          <div class="form-btn">
+                                            <button  class="submit-btn">Check availability</button>
+                                          </div>
+
+
+                                   </form>
+                            </div>
+                     </div>
+              </div>
+       </div>
+</div>
+

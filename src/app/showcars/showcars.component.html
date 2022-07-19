@@ -92,7 +92,7 @@
     <a (click)="toyota()">Toyota</a>
     <a (click)="ford()">Ford</a>
     <a (click)="ford()">Ford</a>
-    <a (click)="toyota()">Toyota</a>
+
     <div id="indicator"></div>
   </nav>
   </div>
@@ -122,8 +122,8 @@
               </div>
               <div class="card-footer">
                 <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                <div class="wcf-right"><a href="#" class="buy-btn" (click)="addToProfile(car);"><i class="fa fa-shopping-basket"></i></a></div>
-                <div class="wcf-right"><a href="#" class="love-btn"  (click)="addToProfile(car);"><i class="fa fa-heart"></i></a></div>
+                <div class="wcf-right"><a  class="buy-btn" [routerLink]="['/date', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
+                <div class="wcf-right"><a  class="love-btn"  (click)="addToProfile(car);"><i class="fa fa-heart"></i></a></div>
               </div>
             </div>
           </div>
