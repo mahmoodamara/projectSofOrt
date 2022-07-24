@@ -13,7 +13,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.get('users/shearchofemail', (req, res) => {
+router.get('/users/shearchofemail', (req, res) => {
 
   const email = req.query.email;
   User.find({email:email},function(err,response){
