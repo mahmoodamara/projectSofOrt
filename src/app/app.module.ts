@@ -21,7 +21,6 @@ import { CarDetailsComponent } from './car-details/car-details.component';
 import { DateComponent } from './date/date.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CarActionComponent } from './car-action/car-action.component';
-import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -44,8 +43,8 @@ import { FooterComponent } from './footer/footer.component';
     CarDetailsComponent,
     DateComponent,
     ProfileComponent,
-    CarActionComponent,
-    FooterComponent  
+    CarActionComponent
+     
   ],
   imports: [
     BrowserModule,
