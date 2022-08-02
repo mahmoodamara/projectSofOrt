@@ -31,20 +31,26 @@ export class ActionComponent implements OnInit {
   isBuyDirectly2 : boolean = false
   code : number;
   carSerialnumber:any;
-  serial:number;
+  serial:any;
   timeAuction:string=''
   ngOnInit(): void {
     // this.getCodes();
-     this.timer();
     this.carSerialnumber=this.actRouter.snapshot.params['serialNumber'];
+
     this.getCarAuction();
-     this.getMaxPrice();
+    this.getMaxPrice();
+     this.timer();
+
 
       setInterval(()=>{
-        this.timer();
-        this.getCarAuction();
-        this.getMaxPrice();
+        this.serial=this.getCarAuction();
       },1000)
+  }
+
+  ngOnDestroy() {
+    if (this.serial) {
+      clearInterval(this.serial);
+    }
   }
 
 getCarAuction(){
@@ -159,18 +165,12 @@ timer(){
    this.seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
    if(timeleft < 0){
-     clearInterval(myfunc);
+
      this.days=0;
      this.minutes=0;
      this.hours=0;
      this.seconds=0;
-     for(let ac of this.auctions){
-       ac.isButtonVisible=false;
-       this.acutionservice.putAuction(ac).subscribe((res)=>{
-        this.getCarAuction();
-        console.log("updateing")
-      });
-     }
+    
   }
    }, 1000)
  }

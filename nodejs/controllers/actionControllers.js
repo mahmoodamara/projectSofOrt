@@ -110,53 +110,28 @@ function updateTimeAuction() {
   const min = new Date().getMinutes();
   const s = new Date().getSeconds();
   //2022-07-19T21:59
-  if (m < 10 && min < 10) {
-    time = `${y}-0${m}-${d}T${h}:0${min}:${s}`;
-  }
-  if (m > 10 && min < 10) {
-    time = `${y}-${m}-${d}T${h}:0${min}:${s}`;
-  }
-  if (m < 10 && min > 10) {
-    time = `${y}-0${m}-${d}T${h}:${min}:${s}`;
-  }
-  if (m > 10 && min >= 10) {
-    time = `${y}-${m}-${d}T${h}:${min}:${s}`;
-  }
+  //7 24,2022 18:26:10
+  time = `${m} ${d},${y} ${h}:${min}:${s}`;
 
 
-  if (min + 3 >= 60 && m < 10 && min < 10) {
-    timeUpdate = `${y}-0${m}-${d}T${h+1}:0${(min+3)-60}:${s}`;
+
+  if (min + 3 < 60) {
+    timeUpdate = `${m} ${d},${y} ${h}:${min+3}:${s}`;
   }
-  if (min + 3 >= 60 && m > 10 && min < 10) {
-    timeUpdate = `${y}-${m}-${d}T${h}:0${(min+3)}:${s}`;
-  }
-  if (min + 3 >= 60 && m < 10 && min > 10) {
-    timeUpdate = `${y}-0${m}-${d}T${h}:${(min+3)}:${s}`;
-  }
-  if (min + 3 >= 60 && m > 10 && min > 10) {
-    timeUpdate = `${y}-${m}-${d}T${h}:${(min+3)}:${s}`;
+  if (min + 3 >= 60) {
+    timeUpdate = `${m} ${d},${y} ${h+1}:${(min+3)-60}:${s}`;
   }
 
-  if (min + 3 < 60 && m > 10 && min + 3 > 10) {
-    timeUpdate = `${y}-${m}-${d}T${h}:${(min+3)}:${s}`;
-  }
-  if (min + 3 < 60 && m > 10 && min + 3 < 10) {
-    timeUpdate = `${y}-${m}-${d}T${h}:0${(min+3)}:${s}`;
-  }
-  if (min + 3 < 60 && m < 10 && min + 3 < 10) {
-    timeUpdate = `${y}-0${m}-${d}T${h}:0${(min+3)}:${s}`;
-  }
-  if (min + 3 < 60 && m < 10 && min + 3 > 10) {
-    timeUpdate = `${y}-0${m}-${d}T${h}:${(min+3)}:${s}`;
-  }
   //timeUpdate = `${y}-${m}-${d}T${h}:${min+3}:${s}`;
+
+  console.log(timeUpdate)
   Action.find({
     timeAction: time
   }, (err, docs) => {
 
     if (!err) {
       for (let i = 0; i < docs.length; i++) {
-        if (docs[i].timeAction && docs[i].views ==0) {
+        if (docs[i].timeAction && docs[i].views == 0) {
           Action.updateOne({
             timeAction: time
           }, {
