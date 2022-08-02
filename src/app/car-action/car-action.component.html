@@ -5,27 +5,23 @@
 
     <header class="section-title">
       <h2>Auction</h2>
+      <p>Cars of Auction</p>
     </header>
 
   <div class="shell">
     <div class="container">
       <div class="row">
-        <div class="col-md-3" *ngFor="let cars of auctions">
+        <div class="col-md-3" *ngFor="let car of auctions">
           <div class="wsk-cp-product" >
             <div class="wsk-cp-img">
-              <img [src]="cars.img" />
+              <img [src]="car.carPhoto" />
             </div>
             <div class="wsk-cp-text">
               <div class="title-product">
-                <h3>{{cars.manufacturer}} {{cars.model}}</h3>
+                <h3>My face not my heart</h3>
               </div>
               <div class="description-prod">
-                <p>model year : {{cars.yearOfManufacture}}</p>
-                <p>engineCapacity : {{cars.engineCapacity}}</p>
-                <p>fuelType : {{cars.fuelType}}</p>
-
-
-
+                <p> Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
               </div>
               <div class="card-footer">
                 <div class="wcf-left"><span class="price">{{car.maxPrice | currency}}</span></div>
@@ -40,4 +36,3 @@
   </div>
   </div>
 </section>
-<app-contact></app-contact>
