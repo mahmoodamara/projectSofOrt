@@ -33,9 +33,7 @@ router.get('/cars/sendEmailCars', (req, res) => {
 });
 
 router.get('/maxViewsCar', (req, res) => {
-  Cars.find().sort({
-    views: -1
-  }).limit(4).exec(function (err, docs) {
+  Cars.find().sort({views: -1}).limit(4).exec(function (err, docs) {
     if (!err) {
       res.send(docs);
     } else {

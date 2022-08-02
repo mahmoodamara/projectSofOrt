@@ -10,6 +10,9 @@ var {
 var {
   Email
 } = require('../models/email');
+var {
+  Action
+} = require('../models/action');
 
 // => localhost:3000/Action/
 router.get('/usersaction', (req, res) => {
@@ -23,7 +26,11 @@ router.get('/usersaction', (req, res) => {
 });
 
 router.get('/maxUsersaction/:carNumber', async (req, res) => {
-  const carNumber = await  UserinAuction.find({carNumber: req.params.carNumber}).sort({bidValue: -1}).limit(1).exec(function (err, docs) {
+  const carNumber = await UserinAuction.find({
+    carNumber: req.params.carNumber
+  }).sort({
+    bidValue: -1
+  }).limit(1).exec(function (err, docs) {
     if (!err) {
       res.send(docs);
     } else {
@@ -93,8 +100,10 @@ router.post('/sendEmail', async (req, res) => {
 
 
 router.post('/usersaction', async (req, res) => {
-
-  car = await UserinAuction.findOne({carNumber: req.body.carNumber,email:req.body.email});
+  car = await UserinAuction.findOne({
+    carNumber: req.body.carNumber,
+    email: req.body.email
+  });
   if (!car) {
     var ac = new UserinAuction({
       email: req.body.email,
@@ -110,7 +119,10 @@ router.post('/usersaction', async (req, res) => {
       }
     });
   } else {
-    UserinAuction.updateOne({carNumber: req.body.carNumber,email:req.body.email}, {
+    UserinAuction.updateOne({
+      carNumber: req.body.carNumber,
+      email: req.body.email
+    }, {
       $set: {
         bidValue: req.body.bidValue
       }
@@ -178,6 +190,83 @@ router.post('/sendEmailWinner', async (req, res) => {
     }
   });
 });
+
+
+function updateTimeAuction() {
+
+
+  const d = new Date().getDate();
+  const m = new Date().getMonth() + 1;
+  const y = new Date().getFullYear();
+
+  const h = new Date().getHours();
+  const min = new Date().getMinutes();
+  const s = new Date().getSeconds();
+
+  time = `${m} ${d},${y} ${h}:${min}:${s}`;
+
+
+
+  if (min + 3 < 60) {
+    timeUpdate = `${m} ${d},${y} ${h}:${min+3}:${s}`;
+  }
+  if (min + 3 >= 60) {
+    timeUpdate = `${m} ${d},${y} ${h+1}:${(min+3)-60}:${s}`;
+  }
+
+  //timeUpdate = `${y}-${m}-${d}T${h}:${min+3}:${s}`;
+
+  Action.find({
+    timeAction: time
+  }, (err, docs) => {
+    if (!err) {
+      for (let i = 0; i < docs.length; i++) {
+        UserinAuction.find({
+          carNumber: docs[i].serialNumber
+        }).sort({
+          bidValue: -1
+        }).limit(1).exec(function (err, doc) {
+
+
+          for (let i = 0; i < doc.length; i++) {
+            console.log(doc[i].email)
+
+            var transporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                user: 'testamara144141@gmail.com', // ethereal user
+                pass: 'izqjinswvbsmprez', // ethereal password
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+
+            var mailOptions = {
+              from: 'RentBuy',
+              to: doc[i].email,
+              subject: 'Sending Email using Node.js from RentBuy',
+              text: `you are winner in the auction`
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+                res.send('Email Sent!')
+              }
+            });
+          }
+        })
+      }
+    } else {
+      console.log('Error in Retriving Rent :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+}
+
+setInterval(updateTimeAuction, 1000);
 
 
 

@@ -21,6 +21,7 @@ export class ActionComponent implements OnInit {
   bidValue:number=0;
   maxPriceArray:UsersAuction[]=[];
   priceAdd:number;
+  isButtonVisible : boolean;
 
 
 
@@ -60,15 +61,11 @@ getCarAuction(){
       this.maxPrice = this.auctions[0].maxPrice;
       this.minPrice = this.auctions[0].minPrice;
       this.carType = this.auctions[0].carType;
+      this.isButtonVisible =this.auctions[0].isButtonVisible;
     });
 }
 
-// getCodes(){
-//   this.acutionservice.getCodeInfo().subscribe(data=>{
-//     this.codes=data;
-//   });
-// }
-//  maxPrice:number=0;
+
 getMaxPrice(){
   this.acutionservice.getMxPrice(Number(this.carSerialnumber)).subscribe(data=>{
     this.maxPriceArray=data;
@@ -84,20 +81,6 @@ checkPrice(){
   return false
 }
 
-
-// sendEmail(){
-//   this.acutionservice.Sendemail().subscribe((res)=>{
-//     console.log("sendEmail");
-//     this.getCodes();
-//  })
-// }
-// sendEmailWinner(ac:Auction){
-//   if(this.price==ac.maxPrice){
-//     this.isBuyDirectly2 = true;
-//     this.sendEmail();
-// }
-// }
-
 addPrice(){
   if(this.checkPrice()){
     this.acutionservice.participateInTheAuction(this.priceAdd,(this.carSerialnumber),this.auctions[0]).subscribe((res) => {
@@ -111,42 +94,6 @@ addPrice(){
   this.getMaxPrice();
 
 }
-
-// checkCode():boolean{
-//   for(let code of this.codes){
-//     if(this.code == code.rand){
-//       this.onCodeDelete(code._id);
-//       return true;
-//     }
-//   }
-//   return false;
-// }
-
-
-// clickToBuyDirectly(){
-//  this.sendEmail();
-//   this.isBuyDirectly = true;
-// }
-
-// clickOk(ac:Auction){
-//     if(this.checkCode()==true){
-//         this.acutionservice.SendemailWinner().subscribe((res)=>{
-//           console.log("sendEmail");
-//   });
-
-//   ac.isButtonVisible=false;
-//   this.acutionservice.putAuction(ac).subscribe((res)=>{
-//     this.getCarAuction();
-//     console.log("updateing")
-//   });
-// }
-//  }
-
-// onCodeDelete(_id: string) {
-//   this.acutionservice.deleteEmail(_id).subscribe((res) => {
-//     this.getCodes();
-//   });
-//  }
 
 
  days:number=0;
@@ -170,7 +117,7 @@ timer(){
      this.minutes=0;
      this.hours=0;
      this.seconds=0;
-    
+     this.getCarAuction();
   }
    }, 1000)
  }

@@ -1,89 +1,6 @@
-<!-- <app-navbar></app-navbar>
 
-<section class="projects" id="projects">
-  <h2 class="title">Projects</h2>
-  <div class="content">
-      <div class="project-card">
-          <div class="project-image">
-              <img src="/assets/images/work1.jpg" />
-          </div>
-          <div class="project-info">
-              <p class="project-category">is renting</p>
-              <p class="project-price">price : $12</p>
-              <strong class="project-title">
-                  <span>Dev Books</span>
-                  <a href="#" class="more-details">More details</a>
-              </strong>
-          </div>
-      </div>
-      <div class="project-card">
-          <div class="project-image">
-              <img src="/assets/images/work2.jpg" />
-          </div>
-          <div class="project-info">
-              <p class="project-category">is renting</p>
-              <p class="project-price">price : $12</p>
-              <strong class="project-title">
-                  <span>Dev Books</span>
-                  <a href="#" class="more-details">More details</a>
-              </strong>
-          </div>
-      </div>
-      <div class="project-card">
-          <div class="project-image">
-              <img src="/assets/images/work3.jpg" />
-          </div>
-          <div class="project-info">
-              <p class="project-category">is renting</p>
-              <p class="project-price">price : $12</p>
-              <strong class="project-title">
-                  <span>Dev Books</span>
-                  <a href="#" class="more-details">More details</a>
-              </strong>
-          </div>
-      </div>
-      <div class="project-card">
-          <div class="project-image">
-              <img src="/assets/images/work4.jpg" />
-          </div>
-          <div class="project-info">
-              <p class="project-category">is renting</p>
-              <p class="project-price">price : $12</p>
-              <strong class="project-title">
-                  <span>Dev Books</span>
-                  <a href="#" class="more-details">More details</a>
-              </strong>
-          </div>
-      </div>
-      <div class="project-card">
-          <div class="project-image">
-              <img src="/assets/images/work5.jpg" />
-          </div>
-          <div class="project-info">
-              <p class="project-category">is renting</p>
-              <p class="project-price">price : $12</p>
-              <strong class="project-title">
-                  <span>Dev Books</span>
-                  <a href="#" class="more-details">More details</a>
-              </strong>
-          </div>
-      </div>
-      <div class="project-card">
-          <div class="project-image">
-              <img src="/assets/images/work6.jpg" />
-          </div>
-          <div class="project-info">
-              <p class="project-category">is renting</p>
-              <p class="project-price">price : $12</p>
-              <strong class="project-title">
-                  <span>Internet</span>
-                  <a href="#" class="more-details">More details</a>
-              </strong>
-          </div>
-      </div>
-  </div>
-</section> -->
 <app-navbar></app-navbar>
+<section id="rent" class="rent">
 <div class="container text-center" style="margin-top:15px">
   <h1 style="font-family: cursive;">Rent Car</h1>
   <nav>
@@ -121,11 +38,15 @@
                 <p> Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
               </div>
               <div class="card-footer">
-                <div class="wcf-left"><span class="price">Rp500.000</span></div>
-                <div class="wcf-right"><a  class="buy-btn" [routerLink]="['/date', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
+                <div class="wcf-left"><span class="price">{{car.price | currency}} / day</span></div>
+                <div class="wcf-right"><a  class="buy-btn" (click)="carViews(car)"  [routerLink]="['/date', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
                 <div class="wcf-right"><a  class="love-btn"  (click)="addToProfile(car);"><i class="fa fa-heart"></i></a></div>
               </div>
             </div>
           </div>
         </div>
+        </div>
+    </div>
+  </div>
+</section>
         <app-contact></app-contact>

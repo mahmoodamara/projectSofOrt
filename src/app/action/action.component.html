@@ -1,132 +1,4 @@
-<!-- <p>action works!</p>
-<div *ngFor="let max of maxPriceArray">
-    <h4>{{max.bidValue}}</h4>
-<div>
 
-{{days}} : {{hours}} : {{minutes}} : {{seconds}}
-<div *ngFor="let ac of auctions">
-    <h4>{{ac.maxPrice}}</h4>
-    <h4>{{ac.minPrice}}</h4>
-<div>
-    <div class="form-group">
-
-        <input [(ngModel)]="price" />
-        <br />
-    </div>
-    <div>
-    <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible" (click)="clickToBuyDirectly()">clickToBuyDirectly</button>
-<div *ngIf="isBuyDirectly">
-    <label>enter the code</label>
-    <input  [(ngModel)]="code" />
-    <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible"  (click)="clickOk(ac)">OK</button>
-</div>
-</div>
-
-    <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible" (click)="addPrice(ac)">Add</button>
-    <div *ngIf="isBuyDirectly2">
-        <label>enter the code</label>
-        <input  [(ngModel)]="code" />
-        <button class="btn btn-secondary" [disabled]="!ac.isButtonVisible"  (click)="clickOk(ac)">OK</button>
-    </div>
-</div>
-
-<button class="btn btn-secondary"   (click)="carViews(ac)">views</button>
-
-</div> -->
-<!-- <app-navbar></app-navbar>
-
-<section>
-  <div class="container">
-
-    <div class="time">
-      <div class="time-colon">
-        <div class="time-text">
-          <span class="num hour_num">{{days}}</span>
-          <span class="text">day</span>
-        </div>
-        <span class="colon">:</span>
-      </div>
-      <div class="time-colon">
-        <div class="time-text">
-          <span class="num hour_num">{{hours}}</span>
-          <span class="text">Hours</span>
-        </div>
-        <span class="colon">:</span>
-      </div>
-      <div class="time-colon">
-        <div class="time-text">
-          <span class="num min_num">{{minutes}}</span>
-          <span class="text">Minutes</span>
-        </div>
-        <span class="colon">:</span>
-      </div>
-      <div class="time-colon">
-        <div class="time-text">
-          <span class="num sec_num">{{seconds}}</span>
-          <span class="text">Seconds</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</section>
-<div id="booking" class="section">
-  <div class="section-center">
-         <div class="container">
-                <div class="row">
-                       <div class="booking-form" >
-                              <div class="booking-bg">
-                                     <div class="form-header">
-                                            <h2>Make your reservation</h2>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
-                                     </div>
-                              </div>
-                              <form>
-                               <div class="alert alert-danger" role="alert" *ngIf="">
-                                 Error in date
-                               </div>
-                               <div class="alert alert-primary" role="alert" *ngIf="">
-                                 send sucssecfuly
-                               </div>                                    <div class="row">
-                                 <div class="col-md-6">
-                                   <div class="form-group">
-                                     <span class="form-label">car model</span>
-                                     <input placeholder="" class="form-control" type="text" >
-
-                              </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                 </div>
-                                 </div>
-                                     <div class="row">
-                                            <div class="col-md-6">
-                                                   <div class="form-group">
-                                                          <span class="form-label">Check In</span>
-                                                          <input name="checkIn" class="form-control" type="date">
-                                                   </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                   <div class="form-group">
-                                                          <span class="form-label">Check Out</span>
-                                                          <input name="checkOut" class="form-control" type="date">
-                                                   </div>
-                                            </div>
-                                     </div>
-                                     <div class="form-group">
-                                            <span class="form-label">location</span>
-                                            <input  name="location" placeholder="location" class="form-control" type="text" >
-
-                                     </div>
-                                     <div class="form-btn">
-                                            <button  class="submit-btn">Check availability</button>
-                                     </div>
-
-                              </form>
-                       </div>
-                </div>
-         </div>
-  </div>
-</div> -->
 
 
 <app-navbar></app-navbar>
@@ -195,15 +67,19 @@
                                         </div>
                                       </div>
                                       </div>
-                                          <div class="form-btn">
-                                                 <button (click)="addPrice()"  class="submit-btn">Check Price</button>
+                                      <div>
+
+
+                                          <div   class="form-btn" >
+                                                 <button   [disabled]="isButtonVisible" (click)="addPrice()"  class="submit-btn">Check Price</button>
                                           </div>
                                           <div class="form-btn">
-                                            <button  class="submit-btn">Check availability</button>
+                                            <button  [disabled]="isButtonVisible"  class="submit-btn">Check availability</button>
                                           </div>
                                           <div class="form-btn">
-                                            <button  class="submit-btn">Check availability</button>
+                                            <button  [disabled]="isButtonVisible" class="submit-btn">Check availability</button>
                                           </div>
+                                        </div>
 
 
                                    </form>

@@ -82,6 +82,13 @@ export class ShowcarsComponent implements OnInit {
     })
   }
 
+    carViews(car:Cars):void{
+    car.views++;
+    this.carsService.putCar(car).subscribe((data)=>{
+      this.getCars();
+    })
+  }
+
 
 /*
   getCars():void{
@@ -98,12 +105,7 @@ export class ShowcarsComponent implements OnInit {
 //     });
 //   }
 
-//   carViews(car:Cars):void{
-//     car.views++;
-//     this.carsService.putCar(car).subscribe((data)=>{
-//       this.getCars();
-//     })
-//   }
+
 
 //   sendEmail():void{
 //     this.acutionservice.Sendemail().subscribe((res)=>{

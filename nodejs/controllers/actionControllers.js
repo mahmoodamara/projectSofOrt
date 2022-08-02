@@ -124,17 +124,12 @@ function updateTimeAuction() {
 
   //timeUpdate = `${y}-${m}-${d}T${h}:${min+3}:${s}`;
 
-  console.log(timeUpdate)
-  Action.find({
-    timeAction: time
-  }, (err, docs) => {
-
+  console.log(time)
+  Action.find({timeAction: time}, (err, docs) => {
     if (!err) {
       for (let i = 0; i < docs.length; i++) {
         if (docs[i].timeAction && docs[i].views == 0) {
-          Action.updateOne({
-            timeAction: time
-          }, {
+          Action.updateOne({timeAction: time}, {
             $set: {
               timeAction: timeUpdate,
               views: 1
@@ -142,6 +137,15 @@ function updateTimeAuction() {
           }, (err, doc) => {
             if (!err) {
               // res.send(doc)
+            } else {
+              console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+            }
+          });
+        }
+        if(docs[i].views == 1){
+          Action.updateOne({serialNumber:docs[i].serialNumber}, {$set: {isButtonVisible:true}}, (err, doc) => {
+            if (!err) {
+              return;
             } else {
               console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
             }
