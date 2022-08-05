@@ -55,12 +55,30 @@ export class DateComponent implements OnInit {
 
     //  console.log(d);
      // console.log(dCheckIn);
+    //  (this.rent.checkIn >= this.rents[i].rent[i].checkIn && this.rent.checkOut >= this.rents[i].rent[i].checkOut)&&
+    //  (this.rent.checkIn <= this.rents[i].rent[i].checkIn && this.rent.checkOut <= this.rents[i].rent[i].checkOut)&&
+    //  (this.rent.checkIn < this.rents[i].rent[i].checkOut && this.rent.checkOut >= this.rents[i].rent[i].checkOut)
 
       for(let i=0;i<this.rents.length;i++){
-        if(this.rent.checkIn >= this.rents[i].rent[i].checkIn && this.rent.checkOut <= this.rents[i].rent[i].checkOut
-          ){
+
+        // if(this.rent.checkIn < this.rents[i].rent[i].checkIn && (this.rent.checkOut <= this.rents[i].rent[i].checkOut  && this.rent.checkOut >= this.rents[i].rent[i].checkIn )){
+        //   f=1
+        // }
+        if(this.rent.checkOut < this.rent.checkIn){
           f=1;
         }
+        if((this.rent.checkIn >= this.rents[i].rent[i].checkIn && this.rent.checkOut <= this.rents[i].rent[i].checkOut) ){
+          f=1;
+        }
+        if((this.rent.checkIn >= this.rents[i].rent[i].checkIn && this.rent.checkIn <= this.rents[i].rent[i].checkOut  ) && this.rent.checkOut > this.rents[i].rent[i].checkOut){
+          f=1;
+        }
+        if((this.rent.checkIn <= this.rents[i].rent[i].checkIn) && (this.rent.checkOut >= this.rents[i].rent[i].checkIn && this.rent.checkOut <= this.rents[i].rent[i].checkOut) ){
+          f=1;
+        }
+
+
+
         if(dCheckIn < d){
           f=1;
         }
@@ -84,8 +102,12 @@ export class DateComponent implements OnInit {
       this.rentService.postRent(this.rent).subscribe(res=>{
         this.getRents();
         this.showSuccssMessage = true;
-        setTimeout(() => this.showErrorMessage = false, 2000);
+        setTimeout(() => this.showSuccssMessage = false, 2000);
         //console.log("save");
+      });
+      this.car[0].views++;
+      this.carservice.putCar(this.car[0]).subscribe((data)=>{
+        this.refreshCars();
       })
     }
     else{

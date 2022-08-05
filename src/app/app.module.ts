@@ -21,6 +21,10 @@ import { CarDetailsComponent } from './car-details/car-details.component';
 import { DateComponent } from './date/date.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CarActionComponent } from './car-action/car-action.component';
+import { DashbordComponent } from './admin/dashbord/dashbord.component';
+import { SidebarAdminComponent } from './admin/sidebar-admin/sidebar-admin.component';
+import { UsersComponent } from './admin/users/users.component';
+import { AdminActionComponent } from './admin/admin-action/admin-action.component';
 
 
 
@@ -43,7 +47,11 @@ import { CarActionComponent } from './car-action/car-action.component';
     CarDetailsComponent,
     DateComponent,
     ProfileComponent,
-    CarActionComponent
+    CarActionComponent,
+    DashbordComponent,
+    SidebarAdminComponent,
+    UsersComponent,
+    AdminActionComponent
      
   ],
   imports: [

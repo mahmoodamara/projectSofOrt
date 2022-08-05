@@ -15,6 +15,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { SignupComponent } from './signup/signup.component';
 import { TeamComponent } from './team/team.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SidebarAdminComponent } from './admin/sidebar-admin/sidebar-admin.component';
+import { DashbordComponent } from './admin/dashbord/dashbord.component';
+import { UsersComponent } from './admin/users/users.component';
 
 const routes: Routes = [{
   path:'',pathMatch:'full',redirectTo:'login'
@@ -85,6 +88,21 @@ const routes: Routes = [{
 {
   path:'carsAction',
   component:CarActionComponent,
+
+},
+{
+  path:'sidebar-Admin',
+  component:SidebarAdminComponent,
+
+},
+{
+  path:'dashbord',
+  component:DashbordComponent,
+
+},
+{
+  path:'users',
+  component:UsersComponent,
 
 },
 ];

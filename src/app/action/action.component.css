@@ -1,15 +1,15 @@
 .auction {
-	position: relative;
-	height: 100vh;
+  position: relative;
+  height: 100vh;
 }
 
 .auction .section-center {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 #booking {
@@ -20,189 +20,190 @@
 }
 
 .booking-form {
-	position: relative;
-	max-width: 912px;
-	width: 100%;
-	margin: auto;
-	background: #F0F8FF;
-	border-radius: 6px;
-	-webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
-	box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-width: 912px;
+  width: 100%;
+  margin: auto;
+  background: #F0F8FF;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
 }
 
 .booking-form .booking-bg {
-	position: absolute;
-	left: 25px;
-	top: -25px;
-	bottom: -25px;
-	width: 400px;
-	background-image: url('/assets/img/backgroundRent.jpg');
-	background-size: cover;
-	background-position: center;
-	padding: 25px;
-	border-radius: 6px;
-	-webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
-	box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
-	overflow: hidden;
+  position: absolute;
+  left: 25px;
+  top: -25px;
+  bottom: -25px;
+  width: 400px;
+  background-image: url('/assets/img/backgroundRent.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 25px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .booking-form .booking-bg::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	background: rgba(71, 89, 119, 0.78);
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(71, 89, 119, 0.78);
 }
 
 .booking-form>form {
-	margin-left: 425px;
-	padding: 30px;
+  margin-left: 425px;
+  padding: 30px;
 }
 
 .booking-form .form-header {
-	margin-bottom: 30px;
-	margin-top: 60px;
-	position: relative;
-	z-index: 20;
+  margin-bottom: 30px;
+  margin-top: 60px;
+  position: relative;
+  z-index: 20;
 }
 
 .booking-form .form-header h2 {
-	font-family: 'Playfair Display', serif;
-	margin-top: 0;
-	margin-bottom: 15px;
-	font-weight: 900;
-	color: #fff;
-	font-size: 35px;
-	text-transform: capitalize;
+  font-family: 'Playfair Display', serif;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 900;
+  color: #fff;
+  font-size: 35px;
+  text-transform: capitalize;
 }
 
 .booking-form .form-header p {
-	color: #fff;
-	font-size: 18px;
+  color: #fff;
+  font-size: 18px;
 }
 
 .booking-form .form-group {
-	position: relative;
-	margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .booking-form .form-control {
-	background-color: #fff;
-	height: 45px;
-	padding: 0px 15px;
-	color: #151515;
-	border: 1px solid #e5e5e5;
-	font-size: 16px;
-	font-weight: 700;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	border-radius: 40px;
-	-webkit-transition: 0.2s all;
-	transition: 0.2s all;
+  background-color: #fff;
+  height: 45px;
+  padding: 0px 15px;
+  color: #151515;
+  border: 1px solid #e5e5e5;
+  font-size: 16px;
+  font-weight: 700;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 40px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .booking-form .form-control::-webkit-input-placeholder {
-	color: #e5e5e5;
+  color: #e5e5e5;
 }
 
 .booking-form .form-control:-ms-input-placeholder {
-	color: #e5e5e5;
+  color: #e5e5e5;
 }
 
 .booking-form .form-control::placeholder {
-	color: #918d8d;
+  color: #918d8d;
 }
 
 .booking-form .form-control:focus {
-	background: #f8f8f8;
+  background: #f8f8f8;
 }
 
 .booking-form input[type="date"].form-control:invalid {
-	color: #502f2f;
+  color: #502f2f;
 }
 
 .booking-form select.form-control {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .booking-form select.form-control:invalid {
-	color: #382c2c;
+  color: #382c2c;
 }
 
 .booking-form select.form-control option {
-	color: #151515;
+  color: #151515;
 }
 
 .booking-form select.form-control+.select-arrow {
-	position: absolute;
-	right: 3px;
-	bottom: 5px;
-	width: 32px;
-	line-height: 32px;
-	height: 32px;
-	text-align: center;
-	pointer-events: none;
-	color: #3e2a2a;
-	font-size: 14px;
+  position: absolute;
+  right: 3px;
+  bottom: 5px;
+  width: 32px;
+  line-height: 32px;
+  height: 32px;
+  text-align: center;
+  pointer-events: none;
+  color: #3e2a2a;
+  font-size: 14px;
 }
 
 .booking-form select.form-control+.select-arrow:after {
-	content: '\279C';
-	display: block;
-	-webkit-transform: rotate(90deg);
-	transform: rotate(90deg);
+  content: '\279C';
+  display: block;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .booking-form .form-label {
-	color: #856849;
-	text-transform: uppercase;
-	line-height: 24px;
-	height: 24px;
-	font-size: 14px;
-	font-weight: 400;
-	margin-left: 20px;
+  color: #856849;
+  text-transform: uppercase;
+  line-height: 24px;
+  height: 24px;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 20px;
 }
 
 .booking-form .form-btn {
-	margin-top: 30px;
+  margin-top: 30px;
 }
 
 .booking-form .submit-btn {
-	display: block;
-	width: 80%;
-	color: #fff;
-	background-color: #4154f1;
-	font-weight: 700;
-	font-size: 18px;
-	border: none;
-	border-radius: 40px;
-	height: 55px;
-	-webkit-transition: 0.2s all;
-	transition: 0.2s all;
+  display: block;
+  width: 80%;
+  color: #fff;
+  background-color: #4154f1;
+  font-weight: 700;
+  font-size: 18px;
+  border: none;
+  border-radius: 40px;
+  height: 55px;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .booking-form .submit-btn:hover,
 .booking-form .submit-btn:focus {
-	background-color: #4154f1;
+  background-color: #4154f1;
 }
 
 @media only screen and (max-width: 768px) {
-	.booking-form .booking-bg {
-		position: relative;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		top: -15px;
-		width: 95%;
-		margin: auto;
-	}
-	.booking-form>form {
-		margin-left: 0px;
-	}
+  .booking-form .booking-bg {
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: -15px;
+    width: 95%;
+    margin: auto;
+  }
+
+  .booking-form>form {
+    margin-left: 0px;
+  }
 }
 
 
@@ -219,7 +220,7 @@
   color: #aaa;
 }
 
-input:checked + label {
+input:checked+label {
   text-decoration: line-through;
   color: #adb5bd;
 }
@@ -231,7 +232,8 @@ label {
 a {
   text-decoration: none;
 }
-section{
+
+section {
   height: 28vh;
   width: 100%;
   display: flex;
@@ -240,7 +242,8 @@ section{
   background: #F0F8FF;
   padding: 0 20px;
 }
-section .container{
+
+section .container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,7 +256,7 @@ section .container{
   position: relative;
 }
 
-section .container .icons i{
+section .container .icons i {
   position: absolute;
   right: 17px;
   top: 17px;
@@ -268,21 +271,23 @@ section .container .icons i{
   cursor: pointer;
 }
 
-.container .icons i.fa-sun{
+.container .icons i.fa-sun {
   opacity: 0;
   pointer-events: none;
 }
 
-section .container .time{
+section .container .time {
   display: flex;
   align-items: center;
 }
-.container .time .time-colon{
+
+.container .time .time-colon {
   display: flex;
   align-items: center;
   position: relative;
 }
-.time .time-colon .am_pm{
+
+.time .time-colon .am_pm {
   position: absolute;
   top: 0;
   right: -50px;
@@ -291,7 +296,7 @@ section .container .time{
   letter-spacing: 1px;
 }
 
-.time .time-colon .time-text{
+.time .time-colon .time-text {
   height: 67px;
   width: 65px;
   display: flex;
@@ -304,18 +309,18 @@ section .container .time{
 }
 
 .time .time-colon .time-text,
-.time .time-colon .colon{
+.time .time-colon .colon {
   font-size: 35px;
   font-weight: 600;
 }
 
-.time .time-colon .colon{
+.time .time-colon .colon {
   font-size: 40px;
   margin: 0 10px;
 }
-.time .time-colon .time-text .text{
+
+.time .time-colon .time-text .text {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
 }
-

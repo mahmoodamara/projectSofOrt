@@ -148,7 +148,19 @@ function updateRent() {
   const s = new Date().getSeconds();
 
 
-  let time = `${y}-0${m}-${d}`
+  let time
+  if(d<10 && m<10){
+    time = `${y}-0${m}-0${d}`
+  }
+  if(d>=10 && m<10){
+    time = `${y}-0${m}-${d}`
+  }
+  if(d<10 && m>10){
+    time = `${y}-${m}-0${d}`
+  }
+  if(d>=10 && m>=10){
+    time = `${y}-${m}-${d}`
+  }
 //console.log(time)
   Rent.find({"rent.checkIn": time}, function (err, docs) {
     if (!err) {
@@ -158,7 +170,7 @@ function updateRent() {
              if(h>=10 && h<18){
               Cars.updateOne({serialNumber:docs[i].serialNumber}, {$set: {isRent:true}}, (err, doc) => {
                 if (!err) {
-                  return;
+
                 } else {
                   console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
                 }

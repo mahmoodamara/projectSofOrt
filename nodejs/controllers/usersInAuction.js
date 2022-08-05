@@ -25,6 +25,16 @@ router.get('/usersaction', (req, res) => {
   });
 });
 
+router.get('/usersaction/:carNumber', (req, res) => {
+  UserinAuction.find({carNumber:req.params.carNumber},(err, docs) => {
+    if (!err) {
+      res.send(docs);
+    } else {
+      console.log('Error in Retriving UserinAuction :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
+
 router.get('/maxUsersaction/:carNumber', async (req, res) => {
   const carNumber = await UserinAuction.find({
     carNumber: req.params.carNumber
@@ -221,15 +231,12 @@ function updateTimeAuction() {
   }, (err, docs) => {
     if (!err) {
       for (let i = 0; i < docs.length; i++) {
-        UserinAuction.find({
-          carNumber: docs[i].serialNumber
-        }).sort({
+        UserinAuction.find({carNumber: docs[i].serialNumber,views:2}).sort({
           bidValue: -1
         }).limit(1).exec(function (err, doc) {
 
 
           for (let i = 0; i < doc.length; i++) {
-            console.log(doc[i].email)
 
             var transporter = nodemailer.createTransport({
               service: "gmail",

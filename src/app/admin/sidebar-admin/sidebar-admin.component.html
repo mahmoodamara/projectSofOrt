@@ -1,0 +1,55 @@
+<div class="sidebar">
+  <div class="logo-details">
+    <i class='bx bxl-c-plus-plus'></i>
+    <span class="logo_name">CodingLab</span>
+  </div>
+    <ul class="nav-links">
+      <li (click)="dashbordActive()">
+        <a  routerLinkActive="active">
+          <i class='fa fa-tachometer' ></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+      </li>
+      <li (click)="auctionActive()">
+        <a  routerLinkActive="active">
+          <i class='fa fa-list' ></i>
+          <span class="links_name">Product</span>
+        </a>
+      </li>
+      <li (click)="usersActive()">
+        <a  routerLinkActive="active">
+          <i class='fa fa-users' ></i>
+          <span class="links_name">Users</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/chat-admin" routerLinkActive="active">
+          <i class='fa fa-envelope' ></i>
+          <span class="links_name">Chats</span>
+        </a>
+      </li>
+      <li class="log_out">
+        <a  style="cursor: pointer;">
+          <i class='fa fa-sign-out'></i>
+          <span  class="links_name">Log out</span>
+        </a>
+      </li>
+    </ul>
+</div>
+
+  <section class="home-section">
+
+
+    <div class="home-content" *ngIf="dashbord">
+      <app-dashbord></app-dashbord>
+    </div>
+
+    <div class="home-content" *ngIf="users">
+      <app-users></app-users>
+    </div>
+
+    <div class="home-content" *ngIf="auction">
+    <app-admin-action></app-admin-action>
+    </div>
+  </section>
+

@@ -39,8 +39,8 @@ router.post('/action', (req, res) => {
     carModel: req.body.carModel,
     carType: req.body.carType,
     carKM: req.body.carKM,
-    isButtonVisible: req.body.isButtonVisible,
-    views: req.body.views,
+    isButtonVisible: false,
+    views: 0,
     serialNumber: req.body.serialNumber
 
 
@@ -84,17 +84,16 @@ router.put('/action/:id', (req, res) => {
   });
 });
 
-router.delete('/action', (req, res) => {
 
-  Action.deleteMany((err, doc) => {
-    if (!err) {
-      res.send(doc);
-    } else {
-      console.log('Error in Auction Delete :' + JSON.stringify(err, undefined, 2));
-    }
+router.delete('/action/:id', (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`No record with given id : ${req.params.id}`);
+
+  Action.findByIdAndRemove(req.params.id, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
   });
 });
-
 
 
 let count = 0
@@ -124,7 +123,7 @@ function updateTimeAuction() {
 
   //timeUpdate = `${y}-${m}-${d}T${h}:${min+3}:${s}`;
 
-  console.log(time)
+  //console.log(time)
   Action.find({timeAction: time}, (err, docs) => {
     if (!err) {
       for (let i = 0; i < docs.length; i++) {
@@ -142,6 +141,7 @@ function updateTimeAuction() {
             }
           });
         }
+
         if(docs[i].views == 1){
           Action.updateOne({serialNumber:docs[i].serialNumber}, {$set: {isButtonVisible:true}}, (err, doc) => {
             if (!err) {
@@ -151,6 +151,18 @@ function updateTimeAuction() {
             }
           });
         }
+
+        Action.updateOne({timeAction: time}, {
+          $set: {
+            views: 2
+          }
+        }, (err, doc) => {
+          if (!err) {
+            // res.send(doc)
+          } else {
+            console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+          }
+        });
 
       }
     } else {

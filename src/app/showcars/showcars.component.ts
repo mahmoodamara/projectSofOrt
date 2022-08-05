@@ -82,12 +82,7 @@ export class ShowcarsComponent implements OnInit {
     })
   }
 
-    carViews(car:Cars):void{
-    car.views++;
-    this.carsService.putCar(car).subscribe((data)=>{
-      this.getCars();
-    })
-  }
+
 
 
 /*

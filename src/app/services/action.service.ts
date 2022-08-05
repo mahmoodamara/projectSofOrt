@@ -43,29 +43,46 @@ export class ActionService {
     return this.http.get(this.baseURLMaxPrice+`/${serialNumber}`);
   }
 
+  getUsersInAuction(serialNumber:number):Observable<any>{
+    return this.http.get(this.baseURLUsers +`/${serialNumber}`);
+  }
+
   participateInTheAuction(bidValue:number,carNumber:number,Action:Auction):Observable<any>{
-    let body = JSON.stringify(new UsersAuction(this.email,bidValue,carNumber,Action));
+    const body = JSON.stringify(new UsersAuction(this.email,bidValue,carNumber,Action));
     return this.http.post(this.baseURLUsers , body,{
     headers: this.headers
     });
 
   }
   Sendemail():Observable<any>{
-    let body = JSON.stringify(new Email(this.email));
+    const body = JSON.stringify(new Email(this.email));
     return this.http.post(this.baseURLEmail , body,{
     headers: this.headers
     });
   }
 
   SendemailWinner():Observable<any>{
-    let body = JSON.stringify(new Email(this.email));
+    const body = JSON.stringify(new Email(this.email));
     return this.http.post(this.baseURLEmailWinner , body,{
     headers: this.headers
     });
   }
 
-  putAuction(ac: Auction) {
+  PostCarAuction(Auction){
+    const body = JSON.stringify(Auction);
+    return this.http.post(this.baseURL , body,{
+      headers: this.headers
+      });
+
+
+  }
+
+  putAuction(ac) {
     return this.http.put(this.baseURL + `/${ac._id}`, ac);
+  }
+
+  deleteCarAuction(_id: string) {
+    return this.http.delete(this.baseURL + `/${_id}`);
   }
 
   deleteEmail(_id: string) {
