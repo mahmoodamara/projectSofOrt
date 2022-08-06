@@ -26,7 +26,7 @@ router.get('/usersaction', (req, res) => {
 });
 
 router.get('/usersaction/:carNumber', (req, res) => {
-  UserinAuction.find({carNumber:req.params.carNumber},(err, docs) => {
+  UserinAuction.find({carNumber:req.params.carNumber}).sort({bidValue:-1}).exec(function(err, docs)  {
     if (!err) {
       res.send(docs);
     } else {

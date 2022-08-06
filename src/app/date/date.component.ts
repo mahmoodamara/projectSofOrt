@@ -35,7 +35,7 @@ export class DateComponent implements OnInit {
       this.carservice.getOneCar(this.carSerialnumber).subscribe((data)=>{
       this.car=data;
       this.listDates=data;
-      console.log(this.listDates);
+      console.log(this.car);
       this.carType = this.car[0].manufacturer;
        });
     }
@@ -98,6 +98,11 @@ export class DateComponent implements OnInit {
     rentCar(){
       this.rent.email=localStorage.getItem('token');
       this.rent.serialNumber = this.carSerialnumber;
+      this.rent.img=this.car[0].img;
+      this.rent.KM=this.car[0].KM;
+      this.rent.type=this.car[0].type;
+      this.rent.price=this.car[0].price;
+
       if(this.checkRent()){
       this.rentService.postRent(this.rent).subscribe(res=>{
         this.getRents();

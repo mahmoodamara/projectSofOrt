@@ -57,8 +57,9 @@ table.table tr th, table.table tr td img {
   height: 150px;
 }
 table.table tr th:first-child {
-width: 80px;
+width: 70px;
 }
+
 table.table tr th:last-child {
 width: 40px;
 }
@@ -195,7 +196,7 @@ background: #ddd;
 }
 /* Modal styles */
 .modal .modal-dialog {
-max-width: 630px;
+max-width: 650px;
 }
 
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {

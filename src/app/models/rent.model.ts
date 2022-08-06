@@ -9,4 +9,11 @@ export class Rent {
     location:string;
 
 
+
+    img: string;
+    type: string;
+    KM:number;
+    price :number;
+
+
 }

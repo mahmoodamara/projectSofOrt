@@ -29,4 +29,18 @@ export class RentService {
     //this.baseURLRentCars = `${this.baseURLRentCars}`
     return this.http.get(this.baseURLRentCars + `/serialNumber?serialNumber=${carSerialnumber}`);
   }
+
+  deleteCarRent(_id: string,serialNumber:number) {
+    return this.http.delete(this.baseURLRentCars + `/${_id}/${serialNumber}`);
+  }
+
+  deleteOneUserRent(email,serialNumber){
+    return this.http.get(this.baseURLRentCars + `/${serialNumber}/${email}`);
+  }
+
+  putCarRent(rent){
+    let body = JSON.stringify(rent);
+
+    return this.http.get(this.baseURLRentCars + `/${rent.email}`, rent);
+  }
 }

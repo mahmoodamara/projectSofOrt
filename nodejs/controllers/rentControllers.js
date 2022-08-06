@@ -53,12 +53,17 @@ router.post('/rent', async (req, res) => {
 
   var rent = new Rent({
     serialNumber: req.body.serialNumber,
+    img:req.body.img,
+    type:req.body.type,
+    KM: req.body.KM,
+    price : req.body.price,
   });
   rentUser = {
     email: req.body.email,
     checkOut: req.body.checkOut,
     checkIn: req.body.checkIn,
-    location: req.body.location
+    location: req.body.location,
+
   }
   rent.rent.push(rentUser);
 
@@ -192,6 +197,13 @@ function updateRent() {
        Rent.findOneAndUpdate({ serialNumber: docs[i].serialNumber },{ $pull: { rent: { email: docs[i].rent[j].email } } },{ new: true },(err, doc) => {
          if (!err) {
             if(docs[i].rent.length==0){
+              Cars.updateOne({serialNumber:docs[i].serialNumber}, {$set: {isRent:false}}, (err, doc) => {
+                if (!err) {
+                  return;
+                } else {
+                  console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+                }
+              });
           Rent.findOneAndRemove({serialNumber: docs[i].serialNumber}, (err, doc) => {
             if (!err) { res.send(doc); }
             else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
@@ -217,7 +229,7 @@ setInterval(updateRent, 1000);
 
 
 
-router.put('/rent/:serialNumber/:email', (req, res) => {
+router.get('/rent/:serialNumber/:email', (req, res) => {
 
   Rent.findOneAndUpdate({ serialNumber: req.params.serialNumber },{ $pull: { rent: { email: req.params.email } } },{ new: true },(err, doc) => {
     if (!err) {
@@ -233,6 +245,27 @@ router.put('/rent/:serialNumber/:email', (req, res) => {
     }
   })
 });
+
+
+
+
+// router.delete('/rent/:id/:serialNumber', (req, res) => {
+//   if (!ObjectId.isValid(req.params.id))
+//       return res.status(400).send(`No record with given id : ${req.params.id}`);
+
+//       Cars.updateOne({serialNumber:req.params.serialNumber}, {$set: {isRent:false}}, (err, doc) => {
+//         if (!err) {
+//           return;
+//         } else {
+//           console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+//         }
+//       });
+
+//   Rent.findByIdAndRemove(req.params.id, (err, doc) => {
+//       if (!err) { res.send(doc); }
+//       else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
+//   });
+// });
 
 
 

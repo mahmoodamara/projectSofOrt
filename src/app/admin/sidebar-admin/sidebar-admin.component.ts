@@ -9,6 +9,7 @@ export class SidebarAdminComponent implements OnInit {
   dashbord = true;
   users = false;
   auction = false;
+  rents = false;
 
   constructor() { }
 
@@ -26,7 +27,15 @@ export class SidebarAdminComponent implements OnInit {
   auctionActive(){
     this.auction=true;
     this.dashbord = false;
+    this.users=false;
+    this.rents=false;
+  }
+
+  rentActive(){
+    this.rents=true;
+    this.dashbord = false;
     this.users=false
+    this.auction=false;
   }
 
 

@@ -26,6 +26,7 @@ import { SidebarAdminComponent } from './admin/sidebar-admin/sidebar-admin.compo
 import { UsersComponent } from './admin/users/users.component';
 import { AdminActionComponent } from './admin/admin-action/admin-action.component';
 import { AuthGuard } from './auth.guard';
+import { AdminRentsComponent } from './admin/admin-rents/admin-rents.component';
 
 
 
@@ -52,7 +53,8 @@ import { AuthGuard } from './auth.guard';
     DashbordComponent,
     SidebarAdminComponent,
     UsersComponent,
-    AdminActionComponent
+    AdminActionComponent,
+    AdminRentsComponent
      
   ],
   imports: [
