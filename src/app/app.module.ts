@@ -25,6 +25,7 @@ import { DashbordComponent } from './admin/dashbord/dashbord.component';
 import { SidebarAdminComponent } from './admin/sidebar-admin/sidebar-admin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { AdminActionComponent } from './admin/admin-action/admin-action.component';
+import { AuthGuard } from './auth.guard';
 
 
 
@@ -62,7 +63,7 @@ import { AdminActionComponent } from './admin/admin-action/admin-action.componen
     ReactiveFormsModule
     
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

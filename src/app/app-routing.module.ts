@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SidebarAdminComponent } from './admin/sidebar-admin/sidebar-admin.component';
 import { DashbordComponent } from './admin/dashbord/dashbord.component';
 import { UsersComponent } from './admin/users/users.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [{
   path:'',pathMatch:'full',redirectTo:'login'
@@ -32,45 +33,55 @@ const routes: Routes = [{
 },
 {
   path:'about',
-  component:AboutComponent
+  component:AboutComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'signup',
   component:SignupComponent
 },
 {
-  path: 'auction/:serialNumber', component:ActionComponent
+  path: 'auction/:serialNumber', component:ActionComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'auction',
-  component:ActionComponent
+  component:ActionComponent,
+  canActivate:[AuthGuard]
 },
 {
-  path: 'rentcars/:serialNumber', component:CardetailsComponent
+  path: 'rentcars/:serialNumber', component:CardetailsComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'rentcars',
-  component:ShowcarsComponent
+  component:ShowcarsComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'navbar',
-  component:NavbarComponent
+  component:NavbarComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'team',
   component:TeamComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'carRent',
   component:SidebarComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'contact',
   component:ContactComponent,
+  canActivate:[AuthGuard]
 },
 {
   path:'admin/cars',
   component:AllcarsComponent,
+  canActivate:[AuthGuard]
 },
 {
   path: 'date/:serialNumber', component:DateComponent
@@ -83,11 +94,13 @@ const routes: Routes = [{
 
   path:'profile',
   component:ProfileComponent,
+  canActivate:[AuthGuard]
 },
 
 {
   path:'carsAction',
   component:CarActionComponent,
+  canActivate:[AuthGuard]
 
 },
 {
