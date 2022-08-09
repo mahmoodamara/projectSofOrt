@@ -28,12 +28,12 @@ export class ActionComponent implements OnInit {
 
   codes:Email[] =[];
   isWinner : string
-  isBuyDirectly : boolean = false
-  isBuyDirectly2 : boolean = false
-  code : number;
   carSerialnumber:any;
   serial:any;
+  max : any;
   timeAuction:string=''
+  showSuccssMessage = false;
+  showErrorMessage = false;
   ngOnInit(): void {
     // this.getCodes();
     this.carSerialnumber=this.actRouter.snapshot.params['serialNumber'];
@@ -45,12 +45,14 @@ export class ActionComponent implements OnInit {
 
       setInterval(()=>{
         this.serial=this.getCarAuction();
+        this.max=this.getMaxPrice();
       },1000)
   }
 
   ngOnDestroy() {
     if (this.serial) {
       clearInterval(this.serial);
+      clearInterval(this.max);
     }
   }
 
@@ -75,7 +77,7 @@ getMaxPrice(){
 
 
 checkPrice(){
-        if(this.priceAdd>this.minPrice && this.priceAdd<this.maxPrice && this.priceAdd>this.bidValue){
+        if(this.priceAdd>this.minPrice && this.priceAdd<this.maxPrice && this.priceAdd>this.bidValue+50){
           return true;
         }
   return false
@@ -86,9 +88,11 @@ addPrice(){
     this.acutionservice.participateInTheAuction(this.priceAdd,(this.carSerialnumber),this.auctions[0]).subscribe((res) => {
     }
     );
-    alert("add")
+    this.showSuccssMessage = true;
+    setTimeout(() => this.showSuccssMessage = false, 2000);
   }else{
-    alert("notadd")
+    this.showErrorMessage = true;
+    setTimeout(() => this.showErrorMessage = false, 2000);
   }
   this.getCarAuction();
   this.getMaxPrice();

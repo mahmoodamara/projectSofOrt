@@ -14,14 +14,15 @@ export class HomeComponent implements OnInit {
   homes :Home[]=[]
   ngOnInit(): void {
     this.refreshHomeList();
+    
   }
 
   refreshHomeList(){
     this.homeservice.gethomeinfo().subscribe((res)=>{
       this.homes=res;
     })
-   
-   
+
+
    }
 
 

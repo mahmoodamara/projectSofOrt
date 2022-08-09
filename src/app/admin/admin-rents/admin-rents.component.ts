@@ -17,14 +17,13 @@ serial:number
   constructor(private rentService:RentService) { }
 
   ngOnInit(): void {
-    this.refreshUsersList();
+    this.refreshRentList();
     this.getCarRent(1);
   }
 
-  refreshUsersList(){
+  refreshRentList(){
     this.rentService.getCarRent().subscribe((res)=>{
       this.rents=res;
-
     })
   }
 
@@ -37,28 +36,25 @@ serial:number
     })
   }
 
-  deleteCarRent(id:string,serialNumber:number){
+  deleteCarRent(id:string){
     if (confirm('Are you sure to delete this record ?') == true) {
-      this.rentService.deleteCarRent(id,serialNumber).subscribe(res=>{
-        this.refreshUsersList();
+      this.rentService.deleteRent(id).subscribe(res=>{
+        this.refreshRentList();
         alert("delete");
       })
     }
   }
+
   deleteOneUserRent(){
     if (confirm('Are you sure to delete this record ?') == true) {
       this.rentService.deleteOneUserRent(this.rent.email,this.serial).subscribe(res=>{
         this.getCarRent(1);
-        this.refreshUsersList();
+        this.refreshRentList();
       })
     }
   }
 
-  putCarRent(){
-    this.rentService.putCarRent(this.rent).subscribe(res=>{
-      alert("update");
-    })
-  }
+
 
 
 

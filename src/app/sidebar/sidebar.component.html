@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar>
 <header class="section-title">
     <h2>Rent Cars</h2>
     <p>The best cars for rent</p>
@@ -8,7 +8,7 @@
 
 
   <div class="column">
-     
+
 <h2>Catgory</h2>
 <div class="list-group">
     <a  (click)="mostWatched()"   class="list-group-item d-flex justify-content-between align-items-center">
@@ -25,7 +25,7 @@
 </div>
     </div>
     <div class="column" style="margin-top: -240px; margin-left: 50px;">
-<div *ngIf="showCar"> 
+<div *ngIf="showCar">
 <section class="cars" id="cars">
   <div class="content">
       <div class="cars-card" *ngFor="let car of cars">
@@ -46,7 +46,7 @@
 </section>
     </div>
 
-    <div *ngIf="showMostWatched"> 
+    <div *ngIf="showMostWatched">
       <section class="cars" id="cars">
         <div class="content">
             <div class="cars-card" *ngFor="let car of mostWatchedArray">
@@ -83,7 +83,7 @@
                         <div class="d-flex flex-column"><p style="font-size: 12px;" class="text-muted">{{rent.checkIn}}</p></div>
                         <div >
                           <div class="d-flex flex-column"> <p style="font-size: 12px;" class="text-muted">{{rent.checkOut}}</p></div>
-                    </div> 
+                    </div>
                   </div>
                 </div>
                       <div class="d-flex flex-row justify-content-between p-1 mid" style="margin-top: -50px;">
@@ -98,16 +98,16 @@
                               </div>
                           </div>
                       </div>
-                      <div class="mx-2 mt-2 mb-1"><button type="button"   (click)="carViews(car)" [routerLink]="['/rentcars', car.serialNumber]" class="btn  btn-block"><small>Read More</small></button></div> 
-                      <div class="mx-2 mt-2 mb-1"><button type="button" class="btn  btn-block" [disabled]="car.isRent" data-toggle="modal" (click)="editCar(car)" data-target="#UPDATE"><small>Rent Now</small></button></div> 
+                      <div class="mx-2 mt-2 mb-1"><button type="button"   (click)="carViews(car)" [routerLink]="['/rentcars', car.serialNumber]" class="btn  btn-block"><small>Read More</small></button></div>
+                      <div class="mx-2 mt-2 mb-1"><button type="button" class="btn  btn-block" [disabled]="car.isRent" data-toggle="modal" (click)="editCar(car)" data-target="#UPDATE"><small>Rent Now</small></button></div>
                   </div>
               </div>
-         
+
         </div>
       </div>
     </div>
     </div>
-    
+
   <div *ngIf="showMostWatched">
     <div class="container-fluid d-flex justify-content-center"  style="margin-top: -260px;">
       <div class="row mt-4" >
@@ -123,7 +123,7 @@
                         <div class="d-flex flex-column"><h6>CheckIn</h6><p style="font-size: 12px;" class="text-muted">{{car.checkIn}}</p></div>
                         <div class="d-flex flex-row justify-content-between px-3 pb-4">
                           <div class="d-flex flex-column"><h6>CheckOut</h6><p style="font-size: 12px;" class="text-muted">{{car.checkOut}}</p></div>
-                    </div> 
+                    </div>
                   </div>
                       <div class="d-flex flex-row justify-content-between p-1 mid" style="margin-top: -50px;">
                           <div class="d-flex flex-column"><small class="text-muted mb-1">ENGINE</small>
@@ -137,15 +137,15 @@
                               </div>
                           </div>
                       </div>
-                      <div class="mx-2 mt-2 mb-1"><button type="button"   (click)="carViews(car)" [routerLink]="['/rentcars', car.serialNumber]" class="btn  btn-block"><small>Read More</small></button></div> 
-                      <div class="mx-2 mt-2 mb-1"><button type="button" class="btn  btn-block" [disabled]="car.isRent" data-toggle="modal" (click)="editCar(car)" data-target="#UPDATE"><small>Rent Now</small></button></div> 
+                      <div class="mx-2 mt-2 mb-1"><button type="button"   (click)="carViews(car)" [routerLink]="['/rentcars', car.serialNumber]" class="btn  btn-block"><small>Read More</small></button></div>
+                      <div class="mx-2 mt-2 mb-1"><button type="button" class="btn  btn-block" [disabled]="car.isRent" data-toggle="modal" (click)="editCar(car)" data-target="#UPDATE"><small>Rent Now</small></button></div>
                   </div>
               </div>
           </div>
       </div>
     </div>
   </div>   -->
-    </div>
+    <!-- </div>
     <div class="modal fade" id="UPDATE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -166,29 +166,29 @@
             <input type="text" class="form-control"   placeholder="Enter serialnumber"  [(ngModel)]="car.serialNumber" />
          </div>
         </div>
-  
+
         <div class="modal-body">
           <div class="field">
             <input type="text" class="form-control"   placeholder="Enter serialnumber"  [(ngModel)]="code" />
          </div>
         </div>
-  
+
         <div class="modal-body">
           <div class="field">
             <input type="date" class="form-control"   placeholder="Enter checkIn"  [(ngModel)]="checkIn" />
          </div>
         </div>
-  
+
         <div class="modal-body">
           <div class="field">
             <input type="date" class="form-control"   placeholder="Enter checkOut"  [(ngModel)]="checkOut"/>
          </div>
         </div>
-          
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" (click)="postCar()" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
-    </div>
+    </div> --> 

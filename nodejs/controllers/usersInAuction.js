@@ -60,54 +60,6 @@ router.get('/sendEmail', (req, res) => {
   });
 });
 
-router.post('/sendEmail', async (req, res) => {
-  let max = 10000;
-  let min = 1000;
-  let rand = Math.floor(Math.random() * (max - min + 1) + min);
-  var ac = new Email({
-    email: req.body.email,
-    rand: rand,
-  });
-  const {
-    email
-  } = req.body;
-
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: 'testamara144141@gmail.com', // ethereal user
-      pass: 'izqjinswvbsmprez', // ethereal password
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
-
-  var mailOptions = {
-    from: 'RentBuy',
-    to: `${email}`,
-    subject: 'Sending Email using Node.js from RentBuy',
-    text: `the rand is ${rand}`
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-      console.log('the random is' + rand)
-      res.send('Email Sent!')
-    }
-  });
-  ac.save((err, doc) => {
-    if (!err) {
-      res.send(doc);
-    } else {
-      console.log('Error in Action Save :' + JSON.stringify(err, undefined, 2));
-    }
-  });
-});
-
 
 router.post('/usersaction', async (req, res) => {
   car = await UserinAuction.findOne({
@@ -159,50 +111,8 @@ router.delete('/sendEmail/:id', (req, res) => {
   });
 });
 
-router.post('/sendEmailWinner', async (req, res) => {
-  const {
-    email
-  } = req.body;
-  var ac = new Email({
-    email: req.body.email,
-  });
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: 'testamara144141@gmail.com', // ethereal user
-      pass: 'izqjinswvbsmprez', // ethereal password
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
 
-  var mailOptions = {
-    from: 'RentBuy',
-    to: `${email}`,
-    subject: 'Sending Email using Node.js from RentBuy',
-    text: `you are winner in the auction`
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-      res.send('Email Sent!')
-    }
-  });
-  ac.save((err, doc) => {
-    if (!err) {
-      res.send(doc);
-    } else {
-      console.log('Error in Action Save :' + JSON.stringify(err, undefined, 2));
-    }
-  });
-});
-
-
-function updateTimeAuction() {
+function updateWinnerInAuction() {
 
 
   const d = new Date().getDate();
@@ -224,7 +134,6 @@ function updateTimeAuction() {
     timeUpdate = `${m} ${d},${y} ${h+1}:${(min+3)-60}:${s}`;
   }
 
-  //timeUpdate = `${y}-${m}-${d}T${h}:${min+3}:${s}`;
 
   Action.find({
     timeAction: time
@@ -237,7 +146,6 @@ function updateTimeAuction() {
 
 
           for (let i = 0; i < doc.length; i++) {
-
             var transporter = nodemailer.createTransport({
               service: "gmail",
               auth: {
@@ -268,12 +176,12 @@ function updateTimeAuction() {
         })
       }
     } else {
-      console.log('Error in Retriving Rent :' + JSON.stringify(err, undefined, 2));
+      console.log('Error in Retriving  :' + JSON.stringify(err, undefined, 2));
     }
   });
 }
 
-setInterval(updateTimeAuction, 1000);
+setInterval(updateWinnerInAuction, 500);
 
 
 

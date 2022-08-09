@@ -31,6 +31,7 @@ router.get('/profile/:email', (req, res) => {
     var profile = new Profile({
         email: req.body.email,
         car: req.body.car,
+        serialNumber : req.body.serialNumber
 
     });
     profile.save((err, doc) => {
@@ -38,5 +39,19 @@ router.get('/profile/:email', (req, res) => {
         else { console.log('Error in message Save :' + JSON.stringify(err, undefined, 2)); }
         });
       }
+      else{
+        res.send(err);
+      }
 });
+
+
+
+router.delete('/profile/:serialNumber', (req, res) => {
+
+  Profile.findOneAndRemove({serialNumber:req.params.serialNumber}, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
+  });
+});
+
 module.exports = router;

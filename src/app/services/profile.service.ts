@@ -22,10 +22,17 @@ export class ProfileService {
     return this.http.get(this.baseURL+`/${this.email}`);
   }
   addToProfile(car: Cars ): Observable<any>{
-    let body = JSON.stringify(new Profile(this.email,car));
+    let body = JSON.stringify(new Profile(this.email,car,car.serialNumber));
     return this.http.post(this.baseURL, body,{
     headers: this.headers
     });
   }
+
+  deleteCar(serialNumber: string) {
+    return this.http.delete(this.baseURL + `/${serialNumber}`);
+  }
+
+
+
 
 }

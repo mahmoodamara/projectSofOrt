@@ -22,9 +22,22 @@
           <span class="links_name">Rents</span>
         </a>
       </li>
+
+      <li (click)="carService()">
+        <a  routerLinkActive="active">
+          <i class='fa fa-list' ></i>
+          <span class="links_name">CarsService</span>
+        </a>
+      </li>
       <li (click)="usersActive()">
         <a  routerLinkActive="active">
           <i class='fa fa-users' ></i>
+          <span class="links_name">Users</span>
+        </a>
+      </li>
+      <li (click)="AllCars()">
+        <a  routerLinkActive="active">
+          <i class='fa fa-list' ></i>
           <span class="links_name">Users</span>
         </a>
       </li>
@@ -61,5 +74,11 @@
     <div class="home-content" *ngIf="rents">
       <app-admin-rents></app-admin-rents>
       </div>
+      <div class="home-content" *ngIf="service">
+        <app-cars-service></app-cars-service>
+        </div>
+        <div class="home-content" *ngIf="cars">
+          <app-allcars></app-allcars>
+          </div>
   </section>
 

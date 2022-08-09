@@ -13,11 +13,11 @@ export class AdminActionComponent implements OnInit {
   auctions : Auction[]=[];
   auction = new Auction();
   users:any[]=[];
-
+  showSuccssMessage = false;
   ngOnInit(): void {
     this.getCarsAuction();
   }
-  getCarsAuction(){
+getCarsAuction(){
     this.acutionservice.getactioninfo().subscribe(data=>{
       this.auctions=data;
       this.auction.serialNumber=this.auctions[this.auctions.length-1].serialNumber+1
@@ -39,7 +39,7 @@ postCarAuction(){
 
 editDate(date){
   const d = new Date(date)
- const time = d.getDay() +"/"+(d.getMonth()+1)+"/"+d.getFullYear()+" - " + d.getHours()+":"+d.getMinutes()+":"+d.getSeconds() ;
+ const time = d.getDate() +"/"+(d.getMonth()+1)+"/"+d.getFullYear()+" - " + d.getHours()+":"+d.getMinutes()+":"+d.getSeconds() ;
  return time;
 }
 

@@ -15,13 +15,13 @@ export class SignupComponent implements OnInit {
   actiontime:number;
   image:string="assets/img/3071357.jpg"
 
-  constructor(private formBuilder:FormBuilder, private usersservise:UsersService) { }
+  constructor(private formBuilder:FormBuilder, private usersservise:UsersService,private router:Router) { }
 
   ngOnInit(): void {
-      this.createaddform();
+      this.createaddformSignUp();
   }
 
-  createaddform(){
+  createaddformSignUp(){
     this.signupForm=this.formBuilder.group({
      username:['',[Validators.required ,Validators.minLength(3)]]
     , email:['',[Validators.required ,Validators.email]]
@@ -31,13 +31,7 @@ export class SignupComponent implements OnInit {
   })
 
 }
-checkPhone(): void{
- 
- 
-  console.log();
-}
-
-onSubmit(){
+onSubmitSignUp(){
   this.usersservise.PostUser(this.signupForm.value)
  .subscribe((data)=>{
   console.log(typeof(this.signupForm.value.phone));
@@ -49,6 +43,10 @@ onSubmit(){
    alert("Somthing went wrong");
 
   });
+ }
+
+ goToLogIn(){
+  this.router.navigate(['/login']);
  }
 
 }

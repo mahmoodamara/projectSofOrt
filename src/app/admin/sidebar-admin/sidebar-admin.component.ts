@@ -10,6 +10,8 @@ export class SidebarAdminComponent implements OnInit {
   users = false;
   auction = false;
   rents = false;
+  service = false;
+  cars = false;
 
   constructor() { }
 
@@ -23,12 +25,19 @@ export class SidebarAdminComponent implements OnInit {
     this.users=true;
     this.dashbord = false;
     this.auction = false;
+    this.service = false;
+    this.rents=false;
+    this.cars = false;
+
   }
   auctionActive(){
     this.auction=true;
     this.dashbord = false;
     this.users=false;
     this.rents=false;
+    this.service = false;
+    this.cars = false;
+
   }
 
   rentActive(){
@@ -36,6 +45,28 @@ export class SidebarAdminComponent implements OnInit {
     this.dashbord = false;
     this.users=false
     this.auction=false;
+    this.service = false;
+    this.cars = false;
+
+  }
+
+  carService(){
+    this.rents=false;
+    this.dashbord = false;
+    this.users=false
+    this.auction=false;
+    this.service = true;
+    this.cars = false;
+  }
+
+  AllCars(){
+    this.rents=false;
+    this.dashbord = false;
+    this.users=false
+    this.auction=false;
+    this.service = false;
+    this.cars = true;
+
   }
 
 

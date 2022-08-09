@@ -29,17 +29,19 @@ export class ShowcarsComponent implements OnInit {
 
 
 
-  car = new Cars("","","");
+  car = new Cars();
   constructor(private carsService:CarsService , private acutionservice:ActionService,private rentService:RentService,private profileService:ProfileService) { }
 
   ngOnInit(): void {
+
     this.getCars();
+    this.mostChecked();
     // this.getCodes();
     // this.timer();
-    this.mostWatched();
+
   }
 
-  mostWatched(){
+  mostChecked(){
     this.showMostWatched = true;
     this.showCar = false;
     this.carsService.getmaxViewsCar().subscribe((data)=>{
@@ -73,13 +75,18 @@ export class ShowcarsComponent implements OnInit {
      });
   }
 
-  rentCar(car:Cars){
-      this.rentService.car.push(car);
-  }
   addToProfile(car:Cars){
+
     this.profileService.addToProfile(car).subscribe((data)=>{
-      alert("add succ");
+      this.showMassegeSuccses = true;
+     setTimeout(() => this.showMassegeSuccses = false, 2000);
+
+    },err=>{
+
     })
+
+
+    
   }
 
 

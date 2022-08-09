@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
- 
+
 
   var Cars = mongoose.model('Cars', {
     serialNumber:{type:Number},
@@ -22,8 +22,11 @@ const mongoose = require('mongoose');
     checkOut:{type:String},
     isShow:{type:Boolean},
     timeRent:{type:String},
-    carInspectionDate:{type:String}
-    
+    carInspectionDate:{type:String},
+    carInspect:{type:Boolean},
+    carService:{type:Boolean}
+
+
 });
 
   module.exports = {Cars}

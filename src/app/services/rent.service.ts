@@ -13,17 +13,15 @@ export class RentService {
   baseURLRentCars: string = 'http://localhost:3000/api/rent';
   constructor(private http : HttpClient ) { }
 
-  getCar(){
-    return this.car;
-  }
-
-  postRent(car:any): Observable<any>{
-    return this.http.post(this.baseURLRentCars ,car);
-  }
-
   getCarRent():Observable<any>{
     return this.http.get(this.baseURLRentCars);
   }
+
+  postRent(rent:any): Observable<any>{
+    return this.http.post(this.baseURLRentCars ,rent);
+  }
+
+
 
   getOneRent(carSerialnumber:number):Observable<any>{
     //this.baseURLRentCars = `${this.baseURLRentCars}`
@@ -33,14 +31,12 @@ export class RentService {
   deleteCarRent(_id: string,serialNumber:number) {
     return this.http.delete(this.baseURLRentCars + `/${_id}/${serialNumber}`);
   }
+  deleteRent(_id: string){
+    return this.http.delete(this.baseURLRentCars + `/${_id}`);
+  }
 
   deleteOneUserRent(email,serialNumber){
     return this.http.get(this.baseURLRentCars + `/${serialNumber}/${email}`);
   }
 
-  putCarRent(rent){
-    let body = JSON.stringify(rent);
-
-    return this.http.get(this.baseURLRentCars + `/${rent.email}`, rent);
-  }
 }

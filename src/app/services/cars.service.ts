@@ -21,7 +21,7 @@ export class CarsService {
   baseURLOneCar : string ='';
   baseURLcatgory : string ='';
 
-  email:string=localStorage.getItem('token');
+  email:string= localStorage.getItem('token');
   emailM:string="testamara144141@gmail.com"
   headers = { 'content-type': 'application/json' };
   constructor(private http : HttpClient ,  private actRouter:ActivatedRoute ) { }
@@ -42,26 +42,9 @@ export class CarsService {
     return this.http.get(this.baseURLcatgory);
   }
 
-  getCarRent():Observable<any>{
-    return this.http.get(this.baseURLRentCar);
-  }
 
   putCar(car:Cars){
     return this.http.put(this.baseURL + `/${car._id}`, car);
-  }
-
-  putShowRent(car:Cars){
-    return this.http.put(this.baseURL + `/${car._id}`, car);
-  }
-
-  putCarRent(rent:Rent){
-    return this.http.put(`${this.baseURLRentCar}/${rent._id}`, rent);
-  }
-
-
-  rentCar(car:Cars){
-    return this.http.put(`${this.baseURL}/${car._id}` , car);
-
   }
 
   postCartreatment(car:any):Observable<any>{
@@ -69,16 +52,18 @@ export class CarsService {
       return this.http.post(this.baseURLtreatment, body);
   }
 
-  postRent(car:any): Observable<any>{
-    return this.http.post(this.baseURLRentCars ,car);
+  postCar(car:any):Observable<any>{
+    return this.http.post<any>(this.baseURL,car,{
+      headers: this.headers
+    });
+}
+
+  deleteCar(_id: string) {
+    return this.http.delete(this.baseURL + `/${_id}`);
   }
 
-  sendEmail(car:Cars):Observable<any>{
-    let body = JSON.stringify(new EmailCarInspectionDate(this.emailM, car));
-    return this.http.post(this.baseURLsendEmailCarInspectionDate , body,{
-    headers: this.headers
-    });
-  }
+
+
 
 
 }

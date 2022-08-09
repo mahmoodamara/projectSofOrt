@@ -14,14 +14,14 @@
             <div class="alert alert-primary" role="alert" *ngIf="showSucessMessage">
                 send sucssecfuly
               </div>
-            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignUp()">
               <div *ngIf="!signupForm.controls.username?.valid &&
               (signupForm.controls.username?.dirty || signupForm.controls.username?.touched)" style="color: red">
               Enter a name consisting of 2 letters or more
              </div>
                 <div class="field">
                     <span class="fa fa-user"></span>
-                    <input type="text" class="form-control" name="username"  placeholder="Enter username" 
+                    <input type="text" class="form-control" name="username"  placeholder="Enter username"
                     formControlName="username"/>
                  </div>
                  <div *ngIf="!signupForm.controls.email?.valid &&
@@ -51,31 +51,29 @@
                 <input type="tel" class="form-control"  name="phone" placeholder="054-455-8952" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                 formControlName="phone"/>
              </div>
-              <div class="d-flex mb-5 align-items-center">
-                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
-              </div>
 
-              <input type="submit" value="Log In" class="btn text-white btn-block btn-primary">
 
-              <span class="d-block text-left my-4 text-muted"> or sign in with</span>
-              
+              <input style="margin-top: 10px;" type="submit" value="Log In" class="btn text-white btn-block btn-primary">
+
+             <a (click)="goToLogIn()" style="cursor: pointer;"> <span class="d-block text-left my-4 text-muted"> SignUp</span></a>
+
               <div class="social-login">
                 <a href="#" class="facebook">
-                  <span class="fa fa-facebook"></span> 
+                  <span class="fa fa-facebook"></span>
                 </a>
                 <a href="#" class="twitter">
-                  <span class="fa fa-twitter"></span> 
+                  <span class="fa fa-twitter"></span>
                 </a>
                 <a href="#" class="google">
-                  <span class="fa fa-instagram"></span> 
+                  <span class="fa fa-instagram"></span>
                 </a>
               </div>
             </form>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
     </div>
   </div>

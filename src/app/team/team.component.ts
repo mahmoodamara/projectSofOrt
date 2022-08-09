@@ -14,10 +14,10 @@ export class TeamComponent implements OnInit {
   constructor(private teamservice : TeamService) { }
 
   ngOnInit(): void {
-    this.refreshActionList();
+    this.refreshTeamList();
   }
 
-  refreshActionList(){
+  refreshTeamList(){
     this.teamservice.getteamtList().subscribe((res)=>{
       this.team=res;
     })

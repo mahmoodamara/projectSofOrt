@@ -27,6 +27,8 @@ import { UsersComponent } from './admin/users/users.component';
 import { AdminActionComponent } from './admin/admin-action/admin-action.component';
 import { AuthGuard } from './auth.guard';
 import { AdminRentsComponent } from './admin/admin-rents/admin-rents.component';
+import { CarsServiceComponent } from './admin/cars-service/cars-service.component';
+import { TreatmentComponent } from './services/treatment/treatment.component';
 
 
 
@@ -54,7 +56,9 @@ import { AdminRentsComponent } from './admin/admin-rents/admin-rents.component';
     SidebarAdminComponent,
     UsersComponent,
     AdminActionComponent,
-    AdminRentsComponent
+    AdminRentsComponent,
+    CarsServiceComponent,
+    TreatmentComponent
      
   ],
   imports: [

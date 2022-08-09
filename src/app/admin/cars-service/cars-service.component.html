@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="table-wrapper">
+      <div class="table-title">
+          <div class="row">
+              <div class="col-sm-6">
+      <h2>Manage <b>CarsService</b></h2>
+    </div>
+
+          </div>
+      </div>
+      <table class="table table-striped table-hover">
+          <thead>
+              <tr>
+                  <th>Image</th>
+                  <th>manufacturer</th>
+                  <th>year</th>
+                  <th>timeService</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let car of treatment ">
+                  <td><img [src]="car.car.img"></td>
+                  <td>{{car.car.manufacturer}}</td>
+                  <td>{{car.car.yearOfManufacture}}</td>
+                  <td>{{car.car.carInspectionDate}}</td>
+
+
+                  <td>
+                      <a (click)="deleteCarService(car._id)" class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
+                  </td>
+              </tr>
+
+
+          </tbody>
+      </table>
+  </div>
+</div>

@@ -11,6 +11,9 @@ var {
 var {
   Treatment
 } = require('../models/carTreatment');
+var {
+  Rent
+} = require('../models/rent');
 
 router.get('/cars', (req, res) => {
   Cars.find((err, docs) => {
@@ -33,7 +36,9 @@ router.get('/cars/sendEmailCars', (req, res) => {
 });
 
 router.get('/maxViewsCar', (req, res) => {
-  Cars.find().sort({views: -1}).limit(4).exec(function (err, docs) {
+  Cars.find().sort({
+    views: -1
+  }).limit(4).exec(function (err, docs) {
     if (!err) {
       res.send(docs);
     } else {
@@ -78,11 +83,11 @@ router.post('/cars', (req, res) => {
     fuelType: req.body.fuelType,
     KM: req.body.KM,
     price: req.body.price,
-    views: req.body.views,
-    isRent: req.body.isRent,
-    carInspectionDate: req.body.carInspectionDate
-
-
+    views: 0,
+    isRent: false,
+    carInspectionDate: req.body.carInspectionDate,
+    carInspect: false,
+    carService: false
   });
   car.save((err, doc) => {
     if (!err) {
@@ -111,7 +116,10 @@ router.put('/cars/:id', (req, res) => {
     price: req.body.price,
     views: req.body.views,
     isRent: req.body.isRent,
-    carInspectionDate: req.body.carInspectionDate
+    carInspectionDate: req.body.carInspectionDate,
+    carInspect: req.body.carInspect,
+    carService: req.body.carService
+
   };
   Cars.findByIdAndUpdate(req.params.id, {
     $set: car
@@ -126,49 +134,21 @@ router.put('/cars/:id', (req, res) => {
   });
 });
 
-router.post('/sendEmailCarInspectionDate', async (req, res) => {
-  const {
-    email
-  } = req.body;
-  var ac = new EmailCarInspectionDate({
-    email: req.body.email,
-    car: req.body.car
-  });
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: 'testamara144141@gmail.com', // ethereal user
-      pass: 'Ma144141Ma', // ethereal password
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
+router.delete('/cars/:id', (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send(`No record with given id : ${req.params.id}`);
 
-  var mailOptions = {
-    from: 'RentBuy',
-    to: `testamara144141@gmail.com`,
-    subject: 'Sending Email using Node.js from RentBuy',
-    text: `There is a new car for repair soon`
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-      res.send('Email Sent!')
-    }
-  });
-  ac.save((err, doc) => {
+  Cars.findByIdAndRemove(req.params.id, (err, doc) => {
     if (!err) {
       res.send(doc);
     } else {
-      console.log('Error in Action Save :' + JSON.stringify(err, undefined, 2));
+      console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2));
     }
   });
 });
-var fullCar
+
+
+
 
 function timer() {
 
@@ -176,7 +156,7 @@ function timer() {
   const m = new Date().getMonth() + 1;
   const y = new Date().getFullYear();
   let time = `${y}-${m}-${(d)}`
-  let timeEmail = `${y}-${m}-${(d+3)-d}`
+  let timeEmail = `${y}-${m}-${(d+3)}`
   if (m == 1 && d + 3 > 31) {
     timeEmail = `${y}-${m+1}-${(d+3)-d}`
   }
@@ -200,8 +180,8 @@ function timer() {
     timeEmail = `${y}-${m+1}-${(d+3)-d}`
   }
 
-  if (m == 8 && d + 3 > 31) {
-    timeEmail = `${y}-${m+1}-${(d+3)-d}`
+  if (m == 8 && d + 3 < 31) {
+    timeEmail = `${y}-0${m}-${(d+3)}`
   }
 
   if (m == 9 && d + 3 > 30) {
@@ -226,82 +206,155 @@ function timer() {
   } else {
     timeIns = `${y+1}-${(m+6)-12}-${(d+3)-d}`
   }
-  Cars.find({
-    carInspectionDate: time
+
+  Rent.find({
+    "rent.checkIn": timeEmail
   }, function (err, docs) {
     if (!err) {
-      router.post('/treatment')
-      var treatment = new Treatment({
-        car: docs
-      });
+      for (let rent of docs) {
+        for (let re of rent.rent) {
+          if (re.sendEmail == false) {
 
-      treatment.save((err, doc) => {
-        if (!err) {
-          console.log("save");
-        } else {
-          console.log('Error in home Save :' + JSON.stringify(err, undefined, 2));
+            Rent.updateOne({
+              "rent.email": re.email
+            }, {
+              $set: {
+                "rent.$.sendEmail": true,
+              }
+            }, (err, doc) => {
+              if (!err) {} else {
+                console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+              }
+            });
+
+            var transporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                user: 'testamara144141@gmail.com',
+                pass: 'izqjinswvbsmprez',
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+
+            var mailOptions = {
+              from: 'RentBuy',
+              to: `${re.email}`,
+              subject: 'Sending Email using Node.js from RentBuy',
+              text: `${timeEmail} `
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+                res.send('Email Sent!')
+              }
+            });
+          }
         }
-      });
+      }
+    }
+  })
 
-      var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: 'testamara144141@gmail.com',
-          pass: 'Ma144141Ma',
-        },
-        tls: {
-          rejectUnauthorized: false
+
+  Cars.find({
+    carInspectionDate: timeEmail
+  }, function (err, docs) {
+    if (!err) {
+      for (let ac of docs) {
+        if (ac.carInspect == false) {
+          var treatment = new Treatment({
+            car: ac
+          });
+          treatment.save((err, doc) => {
+            if (!err) {
+              console.log("save");
+            } else {
+              console.log('Error in home Save :' + JSON.stringify(err, undefined, 2));
+            }
+          });
+          var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: 'testamara144141@gmail.com',
+              pass: 'izqjinswvbsmprez',
+            },
+            tls: {
+              rejectUnauthorized: false
+            }
+          });
+          var mailOptions = {
+            from: 'RentBuy',
+            to: 'mahmoodamara2@gmail.com',
+            subject: 'Sending Email using Node.js from RentBuy',
+            text: `${timeEmail} of ${ac.manufacturer}`
+          };
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+              res.send('Email Sent!')
+            }
+          });
         }
-      });
 
-      var mailOptions = {
-        from: 'RentBuy',
-        to: 'testamara144141@gmail.com',
-        subject: 'Sending Email using Node.js from RentBuy',
-        text: `${timeEmail}`
-      };
-
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-          res.send('Email Sent!')
-        }
-      });
-
-      for (let doc of docs) {
-
-        router.put(`/cars/:${doc._id}`)
-        if (!ObjectId.isValid(doc._id)) {
-          console.log("err")
-        }
-        var car = {
-
-          carInspectionDate: `${timeIns}`
-        };
-        Cars.findByIdAndUpdate(doc._id, {
-          $set: car
+        Cars.updateOne({
+          _id: ac._id
         }, {
-          new: true
+          $set: {
+            carInspect: true,
+            carInspectionDate: timeIns
+          }
         }, (err, doc) => {
           if (!err) {
-            console.log(doc);
+            // res.send(doc)
           } else {
-            console.log('Error in car Update :' + JSON.stringify(err, undefined, 2));
+            console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
           }
         });
       }
-
     } else {
       console.log('Error in Retriving Cars :' + JSON.stringify(err, undefined, 2));
     }
   });
+
+  Cars.find({
+    carInspectionDate: time
+  }, function (err, docs) {
+    if (!err) {
+      for (let car of docs) {
+        if (car.carService == false) {
+          Cars.updateOne({
+            serialNumber: car.serialNumber
+          }, {
+            $set: {
+              carService: true,
+            }
+          }, (err, doc) => {
+            if (!err) {
+              // res.send(doc)
+            } else {
+              console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+            }
+          });
+        }
+      }
+    }
+  })
+
+
+
+
+
 }
 
 
 
-//setInterval(timer,5000);
+setInterval(timer, 1000);
 
 
 module.exports = router;

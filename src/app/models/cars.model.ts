@@ -7,7 +7,7 @@ export class Cars {
     yearOfManufacture:number;
     model: string;
     horsePower: number;
-    engineCapacity: number ; 
+    engineCapacity: number ;
     fuelType:string;
     KM:number;
     price:number;
@@ -17,13 +17,6 @@ export class Cars {
     timeRent:string;
     carInspectionDate:string;
 
-    email: string;
-    checkIn:string;
-    checkOut:string;
-    constructor(email:string,checkIn:string,checkOut:string){
-        this.checkOut=checkOut;
-        this.checkIn=checkIn
-        this.email=email;
-    }
-    
+
+
 }

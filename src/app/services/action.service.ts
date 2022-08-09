@@ -35,9 +35,7 @@ export class ActionService {
     return this.http.get(this.baseURL +`/${serialNumber}`);
   }
 
-  getCodeInfo():Observable<any>{
-    return this.http.get(this.baseURLEmail);
-  }
+
 
   getMxPrice(serialNumber:number):Observable<any>{
     return this.http.get(this.baseURLMaxPrice+`/${serialNumber}`);
@@ -54,19 +52,7 @@ export class ActionService {
     });
 
   }
-  Sendemail():Observable<any>{
-    const body = JSON.stringify(new Email(this.email));
-    return this.http.post(this.baseURLEmail , body,{
-    headers: this.headers
-    });
-  }
 
-  SendemailWinner():Observable<any>{
-    const body = JSON.stringify(new Email(this.email));
-    return this.http.post(this.baseURLEmailWinner , body,{
-    headers: this.headers
-    });
-  }
 
   PostCarAuction(Auction){
     const body = JSON.stringify(Auction);
@@ -85,7 +71,5 @@ export class ActionService {
     return this.http.delete(this.baseURL + `/${_id}`);
   }
 
-  deleteEmail(_id: string) {
-    return this.http.delete(this.baseURLEmail + `/${_id}`);
-  }
+
 }

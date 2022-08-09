@@ -19,6 +19,6 @@ export class CarActionComponent implements OnInit {
     this.acutionservice.getactioninfo().subscribe(data=>{
       this.auctions=data;
     });
-}
+  }
 
 }

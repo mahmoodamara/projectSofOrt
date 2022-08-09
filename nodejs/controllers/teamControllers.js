@@ -46,4 +46,14 @@ router.put('/team/:id', (req, res) => {
     });
 });
 
+router.delete('/team/:id', (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`No record with given id : ${req.params.id}`);
+
+  Team.findByIdAndRemove(req.params.id, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
+  });
+});
+
 module.exports = router;

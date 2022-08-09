@@ -385,7 +385,7 @@ nav .profile-details i{
 }
 @media (max-width: 1000px) {
   .overview-boxes .box{
-    width: calc(100% / 2 - 15px);
+    width: calc(100% / 2 - 50px);
     margin-bottom: 15px;
   }
 }
@@ -405,7 +405,7 @@ nav .profile-details i{
 }
 @media (max-width: 550px) {
   .overview-boxes .box{
-    width: 100%;
+    width: 90%;
     margin-bottom: 15px;
   }
   .sidebar.active ~ .home-section nav .profile-details{
@@ -414,13 +414,13 @@ nav .profile-details i{
 }
   @media (max-width: 400px) {
   .sidebar{
-    width: 0;
+    width: 10%;
   }
   .sidebar.active{
     width: 60px;
   }
   .home-section{
-    width: 100%;
+    width: 90%;
     left: 0;
   }
   .sidebar.active ~ .home-section{

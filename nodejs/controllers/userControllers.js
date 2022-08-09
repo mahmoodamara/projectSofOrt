@@ -1,8 +1,10 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
 const {User} = require("../models/user");
+var {Email} = require('../models/email');
 const jwt = require('jsonwebtoken');
 var ObjectId = require('mongoose').Types.ObjectId;
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -98,6 +100,85 @@ router.post("/users/signup", async (req, res) => {
         else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
     });
   });
+
+  router.post('/users/sendEmail', async (req, res) => {
+    let max = 10000;
+    let min = 1000;
+    let rand = Math.floor(Math.random() * (max - min + 1) + min);
+    var ac = new Email({
+      email: req.body.email,
+      rand: rand,
+    });
+    const {
+      email
+    } = req.body;
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: 'testamara144141@gmail.com', // ethereal user
+        pass: 'izqjinswvbsmprez', // ethereal password
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+
+    var mailOptions = {
+      from: 'RentBuy',
+      to: `${email}`,
+      subject: 'Sending Email using Node.js from RentBuy',
+      text: `the rand is ${rand}`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+        console.log('the random is' + rand)
+        res.send('Email Sent!')
+      }
+    });
+    ac.save((err, doc) => {
+      if (!err) {
+        res.send(doc);
+      } else {
+        console.log('Error in Action Save :' + JSON.stringify(err, undefined, 2));
+      }
+    });
+  });
+
+
+router.put('/users/newPassword/:id', async (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send(`No record with given id : ${req.params.id}`);
+
+
+  const body = req.body;
+  const user = new User(body);
+  const salt = await bcrypt.genSalt(10);
+  let password2 = await bcrypt.hash(user.password, salt);
+
+  var userUpdate = {
+    username: req.body.username,
+    email: req.body.email,
+    password: password2,
+    phone: req.body.phone,
+  };
+  User.findByIdAndUpdate(req.params.id, {
+    $set: userUpdate
+  }, {
+    new: true
+  }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2));
+    }
+  });
+});
+
 
 
 module.exports = router;

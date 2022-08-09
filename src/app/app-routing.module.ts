@@ -19,6 +19,7 @@ import { SidebarAdminComponent } from './admin/sidebar-admin/sidebar-admin.compo
 import { DashbordComponent } from './admin/dashbord/dashbord.component';
 import { UsersComponent } from './admin/users/users.component';
 import { AuthGuard } from './auth.guard';
+import { CarsServiceComponent } from './admin/cars-service/cars-service.component';
 
 const routes: Routes = [{
   path:'',pathMatch:'full',redirectTo:'login'
@@ -118,6 +119,19 @@ const routes: Routes = [{
   component:UsersComponent,
 
 },
+{
+  path:'carService',
+  component:CarsServiceComponent,
+
+},
+
+{
+  path:'allCars',
+  component:AllcarsComponent,
+
+},
+
+
 ];
 
 @NgModule({

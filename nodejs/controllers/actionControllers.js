@@ -6,6 +6,8 @@ var {
   Action
 } = require('../models/action');
 
+
+
 // => localhost:3000/Action/
 router.get('/action', (req, res) => {
   Action.find((err, docs) => {
@@ -96,23 +98,16 @@ router.delete('/action/:id', (req, res) => {
 });
 
 
-let count = 0
 
 function updateTimeAuction() {
-
-
   const d = new Date().getDate();
   const m = new Date().getMonth() + 1;
   const y = new Date().getFullYear();
-
   const h = new Date().getHours();
   const min = new Date().getMinutes();
   const s = new Date().getSeconds();
-  //2022-07-19T21:59
-  //7 24,2022 18:26:10
+
   time = `${m} ${d},${y} ${h}:${min}:${s}`;
-
-
 
   if (min + 3 < 60) {
     timeUpdate = `${m} ${d},${y} ${h}:${min+3}:${s}`;
@@ -121,9 +116,6 @@ function updateTimeAuction() {
     timeUpdate = `${m} ${d},${y} ${h+1}:${(min+3)-60}:${s}`;
   }
 
-  //timeUpdate = `${y}-${m}-${d}T${h}:${min+3}:${s}`;
-
-  //console.log(time)
   Action.find({timeAction: time}, (err, docs) => {
     if (!err) {
       for (let i = 0; i < docs.length; i++) {
@@ -171,6 +163,6 @@ function updateTimeAuction() {
   });
 }
 
-setInterval(updateTimeAuction, 1000);
+setInterval(updateTimeAuction, 500);
 
 module.exports = router;

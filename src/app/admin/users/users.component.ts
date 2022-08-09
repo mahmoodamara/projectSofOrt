@@ -25,10 +25,6 @@ export class UsersComponent implements OnInit {
       this.users=res;
     })
   }
-  toggleColapse(){
-    this.collapsed = !this.collapsed;
-   // this.onToggleSideNav.emit({collapsed:this.collapsed,screenWidth:this.screenWidth})
-  }
 
   postUser(){
     this.userService.addUser(this.user).subscribe((res)=>{

@@ -52,11 +52,11 @@
                                           </div>
                                    </div>
                                    <form>
-                                    <div class="alert alert-danger" role="alert" *ngIf="">
-                                      Error in date
+                                    <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+                                      Error in price
                                     </div>
-                                    <div class="alert alert-primary" role="alert" *ngIf="">
-                                      send sucssecfuly
+                                    <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
+                                      add price sucssecfuly
                                     </div>
                                     <h3>{{bidValue}}</h3>
                                       <div class="row">
