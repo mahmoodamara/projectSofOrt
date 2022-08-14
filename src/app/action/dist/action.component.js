@@ -16,7 +16,6 @@ var ActionComponent = /** @class */ (function () {
         this.auctions = [];
         this.bidValue = 0;
         this.maxPriceArray = [];
-        this.codes = [];
         this.timeAuction = '';
         this.showSuccssMessage = false;
         this.showErrorMessage = false;
@@ -34,7 +33,7 @@ var ActionComponent = /** @class */ (function () {
         setInterval(function () {
             _this.serial = _this.getCarAuction();
             _this.max = _this.getMaxPrice();
-        }, 1000);
+        }, 500);
     };
     ActionComponent.prototype.ngOnDestroy = function () {
         if (this.serial) {

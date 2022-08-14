@@ -1,10 +1,7 @@
 
-
-
 <app-navbar></app-navbar>
 <section>
 <div class="container">
-
   <div class="time">
     <div class="time-colon">
       <div class="time-text">
@@ -37,54 +34,49 @@
 </div>
 </section>
 <div id="booking" class="auction">
-
-       <div class="section-center">
-              <div class="container">
-
-                     <div class="row">
-                            <div class="booking-form" >
-                                   <div class="booking-bg">
-                                          <div class="form-header">
-                                                 <h2>max price: {{maxPrice | currency}}</h2>
-                                                 <h2>min price: {{minPrice | currency}}</h2>
-                                                 <h2>car Type: {{carType}}</h2>
-                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
-                                          </div>
-                                   </div>
-                                   <form>
-                                    <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
-                                      The price you Entered has been not sent sucssecfuly                                    </div>
-                                    <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
-                                      The price you Entered has been sent sucssecfuly
-                                    </div>
-                                    <h3>{{bidValue}}</h3>
-                                      <div class="row">
-                                      <div class="col-md-6">
-                                        <div class="form-group">
-                                          <span class="form-label">MY PRICE</span>
-                                          <input placeholder="Enter the price" [(ngModel)]="priceAdd" name="price" class="form-control" type="text" >
-                                        </div>
-                                      </div>
-                                      </div>
-                                      <div>
-
-
-                                          <div   class="form-btn" >
-                                                 <button   [disabled]="isButtonVisible" (click)="addPrice()"  class="submit-btn">Check Price</button>
-                                          </div>
-                                          <div class="form-btn">
-                                            <button  [disabled]="isButtonVisible"  class="submit-btn">Check availability</button>
-                                          </div>
-                                          <div class="form-btn">
-                                            <button  [disabled]="isButtonVisible" class="submit-btn">Check availability</button>
-                                          </div>
-                                        </div>
-
-
-                                   </form>
-                            </div>
-                     </div>
-              </div>
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="booking-form" >
+          <div class="booking-bg">
+            <div class="form-header">
+              <h2>max price: {{maxPrice | currency}}</h2>
+              <h2>min price: {{minPrice | currency}}</h2>
+              <h2>car Type: {{carType}}</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
+            </div>
+          </div>
+             <form>
+                 <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
+                     The price you Entered has been not sent sucssecfuly
+                 </div>
+                 <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
+                     The price you Entered has been sent sucssecfuly
+                 </div>
+                      <h3>{{bidValue}}</h3>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <span class="form-label">MY PRICE</span>
+                              <input placeholder="Enter the price" [(ngModel)]="priceAdd" name="price" class="form-control" type="text" >
+                          </div>
+                        </div>
+                      </div>
+                    <div>
+                      <div   class="form-btn" >
+                         <button   [disabled]="isButtonVisible" (click)="addPrice()"  class="submit-btn">Check Price</button>
+                      </div>
+                      <div class="form-btn">
+                         <button  [disabled]="isButtonVisible"  class="submit-btn">Check availability</button>
+                      </div>
+                      <div class="form-btn">
+                          <button  [disabled]="isButtonVisible" class="submit-btn">Check availability</button>
+                      </div>
+                    </div>
+                    </form>
+                    </div>
+                 </div>
+            </div>
        </div>
 </div>
 

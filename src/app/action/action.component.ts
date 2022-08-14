@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Auction } from '../models/action.model';
 import { Email } from '../models/email.model';
 import { UsersAuction } from '../models/usersAction';
 import { ActionService } from '../services/action.service';
-
 @Component({
   selector: 'app-action',
   templateUrl: './action.component.html',
@@ -22,12 +21,6 @@ export class ActionComponent implements OnInit {
   maxPriceArray:UsersAuction[]=[];
   priceAdd:number;
   isButtonVisible : boolean;
-
-
-
-
-  codes:Email[] =[];
-  isWinner : string
   carSerialnumber:any;
   serial:any;
   max : any;
@@ -36,16 +29,13 @@ export class ActionComponent implements OnInit {
   showErrorMessage = false;
   ngOnInit(): void {
     this.carSerialnumber=this.actRouter.snapshot.params['serialNumber'];
-
     this.getCarAuction();
     this.getMaxPrice();
      this.timer();
-
-
       setInterval(()=>{
         this.serial=this.getCarAuction();
         this.max=this.getMaxPrice();
-      },1000)
+      },500)
   }
 
   ngOnDestroy() {
@@ -63,7 +53,7 @@ getCarAuction(){
       this.minPrice = this.auctions[0].minPrice;
       this.carType = this.auctions[0].carType;
       this.isButtonVisible =this.auctions[0].isButtonVisible;
-    });
+  });
 }
 
 // The function retrieves the maximum price added to the Auction
@@ -73,7 +63,6 @@ getMaxPrice(){
     if(this.maxPriceArray.length >0){
     this.bidValue=this.maxPriceArray[0].bidValue;
     }
-
   });
 }
 
