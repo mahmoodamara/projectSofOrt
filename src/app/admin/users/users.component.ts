@@ -19,13 +19,13 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.refreshUsersList();
   }
-
+// The function retrieves the information of the website users.
  refreshUsersList(){
     this.userService.getUsers().subscribe((res)=>{
       this.users=res;
     })
   }
-
+// A function to request the addition of a new user.
   postUser(){
     this.userService.addUser(this.user).subscribe((res)=>{
       this.refreshUsersList();
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
     })
   }
 
-
+// Function to request user deleted.
   onDelete(_id: string) {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.userService.deleteUser(_id).subscribe((res) => {
@@ -41,11 +41,11 @@ export class UsersComponent implements OnInit {
       });
     }
   }
-
+// A function to start a user for updating.
   editUser(user){
     this.user=user;
   }
-
+ // A function to request an existing user update.
   putUser(){
     this.userService.putUser(this.user).subscribe((res)=>{
       this.refreshUsersList();

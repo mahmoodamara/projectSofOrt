@@ -15,6 +15,7 @@ var {
   Rent
 } = require('../models/rent');
 
+// The function retrieves all vehicles from the Cars DB.
 router.get('/cars', (req, res) => {
   Cars.find((err, docs) => {
     if (!err) {
@@ -25,16 +26,8 @@ router.get('/cars', (req, res) => {
   });
 });
 
-router.get('/cars/sendEmailCars', (req, res) => {
-  EmailCarInspectionDate.find((err, docs) => {
-    if (!err) {
-      res.send(docs);
-    } else {
-      console.log('Error in Retriving Cars :' + JSON.stringify(err, undefined, 2));
-    }
-  });
-});
 
+// The function retrieves the 4 vehicles that were rented on the site from the Cars DB
 router.get('/maxViewsCar', (req, res) => {
   Cars.find().sort({
     views: -1
@@ -58,7 +51,7 @@ router.get('/cars/serialNumber', (req, res) => {
       res.send(response)
   })
 });
-
+//The function retrieves the vehicles by category from the Cars DB
 router.get('/cars/manufacturer', (req, res) => {
   const manufacturer = req.query.manufacturer;
   Cars.find({
@@ -70,6 +63,8 @@ router.get('/cars/manufacturer', (req, res) => {
       res.send(response)
   })
 });
+
+// A function allows you to add a new car to the DB
 router.post('/cars', (req, res) => {
   var car = new Cars({
     serialNumber: req.body.serialNumber,
@@ -97,7 +92,7 @@ router.post('/cars', (req, res) => {
     }
   });
 });
-
+// A function allows updating an existing car in the DB
 router.put('/cars/:id', (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -133,7 +128,7 @@ router.put('/cars/:id', (req, res) => {
     }
   });
 });
-
+// A function that allows deleting an existing car from DB
 router.delete('/cars/:id', (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -148,7 +143,7 @@ router.delete('/cars/:id', (req, res) => {
 });
 
 
-
+// A function updates the service date for each vehicle and sends a dispatch message to the lot manager for it.
 
 function timer() {
 

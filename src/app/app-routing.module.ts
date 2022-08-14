@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
 import { ActionComponent } from './action/action.component';
 import { AllcarsComponent } from './admin/allcars/allcars.component';
 import { CarActionComponent } from './car-action/car-action.component';
-import { CardetailsComponent } from './cardetails/cardetails.component';
 import { ContactComponent } from './contact/contact.component';
 import { DateComponent } from './date/date.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShowcarsComponent } from './showcars/showcars.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { SignupComponent } from './signup/signup.component';
 import { TeamComponent } from './team/team.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -33,11 +30,6 @@ const routes: Routes = [{
   component:HomeComponent
 },
 {
-  path:'about',
-  component:AboutComponent,
-  canActivate:[AuthGuard]
-},
-{
   path:'signup',
   component:SignupComponent
 },
@@ -48,10 +40,6 @@ const routes: Routes = [{
 {
   path:'auction',
   component:ActionComponent,
-  canActivate:[AuthGuard]
-},
-{
-  path: 'rentcars/:serialNumber', component:CardetailsComponent,
   canActivate:[AuthGuard]
 },
 {
@@ -67,11 +55,6 @@ const routes: Routes = [{
 {
   path:'team',
   component:TeamComponent,
-  canActivate:[AuthGuard]
-},
-{
-  path:'carRent',
-  component:SidebarComponent,
   canActivate:[AuthGuard]
 },
 {

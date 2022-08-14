@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       this.newUser = this.user[0];
     })
   }
-
+//The function initializes the variables that want them to login and gives them the conditions to meet.
   createaddform(){
     this.loginForm=this.formBuilder.group({
     email:['',[Validators.required ]]
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
   })
 
 }
-
+//The function checks the details entered by the user and checks them to see if the situation is correct, they are put on the home page, if not, an error message is given.
 onSubmitLogin(){
   this.usersservise.loginUser(this.loginForm.value)
   .subscribe(
@@ -63,7 +63,7 @@ onSubmitLogin(){
       if(this.loginForm.value.email!='admin@gmail.com'){
              this.router.navigate(['home']).then(()=>{
                window.location.reload();
-              
+
              });
       }
       else{

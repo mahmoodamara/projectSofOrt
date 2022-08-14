@@ -5,12 +5,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 var { Profile } = require('../models/profile');
 
-router.get('/profile', (req, res) => {
-    Profile.find((err, docs) => {
-        if (!err) { res.send(docs); }
-        else { console.log('Error in Retriving profile :' + JSON.stringify(err, undefined, 2)); }
-    });
-});
+// A function for retrieving the information of the logged in user
 
 router.get('/profile/:email', (req, res) => {
     const email = req.params.email;
@@ -44,13 +39,13 @@ router.get('/profile/:email', (req, res) => {
       }
 });
 
-
+//A function allows the user to delete vehicles from his profile
 
 router.delete('/profile/:serialNumber', (req, res) => {
 
   Profile.findOneAndRemove({serialNumber:req.params.serialNumber}, (err, doc) => {
       if (!err) { res.send(doc); }
-      else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
+      else { console.log('Error in profile Delete :' + JSON.stringify(err, undefined, 2)); }
   });
 });
 

@@ -15,6 +15,7 @@ export class CarActionComponent implements OnInit {
   ngOnInit(): void {
     this.getCarsAuction();
   }
+  //The function retrieves the vehicles that have an auction.
   getCarsAuction(){
     this.acutionservice.getactioninfo().subscribe(data=>{
       this.auctions=data;

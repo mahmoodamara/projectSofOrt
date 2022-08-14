@@ -31,7 +31,7 @@
                   <td>
                       <a  (click)="editCar(auction)" href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i></a>
                       <a (click)="deleteCarAuction(auction._id)" class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
-                      <a (click)="getUserInAuction(auction.serialNumber)" href="#userAuctionList" class="users" data-toggle="modal"><i class="fa fa-users" data-toggle="tooltip" title="Delete"></i></a>
+                      <a (click)="getUserInAuction(auction.serialNumber)" href="#userAuctionList" class="users" data-toggle="modal"><i class="fa fa-users" data-toggle="tooltip" title="usersAuction"></i></a>
                   </td>
               </tr>
 
@@ -48,7 +48,7 @@
 <div class="modal-content">
   <form>
     <div class="modal-header">
-      <h4 class="modal-title">Add Employee</h4>
+      <h4 class="modal-title">Add Auction</h4>
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     </div>
     <div class="modal-body">
@@ -74,7 +74,7 @@
       </div>
       <div class="form-group">
         <label>timeAction</label>
-        <input type="text" name="timeAction" [(ngModel)]="auction.timeAction" class="form-control" required>
+        <input type="datetime-local" name="timeAction" [(ngModel)]="auction.timeAction" class="form-control" required>
       </div>
     </div>
     <div class="modal-footer">
@@ -91,7 +91,7 @@
     <div class="modal-content">
       <form>
         <div class="modal-header">
-          <h4 class="modal-title">Edit Employee</h4>
+          <h4 class="modal-title">Edit Auction</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
@@ -132,6 +132,41 @@
   </div>
 </div>
 
+<!-- Edit Modal HTML -->
+<div id="editUserModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h4 class="modal-title">Edit userAuction</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
+          send sucssecfuly
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>carNumber</label>
+            <input type="text" name="carNumber" [(ngModel)]="userAuction.carNumber" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>bidValue</label>
+            <input type="text" name="bidValue" [(ngModel)]="userAuction.bidValue" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>email</label>
+            <input type="text" name="email" [(ngModel)]="userAuction.email" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+          <input type="submit"  class="btn btn-info" (click)="putUserAuction()" value="Save">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <div id="userAuctionList" class="modal fade">
   <div class="modal-dialog">
@@ -166,9 +201,8 @@
                         <td>{{user.email}}</td>
                         <td>{{user.bidValue}}</td>
                         <td>
-                            <a  (click)="editCar(auction)" href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i></a>
-                            <a (click)="deleteCarAuction(auction._id)" class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
-                            <a (click)="getUserInAuction(auction.serialNumber)" href="#userAuctionList" class="users" data-toggle="modal"><i class="fa fa-users" data-toggle="tooltip" title="Delete"></i></a>
+                            <a  (click)="editUserAuction(user)" href="#editUserModal"  class="edit" data-toggle="modal" data-dismiss="modal" aria-hidden="true"><i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i></a>
+                            <a (click)="deleteUserInCarAuction(user._id,user.carNumber)" class="delete" data-toggle="modal"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i></a>
                         </td>
                     </tr>
 
@@ -181,24 +215,3 @@
     </div>
   </div>
 </div>
-<!-- Delete Modal HTML -->
-<!-- <div id="deleteEmployeeModal" class="modal fade">
-<div class="modal-dialog">
-<div class="modal-content">
-  <form>
-    <div class="modal-header">
-      <h4 class="modal-title">Delete Employee</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p>Are you sure you want to delete these Records?</p>
-      <p class="text-warning"><small>This action cannot be undone.</small></p>
-    </div>
-    <div class="modal-footer">
-      <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-      <input type="submit" class="btn btn-danger" value="Delete">
-    </div>
-  </form>
-</div>
-</div>
-</div> -->

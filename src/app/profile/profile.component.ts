@@ -24,26 +24,28 @@ export class ProfileComponent implements OnInit {
     this.getCars();
     console.log(localStorage.getItem('token'));
   }
+  // A function that retrieves the information of the logged in user
   getUser(){
     this.userService.getUser().subscribe((data)=>{
     this.user=data;
     this.putUser = this.user[0];
     });
   }
+  // A function that retrieves the vehicles saved by the logged in user
   getCars(){
     this.profileService.getUserProfile().subscribe((data)=>{
     this.Profile=data;
      });
   }
 
-
+// A function allows updating the details of a logged in user
   putProfile(){
     this.userService.putUserProfile(this.putUser).subscribe(res=>{
       this.showSucessMessage = true;
       setTimeout(() => this.showSucessMessage = false, 2000);
     })
   }
-
+// A function that allows for the deletion of vehicles that have been saved by a logged in user
   deleteCar(car:any){
     this.profileService.deleteCar(car.serialNumber).subscribe(res=>{
         this.getCars();

@@ -6,9 +6,11 @@ var {
   Action
 } = require('../models/action');
 
+var {
+  UserinAuction
+} = require('../models/usersInAuction');
 
-
-// => localhost:3000/Action/
+//The function retrieves the vehicles that have an auction from the Auction DB
 router.get('/action', (req, res) => {
   Action.find((err, docs) => {
     if (!err) {
@@ -18,7 +20,7 @@ router.get('/action', (req, res) => {
     }
   });
 });
-
+// The function retrieves the Auction details according to the SerialNumber from the Auction DB.
 router.get('/action/:serialNumber', (req, res) => {
   const serialNumber = req.params.serialNumber;
   Action.find({
@@ -31,7 +33,7 @@ router.get('/action/:serialNumber', (req, res) => {
   })
 });
 
-
+// A function to add an Auction to the Auction's DB.
 router.post('/action', (req, res) => {
   var ac = new Action({
     timeAction: req.body.timeAction,
@@ -55,7 +57,7 @@ router.post('/action', (req, res) => {
     }
   });
 });
-
+// A function to update Auction in the Auction DB.
 router.put('/action/:id', (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -86,7 +88,7 @@ router.put('/action/:id', (req, res) => {
   });
 });
 
-
+//A function to delete an Auction from the Auction's DB.
 router.delete('/action/:id', (req, res) => {
   if (!ObjectId.isValid(req.params.id))
       return res.status(400).send(`No record with given id : ${req.params.id}`);
@@ -97,7 +99,7 @@ router.delete('/action/:id', (req, res) => {
   });
 });
 
-
+// A function for adding additional time to the Auction after the end of the first time and closing the Auction after the end of the additional time.
 
 function updateTimeAuction() {
   const d = new Date().getDate();
@@ -155,6 +157,19 @@ function updateTimeAuction() {
             console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
           }
         });
+        if(docs[i].views == 2){
+          UserinAuction.updateOne({carNumber: docs[i].serialNumber}, {
+            $set: {
+              sendEmail: true
+            }
+          }, (err, doc) => {
+            if (!err) {
+              // res.send(doc)
+            } else {
+              console.log('Error in Rent Update :' + JSON.stringify(err, undefined, 2));
+            }
+          });
+        }
 
       }
     } else {

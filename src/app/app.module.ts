@@ -12,12 +12,8 @@ import { ActionComponent } from './action/action.component';
 import { ShowcarsComponent } from './showcars/showcars.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TeamComponent } from './team/team.component';
-import { CardetailsComponent } from './cardetails/cardetails.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContactComponent } from './contact/contact.component';
 import { AllcarsComponent } from './admin/allcars/allcars.component';
-import { AboutComponent } from './about/about.component';
-import { CarDetailsComponent } from './car-details/car-details.component';
 import { DateComponent } from './date/date.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CarActionComponent } from './car-action/car-action.component';
@@ -43,12 +39,8 @@ import { TreatmentComponent } from './services/treatment/treatment.component';
     ShowcarsComponent,
     NavbarComponent,
     TeamComponent,
-    CardetailsComponent,
-    SidebarComponent,
     ContactComponent,
     AllcarsComponent,
-    AboutComponent,
-    CarDetailsComponent,
     DateComponent,
     ProfileComponent,
     CarActionComponent,
@@ -59,7 +51,7 @@ import { TreatmentComponent } from './services/treatment/treatment.component';
     AdminRentsComponent,
     CarsServiceComponent,
     TreatmentComponent
-     
+
   ],
   imports: [
     BrowserModule,
@@ -67,7 +59,7 @@ import { TreatmentComponent } from './services/treatment/treatment.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
-    
+
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

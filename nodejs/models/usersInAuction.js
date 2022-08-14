@@ -8,7 +8,8 @@ const mongoose = require('mongoose');
     email: {type:String },
     bidValue: {type:Number},
     carNumber:{type:Number},
-    Action:{type:Object}
+    Action:{type:Object},
+    sendEmail:{type:Boolean},
 });
 
   module.exports = {UserinAuction}

@@ -1,6 +1,7 @@
 import { Auction } from "./action.model";
 
 export class UsersAuction {
+  _id:string;
     Action:Auction
     email:string;
     bidValue:number;

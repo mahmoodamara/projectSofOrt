@@ -16,7 +16,6 @@ export class DateComponent implements OnInit {
   car:Cars[] =[];
   rents:any[]=[];
   carSerialnumber:any;
-  currentProduct:any;
   carType:any;
   listDates : any[]=[];
   rent = new Rent();
@@ -31,7 +30,8 @@ export class DateComponent implements OnInit {
       this.getRents();
 
     }
-    refreshCars(){
+    // A function retrieves the vehicle that the user decided to purchase.
+        refreshCars(){
       this.carservice.getOneCar(this.carSerialnumber).subscribe((data)=>{
       this.car=data;
       this.listDates=data;
@@ -39,31 +39,23 @@ export class DateComponent implements OnInit {
       this.carType = this.car[0].manufacturer;
        });
     }
-
+// A function retrieves the vehicle that the user decided to purchase
     getRents(){
       this.rentService.getOneRent(this.carSerialnumber).subscribe(data=>{
         this.rents=data;
-       // console.log(this.rents);
       })
     }
-
+// The function checks the rental conditions entered by the user
     checkRent(){
       let f=0;
       let d = new Date().getDate();
       let dCheckIn =new Date(this.rent.checkIn).getDate();
       let dCheckOt =new Date(this.rent.checkOut).getDate();
 
-    //  console.log(d);
-     // console.log(dCheckIn);
-    //  (this.rent.checkIn >= this.rents[i].rent[i].checkIn && this.rent.checkOut >= this.rents[i].rent[i].checkOut)&&
-    //  (this.rent.checkIn <= this.rents[i].rent[i].checkIn && this.rent.checkOut <= this.rents[i].rent[i].checkOut)&&
-    //  (this.rent.checkIn < this.rents[i].rent[i].checkOut && this.rent.checkOut >= this.rents[i].rent[i].checkOut)
 
       for(let i=0;i<this.rents.length;i++){
 
-        // if(this.rent.checkIn < this.rents[i].rent[i].checkIn && (this.rent.checkOut <= this.rents[i].rent[i].checkOut  && this.rent.checkOut >= this.rents[i].rent[i].checkIn )){
-        //   f=1
-        // }
+
         if(this.rent.checkOut < this.rent.checkIn){
           f=1;
         }
@@ -94,7 +86,7 @@ export class DateComponent implements OnInit {
 
 
 
-
+// The function checks if everything is correct and sends a request to insert the date into the DB
     rentCar(){
       this.rent.email=localStorage.getItem('token');
       this.rent.serialNumber = this.carSerialnumber;
@@ -108,7 +100,6 @@ export class DateComponent implements OnInit {
         this.getRents();
         this.showSuccssMessage = true;
         setTimeout(() => this.showSuccssMessage = false, 2000);
-        //console.log("save");
       });
       this.car[0].views++;
       this.carservice.putCar(this.car[0]).subscribe((data)=>{

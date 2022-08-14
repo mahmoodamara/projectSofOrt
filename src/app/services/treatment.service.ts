@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class TreatmentService {
   baseURL: string = 'http://localhost:3000/api/treatment';
   constructor(private http:HttpClient) { }
-
+// 
   getTreatmentList():Observable<any>{
     return this.http.get(this.baseURL);
   }

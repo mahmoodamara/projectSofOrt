@@ -8,13 +8,13 @@ const mongoose = require('mongoose');
     type:{type: String},
     KM: {type:Number},
     price : {type:Number},
-    sendEmail : {type:Boolean},
      rent: [{
       email:{type:String},
       checkIn:{type:String},
       checkOut:{type:String},
       location : {type:String},
       sendEmail : {type:Boolean},
+
        }],
 
 

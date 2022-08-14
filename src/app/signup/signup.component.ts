@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
       this.createaddformSignUp();
   }
 
+  //The function initializes the variables that want them to login and gives them the conditions to meet.
   createaddformSignUp(){
     this.signupForm=this.formBuilder.group({
      username:['',[Validators.required ,Validators.minLength(3)]]
@@ -31,6 +32,7 @@ export class SignupComponent implements OnInit {
   })
 
 }
+//The function checks the details entered by the user and checks them to see if the situation is correct. Enter the LOGIN page, if it does not give an error message.
 onSubmitSignUp(){
   this.usersservise.PostUser(this.signupForm.value)
  .subscribe((data)=>{

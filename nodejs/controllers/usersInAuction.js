@@ -15,6 +15,8 @@ var {
 } = require('../models/action');
 
 // => localhost:3000/Action/
+
+//A function that extracts the users of the Auction from the DB of the users of the Auction
 router.get('/usersaction', (req, res) => {
   UserinAuction.find((err, docs) => {
     if (!err) {
@@ -24,7 +26,7 @@ router.get('/usersaction', (req, res) => {
     }
   });
 });
-
+//A function retrieves all users who participated in the Auction
 router.get('/usersaction/:carNumber', (req, res) => {
   UserinAuction.find({carNumber:req.params.carNumber}).sort({bidValue:-1}).exec(function(err, docs)  {
     if (!err) {
@@ -34,7 +36,7 @@ router.get('/usersaction/:carNumber', (req, res) => {
     }
   });
 });
-
+// The function retrieves the maximum price added to the Auction from the DB of the users who user in the Auction.
 router.get('/maxUsersaction/:carNumber', async (req, res) => {
   const carNumber = await UserinAuction.find({
     carNumber: req.params.carNumber
@@ -50,17 +52,8 @@ router.get('/maxUsersaction/:carNumber', async (req, res) => {
 });
 
 
-router.get('/sendEmail', (req, res) => {
-  Email.find((err, docs) => {
-    if (!err) {
-      res.send(docs);
-    } else {
-      console.log('Error in Retriving emails :' + JSON.stringify(err, undefined, 2));
-    }
-  });
-});
 
-
+// The function adds the price and user details to the DB of the Auction users .
 router.post('/usersaction', async (req, res) => {
   car = await UserinAuction.findOne({
     carNumber: req.body.carNumber,
@@ -71,7 +64,8 @@ router.post('/usersaction', async (req, res) => {
       email: req.body.email,
       bidValue: req.body.bidValue,
       carNumber: req.body.carNumber,
-      Action: req.body.Action
+      Action: req.body.Action,
+      sendEmail:false
     });
     ac.save((err, doc) => {
       if (!err) {
@@ -98,20 +92,36 @@ router.post('/usersaction', async (req, res) => {
   }
 });
 
-router.delete('/sendEmail/:id', (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send(`No record with given id : ${req.params.id}`);
 
-  Email.findByIdAndRemove(req.params.id, (err, doc) => {
-    if (!err) {
-      res.send(doc);
-    } else {
-      console.log('Error in Email Delete :' + JSON.stringify(err, undefined, 2));
-    }
+// A function to update a user from the DB from usersAuctions.
+
+router.put('/usersaction/:id', (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`No record with given id : ${req.params.id}`);
+
+  var user = {
+      email: req.body.email,
+      bidValue: req.body.bidValue,
+  };
+  UserinAuction.findByIdAndUpdate(req.params.id, { $set: user }, { new: true }, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in Product Update :' + JSON.stringify(err, undefined, 2)); }
+  });
+});
+
+// A function to delete a user from the DB of usersAuctions.
+router.delete('/usersaction/:id', (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+      return res.status(400).send(`No record with given id : ${req.params.id}`);
+
+      UserinAuction.findByIdAndRemove(req.params.id, (err, doc) => {
+      if (!err) { res.send(doc); }
+      else { console.log('Error in Employee Delete :' + JSON.stringify(err, undefined, 2)); }
   });
 });
 
 
+// A function to send an email to the user with the highest price, a message that he will be immortalized in the Auction.
 function updateWinnerInAuction() {
 
 
@@ -140,7 +150,7 @@ function updateWinnerInAuction() {
   }, (err, docs) => {
     if (!err) {
       for (let i = 0; i < docs.length; i++) {
-        UserinAuction.find({carNumber: docs[i].serialNumber,views:2}).sort({
+        UserinAuction.find({carNumber: docs[i].serialNumber,sendEmail:true}).sort({
           bidValue: -1
         }).limit(1).exec(function (err, doc) {
 

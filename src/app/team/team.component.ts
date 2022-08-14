@@ -16,7 +16,7 @@ export class TeamComponent implements OnInit {
   ngOnInit(): void {
     this.refreshTeamList();
   }
-
+  //The function retrieves contact details on the site.
   refreshTeamList(){
     this.teamservice.getteamtList().subscribe((res)=>{
       this.team=res;

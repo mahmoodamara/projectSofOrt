@@ -13,6 +13,7 @@ export class AdminRentsComponent implements OnInit {
   oneRent:any[]=[];
 serial:number
   rent = new Rent();
+  userRent = new Rent();
 
   constructor(private rentService:RentService) { }
 
@@ -20,13 +21,13 @@ serial:number
     this.refreshRentList();
     this.getCarRent(1);
   }
-
+// A function that retrieves details on rental cars.
   refreshRentList(){
     this.rentService.getCarRent().subscribe((res)=>{
       this.rents=res;
     })
   }
-
+// The function retrieves the trainings of the selected vehicle.
   getCarRent(serialNumber:number){
     this.rentService.getOneRent(serialNumber).subscribe(data=>{
         this.oneRent=data[0].rent;
@@ -35,7 +36,7 @@ serial:number
         console.log(this.oneRent);
     })
   }
-
+// A function that sends a request to the server to delete a rental car
   deleteCarRent(id:string){
     if (confirm('Are you sure to delete this record ?') == true) {
       this.rentService.deleteRent(id).subscribe(res=>{
@@ -44,7 +45,7 @@ serial:number
       })
     }
   }
-
+// A function that sends a request to the server to delete a rental car user.
   deleteOneUserRent(){
     if (confirm('Are you sure to delete this record ?') == true) {
       this.rentService.deleteOneUserRent(this.rent.email,this.serial).subscribe(res=>{
@@ -54,7 +55,15 @@ serial:number
     }
   }
 
+  editUser(user){
+    this.rent = user;
+  }
 
+  putUserAuction(){
+    this.rentService.putUserAuction(this.rent).subscribe(res=>{
+      this.getCarRent(this.rent.serialNumber);
+    })
+  }
 
 
 

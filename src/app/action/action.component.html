@@ -53,17 +53,16 @@
                                    </div>
                                    <form>
                                     <div class="alert alert-danger" role="alert" *ngIf="showErrorMessage">
-                                      Error in price
-                                    </div>
+                                      The price you Entered has been not sent sucssecfuly                                    </div>
                                     <div class="alert alert-primary" role="alert" *ngIf="showSuccssMessage">
-                                      add price sucssecfuly
+                                      The price you Entered has been sent sucssecfuly
                                     </div>
                                     <h3>{{bidValue}}</h3>
                                       <div class="row">
                                       <div class="col-md-6">
                                         <div class="form-group">
-                                          <span class="form-label">car model</span>
-                                          <input placeholder="enter the price" [(ngModel)]="priceAdd" name="price" class="form-control" type="text" >
+                                          <span class="form-label">MY PRICE</span>
+                                          <input placeholder="Enter the price" [(ngModel)]="priceAdd" name="price" class="form-control" type="text" >
                                         </div>
                                       </div>
                                       </div>

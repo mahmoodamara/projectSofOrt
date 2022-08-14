@@ -14,9 +14,9 @@ export class HomeComponent implements OnInit {
   homes :Home[]=[]
   ngOnInit(): void {
     this.refreshHomeList();
-    
-  }
 
+  }
+//The function extracts the details from the HOME department and puts them into the details folder to display them.
   refreshHomeList(){
     this.homeservice.gethomeinfo().subscribe((res)=>{
       this.homes=res;

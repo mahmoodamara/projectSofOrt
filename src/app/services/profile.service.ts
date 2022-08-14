@@ -15,12 +15,11 @@ export class ProfileService {
   headers = { 'content-type': 'application/json' };
   constructor(private http : HttpClient ,  private actRouter:ActivatedRoute ) { }
 
-  getProfile():Observable<any>{
-    return this.http.get(this.baseURL);
-  }
+  //A function continues the request to retrieve details for one user and returns the saved information
   getUserProfile():Observable<any>{
     return this.http.get(this.baseURL+`/${this.email}`);
   }
+  // A function continues the request to add a vehicle that the user liked to his profile.
   addToProfile(car: Cars ): Observable<any>{
     let body = JSON.stringify(new Profile(this.email,car,car.serialNumber));
     return this.http.post(this.baseURL, body,{

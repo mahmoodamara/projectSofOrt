@@ -35,7 +35,6 @@ export class ActionComponent implements OnInit {
   showSuccssMessage = false;
   showErrorMessage = false;
   ngOnInit(): void {
-    // this.getCodes();
     this.carSerialnumber=this.actRouter.snapshot.params['serialNumber'];
 
     this.getCarAuction();
@@ -55,7 +54,7 @@ export class ActionComponent implements OnInit {
       clearInterval(this.max);
     }
   }
-
+// The function retrieves the Auction details according to the SerialNumber that we sent with it by clicking on the Auction button that we selected
 getCarAuction(){
     this.acutionservice.getOneActionInfo(this.carSerialnumber).subscribe(data=>{
       this.auctions=data;
@@ -67,22 +66,25 @@ getCarAuction(){
     });
 }
 
-
+// The function retrieves the maximum price added to the Auction
 getMaxPrice(){
   this.acutionservice.getMxPrice(Number(this.carSerialnumber)).subscribe(data=>{
     this.maxPriceArray=data;
+    if(this.maxPriceArray.length >0){
     this.bidValue=this.maxPriceArray[0].bidValue;
+    }
+
   });
 }
 
-
+// The function checks the price the user wants to add
 checkPrice(){
         if(this.priceAdd>this.minPrice && this.priceAdd<this.maxPrice && this.priceAdd>this.bidValue+50){
           return true;
         }
   return false
 }
-
+// The function transfers the price and the user's details to the server after the tests
 addPrice(){
   if(this.checkPrice()){
     this.acutionservice.participateInTheAuction(this.priceAdd,(this.carSerialnumber),this.auctions[0]).subscribe((res) => {
@@ -104,7 +106,7 @@ addPrice(){
  hours:number=0;
  minutes:number=0;
  seconds:number=0;
-
+// The function returns the time left for the auction
 timer(){
   const myfunc = setInterval(()=>{
    var countDownDate = new Date(this.timeAuction).getTime();
@@ -125,16 +127,5 @@ timer(){
   }
    }, 1000)
  }
-
-
-
-
-//  carViews(ac:Auction){
-//    ac.views++;
-//    this.acutionservice.putAuction(ac).subscribe((res)=>{
-//      console.log("update");
-//      this.getCarAuction();
-//    });
-//  }
 }
 

@@ -44,8 +44,7 @@
 .wsk-cp-text .category{
   text-align:center;
   font-size:12px;
-  font-weight:bold;
-  padding:5px;
+  padding:7px;
   position:relative;
   transition: all 0.2s ease-in-out;
 }
