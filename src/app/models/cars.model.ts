@@ -18,5 +18,4 @@ export class Cars {
     carInspectionDate:string;
 
 
-
 }

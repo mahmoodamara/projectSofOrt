@@ -2,7 +2,7 @@
 <app-navbar></app-navbar>
 <section id="rent" class="rent">
 <div class="container text-center" style="margin-top:15px">
-  <h1 style="font-family: cursive;">Rent Car</h1>
+  <h1 style="font-family: cursive;">Car Rent</h1>
   <nav>
     <a (click)="mostChecked()">MostCars</a>
     <a (click)="mazda()">Mazda</a>
@@ -38,14 +38,17 @@
                 <span [style.color]="'red'"  >NOT AVAILABLE</span>
               </div>
               <div class="title-product">
-                <h3>My face not my heart</h3>
+                <h3>{{car.manufacturer}}</h3>
               </div>
               <div class="description-prod">
-                <p> Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
+                <p>modelyear : {{car.yearOfManufacture}}<br>
+                  fuelType: {{car.fuelType}}<br>
+                  horsePower: {{car.horsePower}}
+                </p>
               </div>
               <div class="card-footer">
                 <div class="wcf-left"><span class="price">{{car.price | currency}} / day</span></div>
-                <div class="wcf-right"><a  class="buy-btn" (click)="carViews(car)"  [routerLink]="['/date', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
+                <div class="wcf-right"><a  class="buy-btn" (click)="carViews(car)"  [routerLink]="['/date', car.serialNumber]"><i class="fa fa-car"></i></a></div>
                 <div class="wcf-right"><a  class="love-btn"  (click)="addToProfile(car);"><i class="fa fa-heart"></i></a></div>
               </div>
             </div>

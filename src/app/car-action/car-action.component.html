@@ -19,20 +19,24 @@
             <div class="wsk-cp-text">
 
               <div class="category" *ngIf="!car.isButtonVisible">
-                <span [style.color]="'green'"  >AVAILABLE</span>
+                <span [style.color]="'green'"  >Available</span>
               </div>
               <div class="category" *ngIf="car.isButtonVisible">
-                <span [style.color]="'red'"  >Not AVAILABLE</span>
+                <span [style.color]="'red'"  >Not Available</span>
               </div>
               <div class="title-product">
                 <h3>{{car.carType}}</h3>
               </div>
               <div class="description-prod">
-                <p> Product tell me how to change playlist height size like 600px in html5 player. player good work now check this link</p>
+                <p>modelyear : {{car.carModel}}<br>  
+                   carKM: {{car.carKM}}<br>
+                   minPrice: {{car.minPrice | currency}}
+               
+                </p>
               </div>
               <div class="card-footer">
                 <div class="wcf-left"><span class="price">{{car.maxPrice | currency}}</span></div>
-                <div class="wcf-right"><a class="buy-btn"   [routerLink]="['/auction', car.serialNumber]"><i class="fa fa-shopping-basket"></i></a></div>
+                <div class="wcf-right"><a class="buy-btn"   [routerLink]="['/auction', car.serialNumber]"><i class="fa fa-gavel"></i></a></div>
               </div>
             </div>
           </div>
