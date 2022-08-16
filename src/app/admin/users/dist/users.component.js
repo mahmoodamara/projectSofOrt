@@ -59,7 +59,7 @@ var UsersComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-users',
             templateUrl: './users.component.html',
-            styleUrls: ['./users.component.css']
+            styleUrls: ['../admin-action/admin-action.component.css']
         })
     ], UsersComponent);
     return UsersComponent;

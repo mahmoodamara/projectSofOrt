@@ -4,7 +4,7 @@ import { TreatmentService } from 'src/app/services/treatment.service';
 @Component({
   selector: 'app-cars-service',
   templateUrl: './cars-service.component.html',
-  styleUrls: ['./cars-service.component.css']
+  styleUrls: ['../admin-action/admin-action.component.css']
 })
 export class CarsServiceComponent implements OnInit {
   treatment:any[]=[]

@@ -71,7 +71,7 @@ var AdminRentsComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-admin-rents',
             templateUrl: './admin-rents.component.html',
-            styleUrls: ['./admin-rents.component.css']
+            styleUrls: ['../admin-action/admin-action.component.css']
         })
     ], AdminRentsComponent);
     return AdminRentsComponent;

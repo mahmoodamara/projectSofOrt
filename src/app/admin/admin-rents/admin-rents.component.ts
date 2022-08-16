@@ -5,7 +5,7 @@ import { RentService } from 'src/app/services/rent.service';
 @Component({
   selector: 'app-admin-rents',
   templateUrl: './admin-rents.component.html',
-  styleUrls: ['./admin-rents.component.css']
+  styleUrls: ['../admin-action/admin-action.component.css']
 })
 export class AdminRentsComponent implements OnInit {
 
