@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cars } from '../models/cars.model';
-import { Profile } from '../models/peofile.model';
+import { Profile } from '../models/profile.model';
 
 @Injectable({
   providedIn: 'root'

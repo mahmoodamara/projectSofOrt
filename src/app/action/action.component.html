@@ -43,7 +43,6 @@
               <h2>max price: {{maxPrice | currency}}</h2>
               <h2>min price: {{minPrice | currency}}</h2>
               <h2>car Type: {{carType}}</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate laboriosam numquam at</p>
             </div>
           </div>
              <form>
@@ -64,14 +63,9 @@
                       </div>
                     <div>
                       <div   class="form-btn" >
-                         <button   [disabled]="isButtonVisible" (click)="addPrice()"  class="submit-btn">Check Price</button>
+                         <button   [disabled]="isButtonVisible" (click)="addPrice()"  class="submit-btn">Check availability</button>
                       </div>
-                      <div class="form-btn">
-                         <button  [disabled]="isButtonVisible"  class="submit-btn">Check availability</button>
-                      </div>
-                      <div class="form-btn">
-                          <button  [disabled]="isButtonVisible" class="submit-btn">Check availability</button>
-                      </div>
+                    
                     </div>
                     </form>
                     </div>
