@@ -8,7 +8,7 @@ import { ViewChild,ElementRef } from '@angular/core'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../signup/signup.component.css']
 })
 export class LoginComponent implements OnInit {
 

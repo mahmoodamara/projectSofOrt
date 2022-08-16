@@ -6,7 +6,7 @@ import { ActionService } from '../services/action.service';
 @Component({
   selector: 'app-car-action',
   templateUrl: './car-action.component.html',
-  styleUrls: ['./car-action.component.css']
+  styleUrls: ['./car-action.component.css','../showcars/showcars.component.css']
 })
 export class CarActionComponent implements OnInit {
   constructor(private acutionservice:ActionService , private formBuilder:FormBuilder) { }

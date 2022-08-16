@@ -28,7 +28,7 @@ var CarActionComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-car-action',
             templateUrl: './car-action.component.html',
-            styleUrls: ['./car-action.component.css']
+            styleUrls: ['./car-action.component.css', '../showcars/showcars.component.css']
         })
     ], CarActionComponent);
     return CarActionComponent;

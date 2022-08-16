@@ -94,7 +94,7 @@ var LoginComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-login',
             templateUrl: './login.component.html',
-            styleUrls: ['./login.component.css']
+            styleUrls: ['../signup/signup.component.css']
         })
     ], LoginComponent);
     return LoginComponent;
