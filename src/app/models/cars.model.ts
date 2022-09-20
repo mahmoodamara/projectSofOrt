@@ -16,6 +16,19 @@ export class Cars {
     isRent:boolean;
     timeRent:string;
     carInspectionDate:string;
+<<<<<<< Updated upstream
 
 
+=======
+    
+    email: string;
+    checkIn:string;
+    checkOut:string;
+    constructor(email:string,checkIn:string,checkOut:string){
+        this.checkOut=checkOut;
+        this.checkIn=checkIn
+        this.email=email;
+    }
+    
+>>>>>>> Stashed changes
 }

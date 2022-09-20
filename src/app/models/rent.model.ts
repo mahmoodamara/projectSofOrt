@@ -7,6 +7,7 @@ export class Rent {
     checkIn:string;
     checkOut:string;
     location:string;
+<<<<<<< Updated upstream
 
 
 
@@ -16,4 +17,6 @@ export class Rent {
     price :number;
 
 
+=======
+>>>>>>> Stashed changes
 }
